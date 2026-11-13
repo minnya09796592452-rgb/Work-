@@ -584,3 +584,103 @@ CURRENT PROJECT STATE / WAITING:
 - The assistant is waiting for the Project Lead's next instruction.
 - Do not begin additional work until the user gives the next instruction.
 - Keep replies concise and do not repeat warnings or caveats unless the user asks.
+
+
+================================================================================
+# 🚨 NEXT-CONVERSATION MEMORY RULE — READ THIS FIRST
+================================================================================
+
+USER'S EXPLICIT INSTRUCTION:
+- For project continuity, use the GitHub conversation transcript as the authoritative
+  memory source. The user does not want the assistant to rely on ChatGPT Memory
+  as the project memory store.
+- At the start of the next conversation, read this transcript and the latest
+  handoff/project records before responding about project state.
+- Preserve continuity by updating this GitHub conversation file with important
+  decisions, completed work, evidence, and handoff state when the user asks.
+- Follow the user's lead. Do not start extra work without an instruction.
+- Keep replies concise, avoid repetitive warnings, and use a lively, cheerful,
+  conversational tone. The user explicitly likes the assistant to speak happily
+  and naturally, with humor when appropriate.
+
+# LATEST CONVERSATION ADDENDUM — 2026-11-13
+
+USER:
+"ငါ့ဆီမှာ ass တွေနဲ့ အခြား မင်းပြောတဲ့ဟာတွေရှိသေးတယ် dll ဖယ်ပြီး ကျန်တာ
+အကုန်ပြမယ် Termux မှာ Scrip ရေးတော့။ အသေးစိတ်မှတ်မိချင်ရင် github repo ကိုစစ်အသေးစိတ်"
+
+ASSISTANT:
+Reviewed the CASTAWAY DEPTHS GitHub project records and supplied a read-only
+Termux inventory script. The script excludes files ending in .dll (case
+insensitive), inventories all other files recursively, records relative paths,
+byte sizes and extensions, and optionally computes SHA-256 with --hash.
+It writes files.tsv and summary.txt under a timestamped directory in $HOME.
+
+USER ran:
+bash "$HOME/inventory_non_dll.sh"
+
+SOURCE:
+ /storage/emulated/0/Download/PC GAMES/StrandedDeep
+
+USER-REPORTED INVENTORY RESULTS:
+- DLL files excluded.
+- 94 non-DLL files found.
+- Total size: 2,180,721,069 bytes (2.031 GiB).
+- Extensions/counts:
+  [no extension] 10
+  aspx 3
+  assets 7
+  browser 3
+  config 7
+  exe 3
+  info 1
+  ini 1
+  json 2
+  manifest 8
+  map 15
+  resource 6
+  ress 6
+  txt 14
+  unity3d 7
+  xml 1
+- User then ran the same script with --hash and received SHA-256 values.
+- Output directories:
+  $HOME/CASTAWAY_NON_DLL_INVENTORY_20261113_233219
+  $HOME/CASTAWAY_NON_DLL_INVENTORY_20261113_233227
+- Main output files are files.tsv and summary.txt in each directory.
+- The terminal display appears to wrap some tab-separated rows together; use the
+  saved TSV file as the structured source rather than relying on pasted terminal
+  line wrapping.
+
+Important large files confirmed by the inventory:
+- Stranded_Deep_Data/resources.assets — 184,519,152 bytes
+- Stranded_Deep_Data/resources.assets.resS — 1,373,682,164 bytes
+- Stranded_Deep_Data/resources.resource — 33,027,648 bytes
+- Stranded_Deep_Data/sharedassets0.assets through sharedassets4.assets
+- Corresponding sharedassets*.assets.resS and sharedassets*.resource files
+- Seven .unity3d bundles, including carrier.unity3d (259,547,752 bytes),
+  mission_eel, mission_shark, mission_squid, introscene, beepi and getbit.
+- Unity built-in resource files, globalgamemanagers, level0 through level4,
+  four default-map sets, MonoBleedingEdge config files, executable files and
+  manifests were also inventoried.
+
+SHA-256 cross-checks observed in the user's output:
+- resources.assets:
+  4d5c887f1cc9329cd86398281410c51c6f232f741901ac9a76ee2cfbc4ac44b2
+- resources.assets.resS:
+  498dd5025d778c4ce9a4046aee1a4880cd23c28292d1eb75496c3ae90f78bdcc
+- sharedassets4.assets:
+  eaa3356dbff97da237f572e47107b306bb705541b396acb7fa0e7d92ed2b0cde
+- sharedassets4.assets.resS:
+  20a0564d5c60eeea79f04a6d8e5acbbce04447f9bc4a848a0bebced74a688ecb
+- carrier.unity3d:
+  ab2d4fa5b7ac481d644ee467c15684cfa05c2500a57a40366b4b70dc33940373
+
+NEXT STEP:
+- Wait for the user's instruction. The inventory has been produced; do not
+  independently start extracting, converting, copying, or integrating files.
+- If asked to inspect the inventory further, request/read the saved files.tsv
+  or summary.txt rather than asking the user to paste the entire terminal output.
+- Maintain the project's explicit boundary: Stranded Deep is forensic reference
+  only; do not reuse its code, binaries, IL, assets, shaders, models, audio,
+  branding, or proprietary implementation in CASTAWAY DEPTHS.
