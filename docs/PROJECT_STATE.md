@@ -112,3 +112,23 @@ User supplied fresh Termux output from the source game directory. Observed facts
 **Scope/interpretation:** This verifies the directory, DLL file count, and identity of the original Assembly-CSharp.dll only. It does not establish that a Stage 3 scan has run or passed. No source DLL was modified by these read-only commands. Preserve the original Managed directory as read-only for the audit.
 
 **Next action:** Repair the Stage 3 scanner before executing it. Do not restart Stage 1/2 and do not run either uploaded scanner unchanged. Once the scanner is repaired, validate it on the 119-DLL Managed directory with read-only input and separate output files; report actual runtime counts and errors before assigning Stage 3 status.
+
+
+## Stage 3 scanner repair candidate prepared (2026-11-14)
+
+A repaired candidate scanner was authored locally as `pinvoke_stage3_scan_fixed.py` (SHA-256: `754c331afde0fc55f781f138128271451d3002381731a0ee09e6804eeb25e402`). It is a candidate for user-side Termux validation, NOT yet a runtime-validated Stage 3 scanner.
+
+Implemented changes:
+- All CSV output writes occur only after cross-assembly enrichment is complete.
+- P/Invoke MemberRef/MethodSpec linking no longer uses managed type + method name alone. It requires normalized assembly identity (name, version, culture, public-key token), declaring type, method name, and exact raw signature bytes.
+- Unmatched MemberRefs are not treated as errors or guessed as P/Invokes; ambiguous matches are explicitly marked and left unlinked.
+- ImplMap MemberForwarded resolution errors, duplicate mappings, MethodDef mdPinvokeImpl flag read errors, and declaration-to-ImplMap coverage mismatches now fail validation (exit code 2).
+- Adds separate declaration, callsite, dynamic-loader, and error CSVs plus a JSON summary.
+- Refuses to place output inside the original Managed input directory.
+
+Local checks completed:
+- `python -m py_compile` PASS.
+- Pure helper self-tests PASS for Assembly/AssemblyRef public-key-token normalization, TypeRef AssemblyRef scope, nested TypeRef naming, exact-signature matching, unmatched references remaining unlinked, ambiguous references remaining unlinked, and CSV-write ordering.
+- These tests used dependency stubs for import/helper isolation; they do NOT validate dnfile/dncil behavior on the real 119-DLL Managed directory.
+
+**Next action:** user should place the candidate script in Termux, run syntax/dependency checks, then execute a read-only scan against `./Stranded_Deep_Data/Managed` with output under `$HOME`. Review the actual summary/errors before assigning Stage 3 PASS/FAIL. Original DLLs remain read-only. Do not claim runtime success until Termux output is received and checked.
