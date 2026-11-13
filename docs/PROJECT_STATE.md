@@ -96,3 +96,19 @@ Mark each gate PASS only with captured evidence: BUILD, INSTALL, LAUNCH, VULKAN 
 - Therefore the previous `native_module: NOT FOUND` is only a report alias mismatch; source CSV uses `dll`. No missing module data.
 - Stage 2 field-profile validation is GREEN / closed; do not rerun Stage 2.
 - Resume at Stage 3 scanner repair and validation. Exact evidence is in [P/Invoke Group Audit](research/PINVOKE_GROUP_AUDIT.md) and [Next Conversation Handoff](NEXT_CONVERSATION_HANDOFF.md).
+
+
+## Verified original Managed inventory and Assembly-CSharp identity (2026-11-14)
+
+User supplied fresh Termux output from the source game directory. Observed facts:
+
+- Managed directory: `./Stranded_Deep_Data/Managed`.
+- Directory exists; observed permissions/metadata: `drwxrws---. 2 u0_a237 media_rw 20480 Jan 24 2024`.
+- DLL inventory: `find "$MANAGED" -type f -iname '*.dll' | wc -l` returned **119**.
+- Original assembly path: `./Stranded_Deep_Data/Managed/Assembly-CSharp.dll`.
+- SHA-256: `d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc`.
+- This SHA-256 exactly matches the previously recorded authoritative baseline. The identity check is GREEN.
+
+**Scope/interpretation:** This verifies the directory, DLL file count, and identity of the original Assembly-CSharp.dll only. It does not establish that a Stage 3 scan has run or passed. No source DLL was modified by these read-only commands. Preserve the original Managed directory as read-only for the audit.
+
+**Next action:** Repair the Stage 3 scanner before executing it. Do not restart Stage 1/2 and do not run either uploaded scanner unchanged. Once the scanner is repaired, validate it on the 119-DLL Managed directory with read-only input and separate output files; report actual runtime counts and errors before assigning Stage 3 status.
