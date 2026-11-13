@@ -61,3 +61,16 @@ Mark each gate PASS only with captured evidence: BUILD, INSTALL, LAUNCH, VULKAN 
 - Next evidence gate: inspect managed IL method bodies and call-site/call-graph references, then distinguish declaration presence from reachable calls and actual native invocation.
 - Detailed report: [P/Invoke Group Audit — Stage 2 and Stage 3](research/PINVOKE_GROUP_AUDIT.md).
 - Research remains reference-only; no Stranded Deep IL/code, EOS SDK, binaries, or assets are to be reused in CASTAWAY DEPTHS.
+
+
+## 2026-11-14 — ဝါစိမ်းနီ milestone and next-conversation handoff
+
+- Read `docs/NEXT_CONVERSATION_HANDOFF.md` first when resuming in a new conversation.
+- Status key: 🟢 GREEN = evidence-confirmed; 🟡 YELLOW = caution / further inspection; 🔴 RED = required fix.
+- Overall forensic stages: Stage 1 🟢 PASS; Stage 2 🟢 PASS; Stage 3 🟡 IN PROGRESS; Stage 4 🔴 INCOMPLETE.
+- Stage 3 Scanner GREEN: Python Variant A/B syntax compilation passed; source differences identified and GitHub review recorded.
+- Stage 3 Scanner YELLOW: method-name-only association needs stronger metadata identity; ImplMap errors must not exit with code 0; declaration/ImplMap completeness validation is required.
+- Stage 3 Scanner RED: CSV is emitted before MemberRef processing; correct the processing/output order.
+- No successful end-to-end runtime scan result is recorded yet. Wait for the user's next Termux output; do not infer runtime success from syntax compilation.
+- Next: inspect the user's output and the two supplied scanner variants, fix only the identified issues, run read-only against the verified original Assembly-CSharp.dll, validate coverage and outputs, then update status with evidence.
+- This P/Invoke work remains reference-only and does not change the original native Android CASTAWAY DEPTHS implementation boundary.
