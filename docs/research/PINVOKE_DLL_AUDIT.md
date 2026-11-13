@@ -1,48 +1,130 @@
-# P/Invoke DLL Inventory — Reference Audit
+# P/Invoke DLL Inventory — Reference Binary Audit
 
 Date: 2026-11-13
-Scope: User-provided Stranded Deep installation; forensic reference only.
+Scope: User-provided Stranded Deep Windows installation; forensic reference only.
+Audit package: `CASTAWAY_PInvoke_Audit.zip`
+Original local path: `/storage/emulated/0/Download/CASTAWAY_PInvoke_Audit.zip`
 
-## Evidence package
+> **Project boundary:** CASTAWAY DEPTHS will not use any code, DLL, IL, asset, shader, model, audio, name, branding, or other game material from Stranded Deep. This document records a forensic investigation only. It is not an import or reuse specification.
 
-Termux created:
-- Archive: `/storage/emulated/0/Download/CASTAWAY_PInvoke_Audit.zip`
-- Reported size: 25 MB
-- Included all files under `Stranded_Deep_Data/Managed/`, `Stranded_Deep_Data/Plugins/x86_64/`, `UnityPlayer.dll`, and `PInvoke_SHA256_MANIFEST.txt`.
-- The archive has not yet been uploaded to this conversation. Its contents have therefore not been independently inspected here.
+## 1. Archive integrity and manifest
 
-## Located clue assemblies and native binaries
+The archive was inspected in the conversation before this report was committed.
 
-| File | Location | Reported size | SHA-256 |
-|---|---|---:|---|
-| Assembly-CSharp-firstpass.dll | Managed | 627K | `05dc598d55fcd2440946fceb7a47a829fa23de26f7c05283080013e4c1c588ae` |
-| Assembly-CSharp.dll | Managed | 3.3M | `d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc` |
-| Rewired_Core.dll | Managed | 2.0M | `018f083660e95467146c23ef07246ee4150401c5e6f3437e7ead33c052c40ab4` |
-| Rewired_Windows.dll | Managed | 908K | `956b674bb57869657aa27f1bea133ea3737cef497fba2898eb6d9e7d52c13cbd` |
-| Rewired_Windows_Functions.dll | Managed | 4.0K | `b5863c2d83d6c12a32188a2f91257dd35a7ce71aaf322112120638592e13b516` |
-| com.rlabrecque.steamworks.net.dll | Managed | 358K | `465c8f4e30120e3060d57efd4d4ffb5061fbcfa85d1320f286bedd1e4152f49c` |
-| Rewired_DirectInput.dll | Plugins/x86_64 | 13K | `9989b282d43621259160954f3c2191afc3e3a13adb0091c3f60be228831858ad` |
-| steam_api64.dll | Plugins/x86_64 | 1.7M | `53ca528e1cf660e8b53c5bbc78decb994cb650709155407fa9978200f9a05ae2` |
-| UnityPlayer.dll | Game root | 28M | `e75ab32370fcd78d454dbac6d1648ee19d9ff6d9b9e481538216409fd860af2e` |
+| Check | Result |
+|---|---|
+| ZIP archive integrity test | PASS |
+| Files reported in archive | 123 |
+| SHA-256 manifest entries checked | 119 |
+| SHA-256 matches | 119 / 119 PASS |
+| Archive purpose | Windows binary / managed-assembly audit |
+| Android-ready native library set | Not present / not established |
 
-These are search clues, not confirmed P/Invoke-containing assemblies.
+The ZIP was approximately 25 MB as reported during creation. The 119 manifest checksums matched the corresponding extracted files. The count of 123 archive entries and 119 manifest records are different measures; do not interpret them as 123 independently hashed files.
 
-## Current conclusion
+## 2. Archive contents and binary classification
 
-No assembly has yet been proven to contain the complete P/Invoke inventory. GitHub research previously identified Assembly-CSharp.dll as an input to gameplay IL/metadata analysis, but that does not prove it contains all P/Invoke declarations. Managed P/Invoke metadata is assembly-local and can be distributed across multiple assemblies.
+The archive included the game's Managed assembly directory, the x86_64 native plugin directory, `UnityPlayer.dll`, and the SHA-256 manifest.
 
-## Required inspection after archive upload
+### Confirmed Windows PE binaries
 
-For every managed assembly, enumerate ECMA-335:
-- MethodDef P/InvokeImpl flags
-- ImplMap table entries
-- ModuleRef rows
-- Imported module name and entry point
-- Mapping flags / calling convention
-- Managed method name and signature
+| File | Classification | Audit finding |
+|---|---|---|
+| `UnityPlayer.dll` | PE32+ / x86-64 Windows native binary | Unity runtime binary; not an Android ARM64 library |
+| `steam_api64.dll` | PE32+ / x86-64 Windows native plugin | Windows Steam API plugin; not Android ABI-compatible |
+| `Rewired_DirectInput.dll` | PE32+ / x86-64 Windows native plugin | DirectInput/Windows input dependency; not Android ABI-compatible |
 
-For native PE files, separately inspect import and export tables. Do not conflate native imports with managed P/Invoke declarations or Unity's internal native binding mechanism.
+The native plugin directory is specifically `Plugins/x86_64`. These binaries cannot be treated as Android `arm64-v8a` shared libraries.
 
-## Project boundary
+### Managed assemblies
 
-REFERENCE ONLY. This audit concerns third-party Stranded Deep binaries. Do not place the DLLs, IL, proprietary code, or archive in the CASTAWAY DEPTHS source repository. Only code-free, high-level findings may inform independently authored systems.
+The archive also contains managed .NET assemblies under `Stranded_Deep_Data/Managed/`, including the game assemblies and Unity / third-party managed libraries. These are CLR-managed assemblies, not Android native `.so` files.
+
+Previously identified principal managed files include:
+- `Assembly-CSharp.dll`
+- `Assembly-CSharp-firstpass.dll`
+- `Rewired_Core.dll`
+- `Rewired_Windows.dll`
+- `Rewired_Windows_Functions.dll`
+- `com.rlabrecque.steamworks.net.dll`
+- UnityEngine module assemblies
+
+The existence of a managed assembly does not by itself prove that it declares P/Invoke methods.
+
+## 3. Unity runtime and operating-system dependency findings
+
+The inspected `UnityPlayer.dll` identifies a Windows x86-64 Unity runtime (version strings observed: Unity 2021.2.7f1). Its PE metadata shows PE32+, image base `0x180000000`, eight sections, and no CLR header.
+
+Windows import dependencies observed include:
+
+- `KERNEL32.dll`
+- `USER32.dll`
+- `OPENGL32.dll`
+- `WINMM.dll`
+- `WINHTTP.dll`
+- `HID.dll`
+- `WS2_32.dll`
+- `ADVAPI32.dll`
+- `GDI32.dll`
+- `SHELL32.dll`
+
+These imports establish Windows platform coupling in the inspected runtime. They do not establish that every listed API is required by a future CASTAWAY DEPTHS engine.
+
+Graphics backend strings observed in the Unity runtime included Vulkan, Direct3D 11, Direct3D 12, OpenGL, and OpenGL ES. These strings indicate backend support/code paths in that Windows Unity runtime; they do not make the Windows binary portable to Android and do not provide Android shader source or an Android Vulkan implementation.
+
+## 4. Native plugin dependency findings
+
+### `Rewired_DirectInput.dll`
+
+The inspected PE imports include Windows DirectInput / system dependencies, including `DINPUT8.dll` and `VCRUNTIME140.dll`, as well as Windows runtime components. This is a Windows controller-input plugin, not an Android input library.
+
+### `steam_api64.dll`
+
+The inspected PE imports include Windows modules such as `IPHLPAPI.dll`, `WS2_32.dll`, `ADVAPI32.dll`, `SHELL32.dll`, and `KERNEL32.dll`. It is a Windows x86-64 Steam plugin, not an Android library.
+
+## 5. P/Invoke status — important distinction
+
+**The ZIP audit did not yet produce a complete, exact P/Invoke inventory.**
+
+The following concepts must remain separate:
+
+1. **Native PE imports:** Windows DLL dependencies recorded in a PE import table.
+2. **Managed P/Invoke declarations:** .NET methods whose metadata maps managed methods to native modules and entry points.
+3. **Unity internal native bindings:** Unity-managed/native engine interfaces, which are not automatically equivalent to ordinary user-assembly P/Invoke declarations.
+
+A Windows PE import list is not a P/Invoke report. Likewise, finding a managed DLL does not prove that it contains P/Invoke declarations.
+
+### Exact metadata work still required
+
+For every managed assembly in the archive, a complete inventory must inspect ECMA-335 metadata:
+- MethodDef `PInvokeImpl` flags
+- `ImplMap` table rows
+- `ModuleRef` table rows
+- Native module name
+- Entry-point name (including name-mangling / ordinal cases where applicable)
+- Mapping flags and calling convention
+- Managed declaring type and method name
+- Complete managed method signature, including parameter and return types
+- Character-set / string-marshalling and related mapping flags where encoded
+
+The report must include zero-result assemblies too, so that the assembly coverage is demonstrably complete. It must distinguish an absent P/Invoke map from a tool/parser failure.
+
+Native PE import and export tables should be recorded separately, with architecture and imported module names.
+
+## 6. CASTAWAY DEPTHS relevance
+
+This audit provides only platform-compatibility and binary-classification evidence:
+
+- Windows x86-64 PE binaries are not Android ARM64 native libraries.
+- Windows-specific input and Steam plugins are not Android-compatible drop-ins.
+- Windows API dependencies must not be assumed available through Android NDK.
+- A future Android engine must be independently implemented against Android APIs and the Android Vulkan loader/driver.
+- The Unity runtime's backend strings are not a transferable Android renderer or shader package.
+
+No binary, managed assembly, source, IL, asset, shader, or proprietary implementation from this archive is approved for inclusion in CASTAWAY DEPTHS.
+
+## 7. Evidence limits and next audit gate
+
+This report records the archive-level results observed in the conversation. The ZIP itself is not being committed to the CASTAWAY DEPTHS repository; only this code-free audit report is stored.
+
+**Next gate:** perform a complete metadata pass across every managed assembly and publish a per-assembly P/Invoke table with exact counts, module names, entry points, calling conventions, and signatures. Do not label the P/Invoke investigation complete until that table and the native PE import/export inventory are reproducible.
