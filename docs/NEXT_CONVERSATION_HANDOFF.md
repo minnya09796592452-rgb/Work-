@@ -175,3 +175,15 @@ The user ran the requested read-only summary against `$HOME/PINVOKE_STAGE3_20261
 
 **Immediate next action**
 Run the next read-only Stage 3 CSV aggregation to quantify linked calls by native module, caller assembly, caller type, and target kind; inspect join multiplicity and print all 27 dynamic-loader callsites with caller context. Then use those results to build Stage 4's evidence-based native dependency map. Do not rerun Stage 1/2 or modify original DLLs.
+
+
+## Standing `@GitHub` protocol — user instruction (2026-11-14)
+
+When the user writes `@GitHub` in this project, treat it as an instruction to synchronize project memory and resume execution, not as a request for an explanation:
+1. Read this handoff first, then `docs/PROJECT_STATE.md` and the relevant research/audit document from the repository's current `main` branch.
+2. Use the latest recorded resume point and project boundaries. Do not ask the user to repeat information already recorded here.
+3. Record the user's newly supplied verified outputs/findings in the relevant GitHub memory documents. Preserve raw counts, caveats, status colors, and exact next action; do not turn inference into fact.
+4. Fetch the updated files again and verify the new evidence is present before saying the memory update is complete.
+5. Continue with the next concrete task already specified by the handoff, giving the user only the necessary next command or decision. Do not restart closed stages, modify read-only source files, introduce excluded technologies, or perform unrequested redesign.
+
+The user is Project Lead/Architect. Follow the user's lead; minimize narration and maximize verified work.
