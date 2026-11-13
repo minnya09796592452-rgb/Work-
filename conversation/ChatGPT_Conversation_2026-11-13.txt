@@ -152,3 +152,167 @@ CURRENT VERIFIED STATE
 - No engine, APK, renderer, gameplay implementation, or final OBB archive is yet claimed to exist.
 
 NEXT USER REQUEST SHOULD BE FOLLOWED AS PROJECT LEAD'S INSTRUCTION.
+
+
+======================================================================
+CONVERSATION CONTINUATION — 2026-11-13 (TERMUX SOURCE INVENTORY)
+======================================================================
+
+USER:
+The conversation has become limited again. Record the discussion from this conversation in GitHub.
+
+ASSISTANT:
+Confirmed the documentation repository is devmyatmin/Read-CASTAWAY-DEPTHS and selected the existing conversation transcript:
+conversation/ChatGPT_Conversation_2026-11-13.txt
+The existing transcript was fetched from main before appending this continuation.
+
+USER:
+The Termux source directory was not remembered. Asked the assistant to inspect GitHub and infer the likely location.
+
+ASSISTANT:
+Inspected the Read repository archive/history. The recorded project workspace path was:
+$HOME/stranded_native_port
+The archive documentation/script identified this as the historical Termux project directory. This was an evidence-based path inference, not a claim that all source files were already in the CASTAWAY DEPTHS repository.
+
+USER:
+Ran the following in Termux:
+cd ~/Castaway-Depths
+git pull --ff-only
+
+Git reported a fast-forward from 9fb3a8c to c854a31 on origin/main. The pull added/updated:
+- README.md
+- conversation/ChatGPT_Conversation_2026-11-13.txt
+- docs/FILE_PLACEMENT_MAP.md
+- docs/IMPLEMENTATION_STATUS.md
+- docs/LOGIC_AUDIT.md
+- docs/LOGIC_FILE_REGISTER.md
+
+The user accidentally typed "git statusls -ld ..." as one command, so Git returned:
+git: 'statusls' is not a git command.
+This was only a command typo; subsequent listing commands ran successfully.
+
+TERMUX INVENTORY EVIDENCE
+-------------------------
+
+Confirmed historical project root:
+$HOME/stranded_native_port
+
+Top-level directories shown:
+- build/
+- logic/
+- output/
+- output_20261112_082726/
+- reports/
+- src/
+
+Top-level scripts/tools included asset extraction, material analysis, mesh validation, audio extraction, 3D reconstruction, and archive/history tooling. These are historical Stranded Deep analysis/extraction utilities and must not automatically be treated as original CASTAWAY DEPTHS implementation.
+
+The logic/ directory contains many analysis artifacts and Python utilities, including:
+- gameplay IL extracts and resolved reports
+- gameplay dependency maps
+- Beam movement / collision / water IL reports
+- Ceto ocean and Fourier analysis/extraction reports
+- shader and compute-kernel inventories
+- Ceto GPU buffer, shader, and CPU/GPU boundary investigations
+- corresponding inspection, extraction, token-resolution, and validation scripts
+
+Important classification: files explicitly containing extracted/decompiled third-party game IL or proprietary implementation details are reference/audit material, not source code to copy into CASTAWAY DEPTHS. Do not upload those files into the new game's source tree. Only independently authored, rights-cleared implementation and suitable code-free high-level research summaries may be considered for the new repository.
+
+The historical src/ directory listing showed:
+- asset_pipe.cpp
+- asset_pipe_v2.cpp
+These are legacy asset-pipeline tools; audit provenance and dependencies before any reuse.
+
+The historical build/ directory contained multiple Vulkan probes/tests and build outputs, including:
+- android_wsi/
+- stranded_deep_vk_core_test.cpp and its executable
+- Ceto GPU/render/shader tests
+- generated .so files and other test binaries
+- original_ceto_* validation/output directories
+
+ANDROID WSI INVENTORY
+---------------------
+
+The user ran:
+find ~/stranded_native_port/build/android_wsi -maxdepth 3 -type f -print
+
+Observed files:
+- nyamist_wsi.cpp
+- test_dlopen.cpp
+- test_dlopen (compiled executable)
+- nyamist-base.apk
+- nyamist_wsi.cpp.bak
+- nyamist_wsi.cpp.pre_dispatch
+- libnyamist_wsi.so
+- AndroidManifest.xml
+- nyamist-unsigned.apk
+- nyamist-aligned.apk
+- nyamist-release.jks
+- NYAMIST.apk
+- NYAMIST.apk.idsig
+
+Handling decisions:
+- nyamist_wsi.cpp: inspect source and provenance before deciding whether any independently reusable Android/Vulkan concepts can be reimplemented for CASTAWAY DEPTHS.
+- test_dlopen.cpp: inspect as a diagnostic test, not presumed production code.
+- .bak and .pre_dispatch: backups only; do not import as active source.
+- .so and test_dlopen: compiled artifacts; do not copy into source tree.
+- APK and idsig files: historical build outputs; do not copy into the new project.
+- nyamist-release.jks: signing-key material; never upload, copy, print, or expose it.
+
+The user displayed build_android_wsi_patch.py. It patches build/android_wsi/nyamist_wsi.cpp by adding Vulkan WSI function pointers and dynamic dispatch loaders for:
+- vkCreateAndroidSurfaceKHR
+- vkDestroySurfaceKHR
+- vkGetPhysicalDeviceSurfaceSupportKHR
+- vkGetPhysicalDeviceSurfaceCapabilitiesKHR
+- vkGetPhysicalDeviceSurfaceFormatsKHR
+- vkCreateSwapchainKHR
+- vkDestroySwapchainKHR
+- vkGetSwapchainImagesKHR
+- vkAcquireNextImageKHR
+- vkQueuePresentKHR
+
+It injects instance-level loading using vkGetInstanceProcAddr and device-level loading using vkGetDeviceProcAddr, and inserts calls after Vulkan instance/device creation. The script writes a .pre_dispatch backup and reports "NYAMIST WSI DISPATCH PATCH: PASS" when its textual patch operation succeeds. This message alone does NOT prove the patched source compiles, launches, creates a surface/swapchain, or presents frames.
+
+The user also displayed the beginning of build/stranded_deep_vk_core_test.cpp. It:
+- dlopens /system/lib64/libvulkan.so
+- resolves vkGetInstanceProcAddr
+- creates a Vulkan instance
+- enumerates physical devices
+- queries device properties/features/extensions and queue-family properties
+The displayed code labels itself as a Stranded Deep/NYAMIST probe. It is historical diagnostic code and should not be imported unchanged as CASTAWAY DEPTHS production source.
+
+CURRENT REPOSITORY STATUS
+-------------------------
+
+The user ran:
+cd ~/Castaway-Depths && git status
+
+Output:
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+No Termux source files have been moved or uploaded as a result of this inventory. The current activity is still source inspection and classification.
+
+NEXT INSPECTION REQUEST
+-----------------------
+
+The assistant asked the user to inspect the following files and provide their output:
+1. ~/stranded_native_port/build/android_wsi/nyamist_wsi.cpp (first 280 lines)
+2. ~/stranded_native_port/build/android_wsi/AndroidManifest.xml
+3. ~/stranded_native_port/build/android_wsi/test_dlopen.cpp
+4. SHA-256 of nyamist_wsi.cpp
+
+Commands supplied:
+sed -n '1,280p' ~/stranded_native_port/build/android_wsi/nyamist_wsi.cpp
+cat ~/stranded_native_port/build/android_wsi/AndroidManifest.xml
+cat ~/stranded_native_port/build/android_wsi/test_dlopen.cpp
+sha256sum ~/stranded_native_port/build/android_wsi/nyamist_wsi.cpp
+
+No output from those commands has been received yet. Wait for the user's evidence before deciding file placement or writing import code.
+
+PROJECT LEAD WORKING AGREEMENT
+------------------------------
+
+The user leads the project and expects the assistant to follow their direction. Keep explanations concise, work from actual repository/Termux evidence, preserve original files, and do not move or upload files until the user directs it and classification is complete. The ChatGPT transcript is intentionally maintained separately under conversation/; the user has now explicitly requested that this conversation be recorded there.
