@@ -315,3 +315,21 @@ Interpretation:
 Status: CSV diagnostic 🟢 complete; game-type-to-EOS-wrapper call graph 🟡 unresolved; no confirmed failure 🔴.
 
 **Next action:** Run a read-only full classification of all 1,668 Epic-target rows: count EOS-wrapper callers vs non-EOS callers; list every non-EOS caller type with target wrapper type/method; separately count blank/malformed caller types. Do not modify original DLLs/CSVs, restart closed stages, or infer runtime reachability.
+
+
+## 2026-11-14 — Latest resume point: EOS caller classification
+
+User's latest read-only classification of all 1,668 Assembly-CSharp IL rows whose target type contains `Epic` returned:
+- Total: 1,668
+- EOS-wrapper callers: 1,668
+- Non-EOS callers: 0
+- Blank callers: 0
+- Unique EOS wrapper caller types: 317
+- Unique non-EOS caller types: 0
+- Unique game-to-EOS direct edges: 0
+
+The row partition reconciles exactly. All filtered calls are within `Epic.OnlineServices.*` wrapper types. Therefore no direct game-specific caller → EOS-wrapper edge was found by this static callsite classification. Do not conclude EOS is unused: reflection, string-based lookup, delegates, callback registration, or other indirect paths remain possible. The separate 382 Assembly-CSharp → EOS native P/Invoke callsites represent the wrapper/native boundary and do not independently establish gameplay invocation.
+
+Detailed evidence: `docs/research/PINVOKE_STAGE4_EOS_CALLER_CLASSIFICATION_20261114.md`.
+
+**Next action:** perform a read-only indirect EOS usage audit across managed metadata/IL. Search reflection APIs and string constants for EOS wrapper type/method names; inspect delegate construction/invocation and callback registration; map any hits to concrete caller methods. Keep original Managed DLLs and Stage 3 CSVs read-only. Do not restart Stage 1/2 or infer runtime reachability, offline necessity, or Android compatibility.
