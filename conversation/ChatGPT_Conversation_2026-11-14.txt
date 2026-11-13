@@ -380,3 +380,84 @@ for cats, r in rows[:120]:
 print("STAGE4_EOS_INDIRECT_CALLSITE_SCREEN_END")
 PY
 ```
+
+
+======================================================================
+CONVERSATION ADDENDUM — 2026-11-14 — TARGETED EOS SCREEN + ANDROID WEB RESEARCH
+======================================================================
+
+USER
+အခု output ကို txt နဲ့ထွက်လိုက် ငါ ဆဲမိတော့မှာပဲကွား အလကားနေ Token ကုန်တယ်
+
+ASSISTANT
+Apologized and supplied a Termux Python script that writes the full targeted screening results to:
+$HOME/PINVOKE_STAGE3_20261114/STAGE4_EOS_TARGETED_SCREEN_SUMMARY.txt
+The script reads il_call_sites.csv and does not modify original DLLs or source CSVs. It prints only a short summary to the terminal.
+
+USER
+[Termux command attempt]
+~/PINVOKE_STAGE3_20261114 $ d "$HOME/PINVOKE_STAGE3_20261114" && python - <<'PY'
+[User pasted the complete Python script]
+The command failed immediately with:
+No command d found, did you mean: ...
+The shell returned to:
+~/PINVOKE_STAGE3_20261114 $
+
+ASSISTANT
+Explained that the first command contained a typo: d instead of cd. The Python script had not run and no CSV/DLL files were modified. Asked the user to rerun with:
+cd "$HOME/PINVOKE_STAGE3_20261114" && python - <<'PY'
+then paste the same script.
+
+USER
+[Corrected script execution result]
+TXT_CREATED = /data/data/com.termux/files/home/PINVOKE_STAGE3_20261114/STAGE4_EOS_TARGETED_SCREEN_SUMMARY.txt
+CANDIDATE_ROWS = 4562
+UNIQUE_CALLER_TYPES = 656
+EOS_RELATED_ROWS = 255
+STATUS = COMPLETE
+
+ASSISTANT
+Confirmed TXT creation and recorded the counts. Clarified that EOS_RELATED_ROWS=255 is only a text-matched candidate screen, not proof of EOS runtime dependency. Asked the user to upload the TXT file itself for row-level review.
+
+USER
+အဲ့ဒီ EOS သဲလွန်စ web မှာသွားရှာ
+
+ASSISTANT
+Searched official Epic Online Services documentation and reported:
+- Epic publishes an official EOS SDK for Android guide.
+- Android integration requires Android Studio/NDK setup and native library loading (System.loadLibrary("EOSSDK")).
+- EOS calls must be made on the same thread because the SDK is not thread-safe.
+- Android app foreground/background changes must be reported through EOS_Platform_SetApplicationStatus.
+- Epic's Unity Android guide documents SDK install, initialization, Platform Interface creation, ticking, and shutdown.
+- The Platform Interface is the required gateway to other EOS interfaces.
+- Important qualification: Android EOS SDK availability does not make EOSSDK-Win64-Shipping usable on Android, and does not prove this audited game uses EOS at runtime or requires EOS for offline play.
+
+Official source pages reviewed:
+1. https://dev.epicgames.com/docs/epic-online-services/platforms/android
+2. https://dev.epicgames.com/docs/epic-online-services/game-engines/eos-unity-integration/eos-unity-integration-android
+3. https://dev.epicgames.com/docs/epic-online-services/release-notes
+4. https://dev.epicgames.com/docs/epic-online-services/eos-fundamentals/eos-platform-interface
+5. https://dev.epicgames.com/docs/api-ref/functions/eos-initialize
+
+Additional important detail from the official EOS SDK 1.19.0.3 release notes (2026-02-10):
+- SDK 1.19.0.3 and later no longer support 32-bit Android or Android OS 6 and 7 (32-bit or 64-bit).
+- 1.19.0.3+ requires 64-bit Android above OS 7.
+- Android DynamicSTDC flavor binaries are no longer provided; use StaticSTDC flavor binaries.
+The exact EOS SDK version used by the audited game is not currently known.
+
+ASSISTANT — TECHNICAL INTERPRETATION
+- Android EOS SDK availability is confirmed.
+- It does not make EOSSDK-Win64-Shipping loadable on Android.
+- It does not prove the existing Windows managed wrappers are Android-compatible.
+- A future Android integration would require Android-compatible native binaries, compatible managed/native bindings, correct ABI and SDK version, lifecycle/thread handling, and product/service configuration.
+- Runtime EOS usage, startup dependency, offline necessity, and compatibility remain unproven.
+
+USER
+လောလောဆယ် conversation ပြောင်းမယ် နောက်တစ်ကောင်ကိုဆက်လုပ်ဖို့ လွန်းညွှန်ချက်တစ်ပါတည်း Update လုပ်ပြီး ဒီ စကားဝိုင်းကပြောခဲ့သမျှတွေကိုပါလုပ်လိုကိ
+
+ASSISTANT
+User requests a new-conversation handoff and archive update. The latest next task is to inspect the actual TXT file row by row, then inspect original Assembly-CSharp.dll IL for ldstr EOS identifiers. The full TXT has not been uploaded yet.
+
+======================================================================
+END CONVERSATION ADDENDUM
+======================================================================
