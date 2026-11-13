@@ -66,3 +66,23 @@
 **ပြီးဆုံးမှုကို အရေအတွက်တစ်ခုတည်းဖြင့် မဆုံးဖြတ်ရ။ အဆင့်တိုင်းတွင် reproducible evidence နှင့် cross-check ရှိမှသာ 🟢 FULL SUCCESS သတ်မှတ်ရမည်။**
 
 **ဤ Plan သည် မူရင်း Full P/Invoke ကို အပြည့်အစုံ၊ တိတိကျကျ စုံစမ်းစစ်ဆေးရန်သာ ဖြစ်သည်။ APK ထုတ်လုပ်ခြင်း၊ Android port လုပ်ခြင်း၊ CASTAWAY DEPTHS ထဲသို့ ပေါင်းစည်းခြင်းတို့ မပါဝင်ပါ။**
+
+## Stage 2 — First Termux ABI/metadata profile (2026-11-13)
+
+User ran `$HOME/pinvoke_stage2.sh` successfully against the audit ZIP.
+
+**Observed output (3,791 rows; 21 columns):**
+- Calling convention: Winapi 2,033; Cdecl 1,159; StdCall 599.
+- Charset: Not specified 3,384; Unicode 177; Ansi 153; Auto 77.
+- Signature pattern hits: pointer 2,997; valuetype 2,215; byref 1,191; class 523; array 375; string 221; object 1.
+- The report confirms the CSV contains explicit columns for `dll`, `entrypoint`, `mapping_flags`, `method_flags`, `impl_flags`, `calling_convention`, `charset`, `exact_spelling`, `supports_last_error`, `best_fit`, `throw_on_unmappable_char`, `mapping_flags_hex`, `method_flags_hex`, `impl_flags_hex`, `pinvoke_impl_flag`, `signature_raw_hex`, and `metadata_method_rid`.
+- The first helper script incorrectly reported native module as NOT FOUND because it searched for a column named like `module`; the actual CSV column is `dll`. Future scripts must use `dll` as the module-name field.
+- The signature-pattern totals are heuristic string matches, not a full ECMA-335 signature/ABI proof. Calling-convention and charset values are metadata observations, not runtime ABI validation.
+
+**Artifacts created on the user's Termux device:**
+`$HOME/PINVOKE_STAGE2_20261113_235016/`
+- `stage2_summary.txt`
+- `field_profile.tsv`
+- `signature_flags.csv`
+
+**Stage status remains 🟡 စစ်ဆေးနေဆဲ.** Next review must use the actual CSV schema and inspect raw metadata flags and signatures row-by-row. Do not mark Stage 2 complete based only on this aggregate profile.
