@@ -1,3 +1,48 @@
+# LATEST HANDOFF UPDATE — 2026-11-14 — READ THIS FIRST
+
+## Project authority and fixed boundaries
+- Project: CASTAWAY DEPTHS; repository devmyatmin/Read-CASTAWAY-DEPTHS; branch main.
+- GitHub is the sole project source of truth. Read this section, docs/PROJECT_STATE.md, and the relevant Stage 4 report before acting.
+- User is Project Lead / Architect. Follow the user's lead; keep narration concise and evidence-based.
+- CASTAWAY-DEPTHS is an original native Android survival game, not a Stranded Deep port.
+- P/Invoke/EOS investigation is reference-only. Never reuse Stranded Deep code, IL, DLLs, binaries, assets, branding, or protected implementation.
+- Preserve original Managed DLLs and Stage 3 CSVs read-only. Do not restart Stage 1/2.
+- Do not introduce Godot unless the user explicitly reintroduces it. Do not use Winlator.
+- Static references do not prove runtime reachability, startup dependency, offline necessity, or Android compatibility.
+
+## Current verified status
+- Stage 1 🟢 PASS.
+- Stage 2 🟢 PASS / CLOSED.
+- Stage 3 scanner/declaration/ImplMap validation 🟢 PASS for 119 DLLs.
+- Stage 3 MemberRef/MethodSpec identity completeness 🟡 300,068 incomplete identities; two unattributed compressed-integer warnings remain.
+- Stage 3 linked static P/Invoke subset: 4,318 rows; declarations: 3,791; dynamic-loader references: 27.
+- Stage 4 🟡 IN PROGRESS; do not mark complete.
+
+## EOS evidence
+- Assembly-CSharp.dll has 382 linked static IL callsites to EOSSDK-Win64-Shipping across 33 EOS wrapper caller types.
+- Of 1,668 Epic-target rows classified, all 1,668 were EOS-wrapper callers; 0 non-EOS callers, 0 blank callers; 317 unique wrapper caller types; 0 direct game-to-EOS edges in that classification.
+- Broad indirect screen: reflection 1,586 rows / 398 caller types; delegate/event 2,980 / 494; callback-prefix 17 / 5; 4,579 unique matched rows after per-row de-duplication (category totals sum to 4,583 due to four overlaps). These are broad candidates with false positives, not confirmed EOS use.
+- Current targeted TXT created by user at $HOME/PINVOKE_STAGE3_20261114/STAGE4_EOS_TARGETED_SCREEN_SUMMARY.txt:
+  - CANDIDATE_ROWS = 4562
+  - UNIQUE_CALLER_TYPES = 656
+  - EOS_RELATED_ROWS = 255
+  - STATUS = COMPLETE
+- The 255 are text-matched candidate rows only. The full TXT has not yet been uploaded or reviewed. The screen does not inspect ldstr operands.
+- Epic's official docs confirm an EOS SDK Android integration path. That does not make EOSSDK-Win64-Shipping usable on Android or prove the audited wrappers are Android-compatible.
+- Epic's release notes say EOS SDK 1.19.0.3+ requires 64-bit Android above OS 7; Android DynamicSTDC binaries are no longer provided, and StaticSTDC flavor is required. The audited game's exact EOS SDK version is unknown.
+- Detailed official-source research: docs/research/PINVOKE_STAGE4_EOS_ANDROID_PLATFORM_RESEARCH_20261114.md.
+
+## Exact resume point — do this next
+1. Ask the user to upload STAGE4_EOS_TARGETED_SCREEN_SUMMARY.txt itself. Inspect all 255 EOS-related rows and distinguish true EOS references from false positives. Do not ask for a large terminal paste.
+2. Continue the planned read-only original Assembly-CSharp.dll IL scan for ldstr operands containing Epic.OnlineServices, EOS_, and known EOS wrapper type/method names. Record each enclosing caller type/method and nearby reflection/delegate/callback instructions.
+3. If actual EOS use is found, identify exact EOS interfaces/services and audited SDK/API version before evaluating Android replacement feasibility.
+4. Keep original DLLs/CSVs read-only. Do not claim runtime reachability, startup dependency, offline necessity, or Android compatibility without independent evidence.
+
+Research report: docs/research/PINVOKE_STAGE4_EOS_ANDROID_PLATFORM_RESEARCH_20261114.md
+Transcript archive: conversation/ChatGPT_Conversation_2026-11-14.txt
+
+--- PREVIOUS HANDOFF CONTENT (HISTORICAL; LATER SECTIONS BELOW MAY BE SUPERSEDED) ---
+
 # Next Conversation Handoff — CASTAWAY DEPTHS
 
 **Read this file first at the start of the next conversation.** It is the current concise handoff; then consult `docs/PROJECT_STATE.md` and the detailed P/Invoke report.
