@@ -40,3 +40,14 @@ Mark each gate PASS only with captured evidence: BUILD, INSTALL, LAUNCH, VULKAN 
 - The DLL list and hashes are documented in `docs/research/PINVOKE_DLL_AUDIT.md`.
 - This is reference-only research. No third-party DLLs or code are to be added to the original CASTAWAY DEPTHS implementation.
 - Historical NYAMIST WSI work remains diagnostic/reference material; no production renderer or visible game rendering is claimed.
+
+
+## 2026-11-14 — P/Invoke Stage 2 grouping update
+
+- User supplied the Termux grouping-audit output from `PINVOKE_GROUP_AUDIT_20261113_235658`.
+- Input CSV: 3,791 rows / 21 columns; 66 native-module groups; 17 assembly groups; 33 unique ABI combinations; 1,976 unique exact signatures; 196 repeated DLL + entry-point keys.
+- Missing-fields report: header only, zero data rows flagged.
+- Repeated DLL + entry-point keys are not automatically errors. The examples include repeated platform API wrappers and legitimate shared entry points; one Rewired `Kernel32.dll!SetNamedPipeHandleState` binding is marked for focused raw-row inspection.
+- Signature-shape labels are heuristic groupings, not proof of blittability or ABI safety.
+- Detailed evidence and next checks: [P/Invoke Group Audit — Stage 2](research/PINVOKE_GROUP_AUDIT.md).
+- Audit remains reference-only. It does not change CASTAWAY DEPTHS implementation status, and no third-party Stranded Deep code, IL, binaries, or assets are to be imported.
