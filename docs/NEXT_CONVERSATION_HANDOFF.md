@@ -474,3 +474,41 @@ Detailed report: `docs/research/PINVOKE_STAGE4_EOS_INDIRECT_CALLSITE_SCREEN_2026
 Status: Stage 4 remains 🟡 IN PROGRESS. Broad candidate screen executed; semantic/EOS attribution unresolved. Do not mark Stage 4 complete or infer runtime reachability, startup dependency, offline necessity, or Android compatibility.
 
 **NEXT ACTION:** inspect original `Assembly-CSharp.dll` IL read-only for `ldstr` operands containing EOS identifiers (e.g. `Epic.OnlineServices`, `EOS_`, wrapper type/method names), recording enclosing caller type/method and nearby reflection/delegate/callback instructions. Separately narrow callsite candidates by resolving actual target declaring type/assembly and excluding ordinary JSON accessors and game-event delegates. Preserve original DLLs and Stage 3 CSVs read-only.
+
+
+## 2026-11-14 — CURRENT RESUME POINT: Stage 4 IL string scan completed; local plugin inventory next
+
+Read this section first. Detailed record: docs/research/PINVOKE_STAGE4_LDSTR_AND_PLATFORM_EVIDENCE_20261114.md. Project status: docs/PROJECT_STATE.md.
+
+### Verified user-side results
+- Five copies of original Assembly-CSharp.dll were checked. All are 3,432,448 bytes with SHA-256 d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc.
+- Selected input: /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll.
+- Working directory was ~/PINVOKE_STAGE3_20261114; a relative ./Stranded_Deep_Data/... path from there is incorrect. Use the absolute path above.
+- User created $HOME/eos_ldstr_audit.py; py_compile and dnfile/dncil dependency checks passed.
+- Read-only IL scan: 26,143 MethodDef rows; 23,276 methods with RVA scanned; 23,276 method bodies parsed; zero parse errors; zero EOS-pattern ldstr hits. Status COMPLETE.
+- Outputs: $HOME/PINVOKE_STAGE4_LDSTR_20261114/EOS_LDSTR_SUMMARY.json, EOS_LDSTR_HITS.csv, and TERMUX_RUN.txt.
+- This only says no matching EOS-pattern literal was found in scanned method-body ldstr operands. It does not rule out metadata, reflection using other strings, delegates/callbacks, native plugin loading, or other assemblies. Do not treat it as disproving the 382 wrapper-to-EOS native P/Invoke callsites.
+
+### Web research interpretation
+- Public desktop manifests provided Photon/Bolt/UDPKit clues, including Photon3Unity3D.dll, PhotonBolt.dll, PhotonRealtime.dll, bolt.dll, bolt.user.dll, udpkit.dll, udpkit.platform.photon.dll, and udpkit.platform.null.dll.
+- PCGamingWiki EOS plugin reference conflicts with reviewed SteamDB desktop manifest evidence that did not show the EOS native binary. Treat this as a possible version/build mismatch or incomplete/outdated public data. Exact local build decides.
+- No Android depot was identified in reviewed public manifests. Epic does provide an Android EOS SDK, but that does not make desktop EOS binaries/wrappers Android-compatible.
+- Do not remove EOS or replace Photon/EOS based on web evidence alone.
+
+### Stage status
+- Stage 1 GREEN PASS.
+- Stage 2 GREEN PASS / CLOSED.
+- Stage 3 scanner and declaration/ImplMap validation GREEN PASS; MemberRef/MethodSpec completeness remains YELLOW (300,068 incomplete identities; two compressed-integer warnings unattributed).
+- Stage 4 YELLOW IN PROGRESS. EOS wrapper/native boundary 382 static callsites; direct non-EOS/game-specific callers to EOS wrappers 0 in the prior classification; targeted screen 255 candidate rows; original Assembly-CSharp ldstr scan 0 hits with 0 parse errors. Runtime reachability, startup dependency, offline necessity, and Android compatibility remain unproven.
+
+### NEXT ACTION — run the local plugin inventory command already supplied in the previous conversation
+Use ROOT=/storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep. Recursively list files under Stranded_Deep_Data whose names contain eos, epic, photon, bolt, udpkit, or steam; list every top-level DLL name in Stranded_Deep_Data/Managed; then recompute SHA-256 for Managed/Assembly-CSharp.dll. The exact Termux command is in the preceding conversation message. Paste the complete output.
+
+After receiving it:
+1. Compare exact local filenames against public manifest clues; do not assume absence from one directory means absent from the build.
+2. Perform read-only metadata audit of TypeRef, MemberRef, AssemblyRef, MethodSpec, ModuleRef, and ImplMap in the original assembly.
+3. Inventory/hash native plugin binaries and identify platform/ABI using file metadata, not filename guesses alone.
+4. Correlate game-specific managed callers to wrapper methods and native plugin loading paths.
+5. Keep static references distinct from runtime reachability and actual Android availability.
+
+Original Managed DLLs and Stage 3 CSVs remain read-only. Do not rerun closed Stage 1/2. CASTAWAY DEPTHS remains an original native Android game; Stranded Deep work is reference-only. Follow the user's lead and keep responses concise.
