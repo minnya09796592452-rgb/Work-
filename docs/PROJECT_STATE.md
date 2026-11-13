@@ -202,3 +202,16 @@ Next: aggregate the linked callsites by native module, caller assembly/type, and
 - Stage 4 remains YELLOW / IN PROGRESS. Next: build a platform/native-module dependency matrix from 4,318 linked callsites and 3,791 declarations, correlate module-to-caller and entrypoint evidence, distinguish Assembly-CSharp direct references from framework/third-party references, and keep static references separate from runtime reachability and Android availability.
 - Handoff is recorded in `docs/NEXT_CONVERSATION_HANDOFF.md`; conversation continuation is appended to `conversation/ChatGPT_Conversation_2026-11-14.txt`. Hidden/collapsed conversation messages are not represented as verbatim text.
 - Preserve original Managed DLLs read-only. Do not restart Stage 1/2 or reuse third-party game code/assets.
+
+
+## 2026-11-14 — Stage 4 EOS managed-wrapper linkage verified
+
+- User supplied the Termux output from `STAGE4_EOS_GAME_DEPENDENCY_AUDIT`, generated from the Stage 3 `il_call_sites.csv`.
+- `Assembly-CSharp.dll` → `EOSSDK-Win64-Shipping`: **382 linked static IL callsites**.
+- The output reports **382 unique caller-type / caller-method / EOS-entrypoint tuples** across **33** managed caller types; the per-type counts sum to 382.
+- The caller types are `Epic.OnlineServices.*` wrapper types. This proves the EOS managed-wrapper/native boundary is embedded in `Assembly-CSharp.dll`; it does **not** yet prove which game-specific gameplay/UI classes call those wrappers.
+- This is static linkage only. Runtime execution, startup dependency, offline necessity, and Android binary/API compatibility remain unproven.
+- Declaration/callsite module reconciliation: **66** exact declaration module strings vs **65** exact linked-callsite module strings. `comdlg32.dll` is declaration-only (2 declarations, 0 linked calls). Case-only name variants remain distinct; no normalization has been applied.
+- Evidence summary: [Stage 4 EOS Game Dependency Audit](research/PINVOKE_STAGE4_EOS_GAME_DEPENDENCY_AUDIT_20261114.md).
+- Stage 4 remains 🟡 IN PROGRESS; do not mark complete.
+- Next: trace non-wrapper managed IL calls into `Epic.OnlineServices.*` wrapper methods to identify game-level feature use. Do not infer runtime reachability or Android compatibility from static P/Invoke links.
