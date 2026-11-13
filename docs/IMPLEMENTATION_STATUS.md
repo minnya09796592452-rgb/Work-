@@ -49,3 +49,12 @@ Track each gate independently. Attach logs or other reproducible evidence before
 - P/Invoke binary audit package prepared on the user's Android device; awaiting upload for inspection. No P/Invoke inventory is verified yet. See `docs/research/PINVOKE_DLL_AUDIT.md`.
 - Historical NYAMIST Android WSI source was inspected in the conversation, including a one-shot swapchain image transition and present path. This is not a CASTAWAY DEPTHS implementation and no device runtime log was supplied for this source. Therefore SURFACE, SWAPCHAIN, SUBMIT/PRESENT, and RENDER OUTPUT remain NOT STARTED / UNVERIFIED for CASTAWAY DEPTHS.
 - No source, binary, APK, or asset was imported from the historical project into the CASTAWAY DEPTHS implementation.
+
+
+## 2026-11-13 ZIP audit evidence update
+- `CASTAWAY_PInvoke_Audit.zip` integrity check: PASS; 123 archive entries reported.
+- SHA-256 manifest: 119/119 entries matched.
+- Confirmed Windows PE32+ x86-64 binaries: `UnityPlayer.dll`, `steam_api64.dll`, `Rewired_DirectInput.dll`.
+- Windows runtime/plugin dependency findings are documented in `docs/research/PINVOKE_DLL_AUDIT.md`.
+- This is a reference-binary audit only. It does not change CASTAWAY DEPTHS implementation status and does not establish a complete P/Invoke metadata inventory.
+- Next audit gate: enumerate MethodDef P/InvokeImpl, ImplMap, and ModuleRef across every managed assembly, then publish exact per-assembly counts and signatures. Inspect native PE imports/exports separately.
