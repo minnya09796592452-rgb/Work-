@@ -142,3 +142,17 @@ The full audit bundle contains:
 - `native_pe_import_symbols.csv` — named native imports.
 - `native_pe_export_symbols.csv` — named native exports.
 - `audit_summary.json` — compact totals.
+
+
+## Stage 2 grouping and consistency checks — 2026-11-14
+
+The user ran a separate grouping audit against the 3,791-row CSV. Results are recorded in [P/Invoke Group Audit — Stage 2](PINVOKE_GROUP_AUDIT.md).
+
+- 3,791 rows and 21 columns.
+- 66 native-module groups; 17 assembly groups.
+- 33 unique ABI combinations; 1,976 unique exact signatures.
+- 196 repeated native DLL + entry-point keys.
+- Missing-fields report contained only the header: zero data rows flagged.
+- The duplicate-key count is a triage list, not a failure count. Examples include legitimate multiple managed wrappers for Apple APIs, EOS release functions, Windows APIs, and SDL2 functions. One repeated obfuscated Rewired method binding to `Kernel32.dll!SetNamedPipeHandleState` remains for focused inspection.
+- Signature-shape groups are heuristic categories (POINTER, BYREF, VALUETYPE, CLASS, ARRAY, STRING, OTHER), not a substitute for exact ABI/signature and marshalling analysis.
+- This stage is metadata grouping only. It does not establish runtime reachability, Android compatibility, or permission to reuse any Stranded Deep material.
