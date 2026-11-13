@@ -171,3 +171,14 @@ User located the original managed game assembly at:
 Reported file metadata: 3.3 MiB; timestamp shown by Termux `Jan 24 2024`; SHA-256 `d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc`.
 
 This resolves the earlier false start: the audit ZIP extraction did not contain the original DLL, but the actual game installation does. Next inspect the DLL read-only. First verify the hash again and check available Python/runtime capabilities; do not modify, patch, or replace the source DLL. The next analysis should establish actual managed IL call-site references to the EOS P/Invoke declarations, not infer reachability from declaration counts alone.
+
+
+## 12. IL analysis environment verified (2026-11-14)
+
+Original assembly: `/storage/emulated/0/Download/PC GAMES/StrandedDeep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll`.
+
+Verified metadata: 3,432,448 bytes; modified 2024-01-24 05:51:28 (+0630); SHA-256 `d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc`.
+
+Termux: Python 3.14.10; pip 26.3; `dnfile`, `dncil`, and `pefile` are importable; `lief` is unavailable. The Managed directory contains `Assembly-CSharp-firstpass.dll`, the target `Assembly-CSharp.dll`, and supporting Rewired, Photon, GDK utility, and Unity managed assemblies.
+
+Status: GREEN to begin read-only managed metadata and IL call-site analysis with the available Python packages. Keep the original DLL untouched. First validate dnfile/dncil compatibility against this exact file, then enumerate MethodDef bodies and call operands referencing the 360 EOS P/Invoke declarations. Do not classify EOS as optional or mandatory until call-site, startup/control-flow, and runtime evidence supports the conclusion.
