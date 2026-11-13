@@ -135,3 +135,33 @@ Current status remains:
 - Stage 2 🟡
 - Stage 3 🟡 (mapping still fails; diagnostic output pending)
 - Stage 4 🟡 (partial symbol-level evidence only)
+
+
+## 2026-11-14 — Stage 3 MemberForwarded RID diagnostic update
+
+User supplied the requested direct Termux diagnostic for the first five ImplMap rows in `Assembly-CSharp.dll`.
+
+**Observed output:**
+- ImplMap rows: 360
+- MethodDef rows: 26,143
+- `MemberForwarded` object type: `dnfile.mdtable.MethodDef`
+- `MemberForwarded.table` type: `dnfile.mdtable.MethodDef`
+- `MemberForwarded.table is md.MethodDef`: True
+- For all five displayed rows, `MemberForwarded.row_index` was a valid RID and `methods[rid - 1].Name` exactly matched the target method name.
+- Confirmed examples include `EOS_EResult_IsOperationComplete`, `EOS_ContinuanceToken_ToString`, `EOS_EpicAccountId_FromString`, `EOS_EpicAccountId_ToString`, and `EOS_EpicAccountId_IsValid`.
+
+**Interpretation:** The RID-to-MethodDef indexing rule `MethodDef.rows[rid - 1]` is directly validated for these five examples. This is strong evidence that the metadata row mapping itself is sound for the sampled records. It does **not** yet prove all 360 rows resolve correctly, nor that the scanner's extraction/join logic is fixed. Do not mark Stage 3 complete.
+
+**Next action — full 360-row mapping validation (Assembly-CSharp.dll only):**
+Run a read-only validation over every ImplMap row. For each row, verify:
+1. `MemberForwarded.table is md.MethodDef`;
+2. RID is an integer in the range 1..len(MethodDef.rows);
+3. `MethodDef.rows[rid - 1]` is the same method represented by `MemberForwarded` (compare method name and, where practical, row object identity/signature);
+4. collect unresolved rows, duplicate RIDs, and name mismatches;
+5. report totals and a small sample of failures.
+
+Expected outcome for a clean mapping check: 360/360 valid table references, 360/360 in-range RIDs, 0 name mismatches. Duplicate RIDs must be reported, not automatically treated as errors, until their semantics are checked.
+
+Only after this direct 360-row validation passes should the scanner be instrumented to report per-ImplMap extraction counters (rows iterated, table accepted, RID accepted, MethodDef resolved, declaration emitted, rejection reason). Do not rerun all 119 DLLs yet.
+
+**Current Stage 3 status:** 🟡 RID mapping confirmed on 5/360 sampled rows; full 360-row validation and scanner extraction diagnosis pending.
