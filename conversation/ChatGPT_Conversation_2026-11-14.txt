@@ -547,3 +547,163 @@ GITHUB RECORDS UPDATED
 ======================================================================
 END CONVERSATION ADDENDUM
 ======================================================================
+
+
+======================================================================
+CURRENT CONVERSATION ADDENDUM — 2026-11-14 — USER-SUPPLIED vk_probe.cpp
+
+USER
+@GitHub စစ်အသေးစိတ် ရော့
+ရော့ ~/PINVOKE_STAGE3_20261114 $ sed -n '1,260p' ~/vk_probe.cpp
+[The user supplied the complete C++ source below.]
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <dlfcn.h>
+#include <cstdint>
+
+typedef uint32_t VkFlags;
+typedef uint32_t VkResult;
+typedef struct VkInstance_T* VkInstance;
+typedef struct VkPhysicalDevice_T* VkPhysicalDevice;
+typedef void (*PFN_vkVoidFunction)(void);
+typedef PFN_vkVoidFunction (*PFN_vkGetInstanceProcAddr)(VkInstance, const char*);
+
+struct VkApplicationInfo {
+    uint32_t sType; const void* pNext;
+    const char* pApplicationName; uint32_t applicationVersion;
+    const char* pEngineName; uint32_t engineVersion;
+    uint32_t apiVersion;
+};
+
+struct VkInstanceCreateInfo {
+    uint32_t sType; const void* pNext; VkFlags flags;
+    const VkApplicationInfo* pApplicationInfo;
+    uint32_t enabledLayerCount; const char* const* ppEnabledLayerNames;
+    uint32_t enabledExtensionCount; const char* const* ppEnabledExtensionNames;
+};
+
+struct VkPhysicalDeviceProperties {
+    uint32_t apiVersion;
+    uint32_t driverVersion;
+    uint32_t vendorID;
+    uint32_t deviceID;
+    uint32_t deviceType;
+    char deviceName[256];
+    uint8_t pipelineCacheUUID[16];
+    uint8_t limitsAndSparse[1024];
+};
+
+struct VkExtensionProperties {
+    char extensionName[256];
+    uint32_t specVersion;
+};
+
+int main() {
+    void* lib = dlopen("/system/lib64/libvulkan.so", RTLD_NOW | RTLD_LOCAL);
+    if (!lib) {
+        std::cerr << "[FAIL] dlopen /system/lib64/libvulkan.so: " << dlerror() << "\n";
+        return 1;
+    }
+    std::cout << "[OK] Loaded /system/lib64/libvulkan.so\n";
+
+    auto vkGetInstanceProcAddr =
+        reinterpret_cast<PFN_vkGetInstanceProcAddr>(dlsym(lib, "vkGetInstanceProcAddr"));
+
+    auto vkCreateInstance =
+        reinterpret_cast<VkResult(*)(const VkInstanceCreateInfo*, const void*, VkInstance*)>(
+            vkGetInstanceProcAddr(nullptr, "vkCreateInstance"));
+
+    VkApplicationInfo app{};
+    app.sType = 0; // VK_STRUCTURE_TYPE_APPLICATION_INFO
+    app.apiVersion = (1 << 22) | (3 << 12); // Vulkan 1.3
+
+    VkInstanceCreateInfo ci{};
+    ci.sType = 1; // VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO
+    ci.pApplicationInfo = &app;
+
+    VkInstance inst = nullptr;
+    if (vkCreateInstance(&ci, nullptr, &inst) != 0 || !inst) {
+        std::cerr << "[FAIL] vkCreateInstance failed\n";
+        return 1;
+    }
+
+    auto vkEnumeratePhysicalDevices =
+        reinterpret_cast<VkResult(*)(VkInstance, uint32_t*, VkPhysicalDevice*)>(
+            vkGetInstanceProcAddr(inst, "vkEnumeratePhysicalDevices"));
+
+    auto vkGetPhysicalDeviceProperties =
+        reinterpret_cast<void(*)(VkPhysicalDevice, VkPhysicalDeviceProperties*)>(
+            vkGetInstanceProcAddr(inst, "vkGetPhysicalDeviceProperties"));
+
+    auto vkEnumerateDeviceExtensionProperties =
+        reinterpret_cast<VkResult(*)(VkPhysicalDevice, const char*, uint32_t*, VkExtensionProperties*)>(
+            vkGetInstanceProcAddr(inst, "vkEnumerateDeviceExtensionProperties"));
+
+    uint32_t gpuCount = 0;
+    vkEnumeratePhysicalDevices(inst, &gpuCount, nullptr);
+    std::cout << "Physical Devices Found: " << gpuCount << "\n\n";
+
+    std::vector<VkPhysicalDevice> gpus(gpuCount);
+    vkEnumeratePhysicalDevices(inst, &gpuCount, gpus.data());
+
+    const char* types[] = {"OTHER", "INTEGRATED_GPU", "DISCRETE_GPU", "VIRTUAL_GPU", "CPU (SWIFTSHADER)"};
+
+    for (uint32_t i = 0; i < gpuCount; ++i) {
+        VkPhysicalDeviceProperties props{};
+        vkGetPhysicalDeviceProperties(gpus[i], &props);
+
+        uint32_t major = (props.apiVersion >> 22);
+        uint32_t minor = (props.apiVersion >> 12) & 0x3FF;
+        uint32_t patch = (props.apiVersion) & 0xFFF;
+
+        std::cout << "============================================\n";
+        std::cout << " GPU #" << i << " : " << props.deviceName << "\n";
+        std::cout << "============================================\n";
+        std::cout << "Device Type   : " << (props.deviceType < 5 ? types[props.deviceType] : "UNKNOWN") << "\n";
+        std::cout << "Vulkan API    : " << major << "." << minor << "." << patch << "\n";
+        std::cout << "Vendor ID     : 0x" << std::hex << props.vendorID << "\n";
+        std::cout << "Device ID     : 0x" << props.deviceID << "\n";
+        std::cout << "Driver Ver    : 0x" << props.driverVersion << std::dec << "\n";
+
+        uint32_t extCount = 0;
+        vkEnumerateDeviceExtensionProperties(gpus[i], nullptr, &extCount, nullptr);
+        std::vector<VkExtensionProperties> exts(extCount);
+        vkEnumerateDeviceExtensionProperties(gpus[i], nullptr, &extCount, exts.data());
+
+        std::cout << "Extensions    : " << extCount << " supported\n";
+        for (const auto& e : exts) {
+            std::cout << "  -> " << e.extensionName << " (v" << e.specVersion << ")\n";
+        }
+    }
+
+    dlclose(lib);
+    return 0;
+}
+```
+
+USER
+Update လုပ်ဆက်သွားမယ်
+
+ASSISTANT
+Reviewed the source without executing it. Findings and the exact next action are recorded below.
+
+## Source review
+- The direct loader path is explicit: `/system/lib64/libvulkan.so`.
+- Vulkan structure-type values 0 and 1 are correct.
+- `(1 << 22) | (3 << 12)` encodes Vulkan 1.3.0.
+- Physical-device type values 0–4 are mapped correctly.
+- Reliability defects: no null checks for `dlsym` / returned Vulkan function pointers; several `VkResult` values are ignored; no explicit zero-device/error handling; hard-coded 1.3 request; missing `vkDestroyInstance`; generic error output.
+- `VkPhysicalDeviceProperties` is manually approximated. Validate its ABI layout against official Vulkan headers for this target before relying on the full structure. The 1,024-byte tail is not a typed definition of Vulkan limits/sparse properties.
+
+## Evidence boundary
+This paste is source code, not a new execution result. Earlier archived direct-loader output already enumerated Mali-G925-Immortalis MC12 (Vulkan 1.3.278, 152 device extensions), while Termux `vulkaninfo` selected llvmpipe. These are distinct loader paths. This source does not test queue submission, surface/swapchain, presentation, or rendering.
+
+## GitHub records updated
+- `docs/research/VULKAN_PROBE_SOURCE_REVIEW_20261114.md`
+- `docs/PROJECT_STATE.md`
+- `docs/NEXT_CONVERSATION_HANDOFF.md`
+- This conversation transcript is appended with the supplied source and review.
+
+NEXT ACTION: Wait for the compile/run result of this exact `vk_probe.cpp` revision. Then review complete stdout/stderr and continue to the isolated queue/surface test. Keep Android driver/vendor configuration unchanged.
