@@ -228,3 +228,43 @@ The 27 static loader API references divide into clearly platform-specific caller
 ### Immediate next action
 
 Run a read-only schema audit on `il_call_sites.csv`, `pinvoke_declarations.csv`, and `pinvoke_callsite_and_declarations.csv`: print headers, non-empty counts for every column, and the first 3 rows of each file. Specifically identify the actual callsite identity columns and determine whether the joined file contains callsite rows plus declaration-only rows. Do not rerun Stage 1/2, change the scanner, or modify original Managed DLLs. After schema confirmation, build the Stage 4 platform/native-module dependency map from the 4,318 linked calls and the 27 loader contexts.
+
+
+## 2026-11-14 — VERIFIED CURRENT RESUME POINT (READ THIS FIRST)
+
+The user supplied the Stage 3 schema audit report at commit `de877d735fa575f7876d9afef30d01eb728a89dd`. It was archived unchanged at `docs/research/PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt` (244 lines; exact content re-fetch verified; blob SHA `4bb0953c807faff032b8b6b0bf77b2fb499619ed`).
+
+### Schema findings — join ambiguity resolved for supplied output
+- `il_call_sites.csv`: 695,709 rows. All callsite identity columns are populated in all rows. `pinvoke_dll` and `pinvoke_entrypoint` are populated in 4,318 rows.
+- `pinvoke_declarations.csv`: 3,791 rows; all 8 columns populated in every row.
+- `pinvoke_callsite_and_declarations.csv`: 8,109 rows. Callsite fields are populated in exactly 4,318 rows; declaration fields are populated in exactly 3,791 rows.
+- The combined file therefore contains two distinct row groups: 4,318 linked callsite records plus 3,791 declaration records. It is NOT 8,109 unique calls.
+- The earlier 17 repeated blank-key buckets were declaration-only records with blank callsite identity fields, not verified duplicate callsites. The previous join-multiplicity ambiguity is resolved for this supplied schema.
+
+### Current status
+- Stage 1 🟢 PASS.
+- Stage 2 🟢 PASS / CLOSED.
+- Stage 3 scanner execution and declaration/ImplMap validation 🟢 PASS.
+- Stage 3 linked static callsite subset 🟢 4,318 rows.
+- Stage 3 join schema interpretation 🟢 RESOLVED for the supplied CSVs.
+- Stage 3 MemberRef/MethodSpec association completeness 🟡 unresolved: 300,068 incomplete identities.
+- Two warnings, `invalid compressed int: leading byte: 0xfb`, remain unattributed.
+- Stage 4 native dependency map 🟡 IN PROGRESS; not complete.
+
+### NEXT ACTION — BEGIN STAGE 4 NATIVE DEPENDENCY MAP
+Use the archived reports:
+- `docs/research/PINVOKE_STAGE3_AGGREGATION_20261114.txt`
+- `docs/research/PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt`
+- `docs/research/PINVOKE_GROUP_AUDIT.md`
+
+Build an evidence-based dependency matrix from the 4,318 linked callsites and 3,791 declarations:
+1. Classify native modules by platform family (Windows, Apple/macOS, Linux/POSIX, cross-platform, unknown); mark uncertain items unknown rather than guessing.
+2. Correlate modules with caller assembly/type/method, managed declaration, entrypoint, and counts wherever source data supports it.
+3. Separate game-assembly direct references from third-party/framework references (Steamworks, EOS, Xbox/XGamingRuntime, Rewired, System.Drawing/GDI+, Mono BTLS, SDL, etc.).
+4. Distinguish direct static references from runtime reachability and actual dynamic loading. Do not claim a module is required for startup/gameplay or available on Android without independent evidence.
+5. Keep 300,068 incomplete MemberRef identities and the two unattributed compressed-integer warnings explicitly YELLOW.
+6. Produce the dependency matrix and highest-priority unresolved questions. Do not change the scanner or original Managed DLLs.
+
+Project boundaries remain unchanged: CASTAWAY DEPTHS is an original native Android survival game; this P/Invoke analysis is reference-only. Do not restart Stage 1/2, reuse third-party code/assets, or introduce excluded technologies. User is Project Lead; follow their lead and keep narration concise.
+
+The conversation continuation was appended to `conversation/ChatGPT_Conversation_2026-11-14.txt`; the transcript explicitly notes that hidden/collapsed messages are not fabricated as verbatim content.
