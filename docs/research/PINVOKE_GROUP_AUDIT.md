@@ -161,3 +161,13 @@ Keep this research reference-only; no EOS SDK, Stranded Deep IL/code, binaries, 
 User ran a search for `Assembly-CSharp.dll` under `$HOME/PINVOKE_STAGE2_20261113_235016/extracted`; it returned no file. The same Termux check found none of `monodis`, `ilspycmd`, `ildasm`, or `dotnet` on PATH. This is expected if that extracted directory contains only the audit ZIP's CSV/report outputs rather than the original managed game assemblies. No conclusion about the original game installation's DLL availability can be drawn yet.
 
 Next action: locate the original `Assembly-CSharp.dll` under the user's actual game directory. Only after confirming its exact path and file metadata should an IL inspection approach/tool be selected. Do not install tooling or alter the source DLL before locating it.
+
+
+## 11. Original Assembly-CSharp.dll located (2026-11-14)
+
+User located the original managed game assembly at:
+`/storage/emulated/0/Download/PC GAMES/StrandedDeep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll`
+
+Reported file metadata: 3.3 MiB; timestamp shown by Termux `Jan 24 2024`; SHA-256 `d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc`.
+
+This resolves the earlier false start: the audit ZIP extraction did not contain the original DLL, but the actual game installation does. Next inspect the DLL read-only. First verify the hash again and check available Python/runtime capabilities; do not modify, patch, or replace the source DLL. The next analysis should establish actual managed IL call-site references to the EOS P/Invoke declarations, not infer reachability from declaration counts alone.
