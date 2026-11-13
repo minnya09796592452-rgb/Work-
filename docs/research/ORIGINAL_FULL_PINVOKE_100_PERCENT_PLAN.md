@@ -115,3 +115,23 @@ User ran `$HOME/pinvoke_stage2.sh` successfully against the audit ZIP.
 - `signature_flags.csv`
 
 **Stage status remains 🟡 စစ်ဆေးနေဆဲ.** Next review must use the actual CSV schema and inspect raw metadata flags and signatures row-by-row. Do not mark Stage 2 complete based only on this aggregate profile.
+
+
+## 2026-11-14 — Current handoff / waiting state
+
+User's isolated Termux test of the patched Stage 3 scanner against a directory containing only `Assembly-CSharp.dll` returned `pinvoke_declarations_seen: 0` (26,143 MethodDefs, 23,276 method bodies parsed, 82,804 IL call instructions). This means the local patch has not passed runtime validation, despite syntax compilation passing.
+
+The user was then asked to run a direct first-five-row comparison of:
+- `MemberForwarded.row_index`
+- `MemberForwarded.table` type and identity against `md.MethodDef`
+- `mf.row.Name`
+- `MethodDef.rows[rid - 1].Name`
+- whether the names match
+
+**WAITING FOR THE USER TO SEND THAT NEXT DIAGNOSTIC OUTPUT.** Do not issue another command or patch before reviewing it. Continue with the one-DLL Assembly-CSharp validation first; do not repeat the 119-DLL scan until declaration mapping is proven.
+
+Current status remains:
+- Stage 1 🟢
+- Stage 2 🟡
+- Stage 3 🟡 (mapping still fails; diagnostic output pending)
+- Stage 4 🟡 (partial symbol-level evidence only)
