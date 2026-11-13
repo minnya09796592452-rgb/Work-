@@ -319,3 +319,16 @@ Android EOS SDK availability is confirmed. This does not make EOSSDK-Win64-Shipp
 2. Perform a read-only original-IL scan for ldstr operands containing EOS identifiers and correlate them to enclosing caller type/method and nearby reflection/delegate/callback instructions.
 3. If genuine EOS usage is identified, determine the actual services/interfaces and exact audited SDK version before evaluating Android replacement.
 4. Preserve original Managed DLLs and Stage 3 CSVs read-only; do not restart Stage 1/2 or infer runtime reachability from static callsites.
+
+
+## 2026-11-14 — Stage 4 original IL ldstr scan and platform evidence update
+
+- New detailed report: [Stage 4 ldstr and platform evidence](research/PINVOKE_STAGE4_LDSTR_AND_PLATFORM_EVIDENCE_20261114.md).
+- User verified five copies of original `Assembly-CSharp.dll`; all five were 3,432,448 bytes and had SHA-256 `d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc`. Audit used the Game Zip copy at `/storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll`.
+- User-created read-only `dnfile`/`dncil` IL scan completed: 26,143 MethodDef rows; 23,276 methods with RVA scanned; 23,276/23,276 method bodies parsed; zero parse errors; zero matching EOS-pattern `ldstr` hits. Summary and CSV are under `$HOME/PINVOKE_STAGE4_LDSTR_20261114/`.
+- Interpretation is bounded: no matching EOS strings in scanned `Assembly-CSharp.dll` method-body `ldstr` operands. This does not rule out metadata references, reflection with other strings, delegates/callbacks, native plugin loading, or other assemblies. It does not negate the separate 382 wrapper-to-EOS native P/Invoke callsites.
+- Web review found Photon/Bolt/UDPKit managed DLL names in public desktop manifest evidence, while PCGamingWiki EOS plugin references conflict with reviewed SteamDB manifests. Treat EOS-vs-Photon attribution as unresolved until exact local build inventory and metadata corroborate it.
+- Android EOS SDK availability is not evidence that the desktop EOS binary or wrappers are Android-compatible. No Android depot was identified in the reviewed public manifests.
+- Stage 4 remains 🟡 IN PROGRESS. Do not remove/replace EOS or networking components based on these findings alone.
+- Immediate next action: run the supplied read-only local inventory command for EOS/Epic/Photon/Bolt/UDPKit/Steam files, list Managed DLL names, and recheck Assembly-CSharp SHA-256; then audit TypeRef/MemberRef/AssemblyRef/MethodSpec/ModuleRef/ImplMap and correlate exact local plugin files.
+- Original Managed DLLs and Stage 3 CSVs remain read-only. Stage 1/2 remain closed. CASTAWAY DEPTHS remains an original native Android game; Stranded Deep research is reference-only.
