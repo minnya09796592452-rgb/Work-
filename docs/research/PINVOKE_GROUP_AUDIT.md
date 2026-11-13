@@ -322,3 +322,70 @@ Observed run results:
 **Status:** Stage 3's implemented scanner validation gate is **GREEN / PASS** for the 119-DLL inventory and the reported declaration/ImplMap and method-body parsing checks. MemberRef/MethodSpec association completeness remains **YELLOW / unresolved** because 300,068 identities were incomplete, and the two compressed-integer warnings need attribution. This PASS does not prove runtime reachability, Android compatibility, or native-library availability.
 
 **Next action:** Inspect the generated CSVs and summary in `$HOME/PINVOKE_STAGE3_20261114`, especially the declaration-to-callsite linkage and unresolved MemberRef records. Do not rerun Stage 1/2 or modify original DLLs. Stage 4 remains incomplete until its evidence-based analysis is performed.
+
+
+## 16. Stage 3 generated CSV review — direct P/Invoke callsite evidence (2026-11-14)
+
+User supplied the output of a read-only summary script run in `$HOME/PINVOKE_STAGE3_20261114`.
+
+### CSV inventory and counts
+
+| Output | Observed result |
+|---|---:|
+| `il_call_sites.csv` | 695,709 rows |
+| MethodDef targets | 395,641 |
+| MemberRef targets | 279,460 |
+| MethodSpec targets | 20,608 |
+| `il_call_sites.csv` rows with `pinvoke_dll` populated | **4,318** |
+| `pinvoke_declarations.csv` | 3,791 rows |
+| `pinvoke_callsite_and_declarations.csv` | 8,109 rows |
+| `dynamic_loader_call_sites.csv` | 27 rows |
+| `stage3_errors.csv` | 0 rows |
+
+Dynamic-loader target counts:
+- `dlopen`: 6
+- `dlclose`: 6
+- `dlsym`: 5
+- `GetProcAddress`: 4
+- `FreeLibrary`: 3
+- `LoadLibraryEx`: 2
+- `LoadLibraryExW`: 1
+
+Top declaration-module counts from `pinvoke_declarations.csv`:
+- `steam_api64`: 1,025
+- `gdiplus`: 556
+- `EOSSDK-Win64-Shipping`: 360
+- `Microsoft.Xbox.Services.141.GDK.C.Thunks`: 350
+- `XGamingRuntimeThunks`: 190
+- `libmono-btls-shared`: 188
+- `kernel32.dll`: 125
+- `steam_api`: 115
+- `user32.dll`: 79
+- `SDL2`: 55
+- `libSDL2-2.0.so.0`: 55
+- `advapi32.dll`: 53
+- `Rewired_DirectInput`: 52
+- `odbc32.dll`: 45
+- CoreFoundation framework path: 38
+
+The sample linked callsites include direct MethodDef calls in `Assembly-CSharp.dll` to EOS wrappers: `EOS_EResult_IsOperationComplete`, `EOS_ContinuanceToken_ToString`, `EOS_EpicAccountId_IsValid`, `EOS_EpicAccountId_ToString`, and `EOS_EpicAccountId_FromString`.
+
+### Interpretation
+
+The **4,318** figure is the number of IL callsite rows in `il_call_sites.csv` where the scanner populated `pinvoke_dll`. It is the observed linked subset, not a complete count of all P/Invoke references. The scanner summary still reports `memberref_identity_incomplete=300,068`, so MemberRef/MethodSpec identity association remains incomplete and must stay YELLOW.
+
+The **8,109** rows in `pinvoke_callsite_and_declarations.csv` are joined output rows. Do not call them 8,109 unique calls: one callsite may potentially expand to multiple declaration rows. Audit join multiplicity before treating this file as a call count.
+
+The 27 dynamic-loader records show static references to loader APIs; they do not prove which libraries were loaded at runtime or whether those paths execute. The zero-row error CSV is consistent with the scanner's validation PASS, but does not resolve incomplete MemberRef identities or the two previously observed `invalid compressed int: leading byte: 0xfb` warnings.
+
+### Stage status after this review
+
+- Stage 1: 🟢 PASS.
+- Stage 2: 🟢 PASS / CLOSED.
+- Stage 3 scanner validation and declaration/ImplMap coverage: 🟢 PASS.
+- Stage 3 MemberRef/MethodSpec association completeness: 🟡 YELLOW / unresolved.
+- Stage 4: 🟡 IN PROGRESS; native dependency mapping has begun but is not complete.
+
+### Next evidence task
+
+Aggregate the 4,318 linked rows by `pinvoke_dll`, caller assembly, caller type, and target kind. Audit whether the 8,109 joined rows contain multiple declaration matches per IL callsite. Print the full 27 dynamic-loader rows with caller assembly/type/method and IL offset. Use these outputs to construct the Stage 4 evidence-based native dependency map. Preserve the original Managed directory read-only; this forensic work remains reference-only and must not feed third-party code, IL, binaries, or assets into CASTAWAY DEPTHS.
