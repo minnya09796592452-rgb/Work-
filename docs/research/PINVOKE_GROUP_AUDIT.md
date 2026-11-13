@@ -270,3 +270,18 @@ The second variant adds an object-identity lookup for the MethodDef row, then fa
 No Stage 3 runtime success is established by the Stage 2 output or by syntax compilation.
 
 **Next action:** inspect the extracted CSV's real `dll` and `entrypoint` columns read-only, verify distinct-module count and missing values, then repair the scanner defects before any Stage 3 execution against the original Managed directory.
+
+
+## Verified Termux CSV column check (2026-11-14)
+
+User ran a read-only Python check against the extracted Stage 2 CSV. Exact observed results:
+
+- Columns include `dll` and `entrypoint` (21 columns total).
+- `dll`: 3,791 rows; 0 missing; **66 unique values**.
+- `entrypoint`: 3,791 rows; 0 missing; **3,324 unique values**.
+- Top DLL counts: `steam_api64` 1,025; `gdiplus` 556; `EOSSDK-Win64-Shipping` 360; `Microsoft.Xbox.Services.141.GDK.C.Thunks` 350; `XGamingRuntimeThunks` 190; `libmono-btls-shared` 188; `kernel32.dll` 125; `steam_api` 115; `user32.dll` 79; `SDL2` 55; `libSDL2-2.0.so.0` 55; `advapi32.dll` 53; `Rewired_DirectInput` 52; `odbc32.dll` 45; CoreFoundation framework path 38.
+- Top entrypoint counts begin: `XInputGetState` 10; `ReadFile` 7; `CreateFileW`, `CloseHandle`, `WriteFile`, `XInputGetCapabilities`, `XInputSetState`, `RegQueryValueExW`, and `RegSetValueExW` each 5.
+
+**Conclusion:** Stage 2's 66-module count is directly re-confirmed from the raw CSV. The earlier `native_module: NOT FOUND` is strictly a reporting-field alias mismatch: the real column is `dll`; it does not indicate missing module data. The raw data has zero missing DLL and entrypoint cells. Mark this field-profile check GREEN.
+
+**Next action:** Stage 2 profile is now closed. Do not re-run it. Proceed to Stage 3 scanner repair: move all CSV writes after MemberRef/MethodSpec enrichment; improve reference resolution beyond name-only matching; make ImplMap resolution errors and declaration/ImplMap coverage failures affect the exit status. Then validate with a read-only scan of the original Managed directory.
