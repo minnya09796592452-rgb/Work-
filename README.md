@@ -18,6 +18,16 @@ This is original game development, **not a Stranded Deep port**. Do not integrat
 5. When complete, produce and validate the final standalone game APK.
 6. Retire the temporary Editor/Control APK from the release workflow.
 
+## Documentation index
+- `docs/PROJECT_STATE.md` — identity, constraints, and baseline.
+- `docs/ARCHITECTURE.md` — runtime layers and packaging boundaries.
+- `docs/ASSET_POLICY.md` — original-content and provenance rules.
+- `docs/TERMUX_SETUP.md` — Termux workspace setup.
+- `docs/LOGIC_AUDIT.md` — current logic/pipeline findings and external research boundaries.
+- `docs/IMPLEMENTATION_STATUS.md` — evidence-based subsystem status and validation gates.
+- `docs/FILE_PLACEMENT_MAP.md` — exact destination for each future source/data file.
+- `docs/LOGIC_FILE_REGISTER.md` — intake register for files uploaded from Termux.
+
 ## Packaging rules
 - Native `.so` libraries belong inside the APK under the matching ABI, e.g. `lib/arm64-v8a/`.
 - `obb/Castaway Depths/` is a development data-staging tree, not an installable OBB archive.
@@ -26,5 +36,3 @@ This is original game development, **not a Stranded Deep port**. Do not integrat
 
 ## Quality gates
 Track BUILD, INSTALL, LAUNCH, VULKAN SURFACE/SWAPCHAIN/PRESENT, RENDER OUTPUT, GAMEPLAY, SAVE/LOAD, and DEVICE COMPATIBILITY separately. A compile success is not proof of runtime success.
-
-See `docs/PROJECT_STATE.md`, `docs/ARCHITECTURE.md`, `docs/ASSET_POLICY.md`, and `docs/TERMUX_SETUP.md`.
