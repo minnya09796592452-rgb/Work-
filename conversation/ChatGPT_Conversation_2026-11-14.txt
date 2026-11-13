@@ -272,3 +272,40 @@ Build an evidence-based map of the 4,318 linked static callsites and 3,791 decla
 Before doing new work, fetch the current main versions of the handoff, project state, and research docs. Record results in GitHub, then re-fetch and verify every update. Do not ask the user to repeat facts already recorded here.
 
 END OF CURRENT CONVERSATION ADDENDUM
+
+
+======================================================================
+CONVERSATION ADDENDUM — 2026-11-14 — STAGE 4 EOS CALLER CLASSIFICATION
+======================================================================
+
+USER-SUPPLIED TERMUX RESULT (read-only; Assembly-CSharp rows with target_type containing "Epic"):
+
+STAGE4_EOS_CALLER_CLASSIFICATION
+TOTAL_EPIC_TARGET_ROWS = 1668
+EOS_WRAPPER_CALLER_ROWS = 1668
+NON_EOS_CALLER_ROWS = 0
+BLANK_CALLER_ROWS = 0
+UNIQUE_EOS_WRAPPER_TYPES = 317
+UNIQUE_NON_EOS_CALLER_TYPES = 0
+UNIQUE_GAME_TO_EOS_EDGES = 0
+The output printed the EOS wrapper caller type frequency listing. No non-EOS caller types or non-EOS-to-EOS method edges were printed.
+STAGE4_EOS_CALLER_CLASSIFICATION_END
+
+ASSISTANT REVIEW:
+- The partition reconciles: 1,668 = 1,668 + 0 + 0.
+- All 1,668 filtered IL callsite rows are called from Epic.OnlineServices.* wrapper types.
+- No direct non-EOS/game-specific caller → EOS-wrapper edge was found by this method.
+- This does not prove EOS is unused. Reflection, string-based lookup, delegates, callback registration, generated bindings, or other indirect paths may not appear as direct call edges.
+- The previously verified 382 Assembly-CSharp.dll → EOSSDK-Win64-Shipping P/Invoke callsites represent the managed wrapper/native boundary; they do not by themselves prove game-specific gameplay invocation.
+- Runtime execution, startup reachability, offline-play necessity, and Android compatibility remain unproven.
+
+USER INSTRUCTION:
+The user said the conversation is moving to a new chat because this one has become long, instructed the assistant to carry out the prior GitHub handoff process in one pass, and explicitly reminded the assistant to copy this conversation into the GitHub conversation archive.
+
+GITHUB ARCHIVE:
+- Detailed report: docs/research/PINVOKE_STAGE4_EOS_CALLER_CLASSIFICATION_20261114.md
+- This conversation addendum is appended to this archive.
+- Current resume task: read-only indirect EOS usage audit (reflection, string-based lookup, delegate/callback wiring), preserving original Managed DLLs and Stage 3 CSVs as read-only.
+======================================================================
+END CONVERSATION ADDENDUM
+======================================================================
