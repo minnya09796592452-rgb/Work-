@@ -54,3 +54,23 @@ Keep all three source versions distinct until the Project Lead identifies the cu
 
 The original source provenance record remains unchanged:
 `docs/research/PINVOKE_STAGE3_SCANNER_SOURCE_PROVENANCE.md`.
+
+
+## Follow-up static code audit (2026-11-14)
+
+Reviewed the uploaded variants line-by-line. The same findings apply to both uploaded variants and the readable Library source unless noted.
+
+### Confirmed defects / risks
+
+1. **CSV output is written before MemberRef/MethodSpec matching.** In `main()`, all three CSV files are written at lines 197–199, but MemberRef/MethodSpec name matching runs afterward at lines 200–212. That later pass mutates `calls` and appends matched rows to `pinvokes`, but neither `il_call_sites.csv` nor `pinvoke_callsite_and_declarations.csv` is written again. Consequently, the summary can count rows and mappings that are absent from the corresponding CSV files.
+2. **Name-only matching can produce false associations.** The declaration index key is only lowercased managed type + method name. It does not compare assembly identity, method signature/parameter types, generic instantiation, or metadata token identity. Overloads or same-named types across assemblies can therefore be incorrectly associated. The code itself labels this a name match, not a proven call edge.
+3. **ImplMap resolution errors do not fail the process.** Exceptions increment `implmap_resolution_errors`, but the final nonzero-exit condition checks only `file_errors` and `method_body_parse_errors`. A run may exit 0 while P/Invoke declarations failed to resolve.
+4. **No internal completeness reconciliation.** The scanner does not compare the P/InvokeImpl flags on MethodDef rows against successfully mapped ImplMap rows, nor assert that every ImplMap row was resolved exactly once. Therefore `pinvoke_declarations_seen` alone is not a completeness proof.
+
+### Verification status
+
+- Confirmed by direct source inspection; no source code changed.
+- Python syntax compilation passed for both uploaded variants.
+- Runtime execution remains unverified because `dnfile` and `dncil` are unavailable in the current environment.
+- No fresh scan, CSV output, or Stage 3 result is claimed.
+- These findings are recorded for the Project Lead; no patch or canonical-source selection has been made.
