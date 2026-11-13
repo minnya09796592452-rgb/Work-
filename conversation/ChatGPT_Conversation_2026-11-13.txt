@@ -375,3 +375,74 @@ Important technical qualification:
 - The logged PASS messages are source-level success paths; runtime success requires actual APK launch/logcat evidence on device.
 - Review surface-format edge cases, swapchain image acquisition/presentation results (including out-of-date/suboptimal), repeated window lifecycle, and cleanup on partial initialization before adapting any concepts.
 - No legacy source files have been imported into CASTAWAY DEPTHS; the repository should remain unchanged until the adaptation boundary and provenance are approved.
+
+
+======================================================================
+CONVERSATION CONTINUATION — 2026-11-13 (P/INVOKE DLL AUDIT PACKAGE)
+======================================================================
+
+USER:
+Paused the WSI line of work and redirected the investigation: identify which Stranded Deep DLLs contain the full P/Invoke declarations. First asked to use GitHub evidence, then asked for online clues, and challenged whether external clues could be as accurate as inspection of the actual game files.
+
+ASSISTANT:
+Agreed that the actual installed game binaries are the authoritative evidence. Online/GitHub findings are only clues; the exact P/Invoke inventory must be extracted from the user's own managed assemblies and native plugins. Do not treat a guessed list of DLLs as complete.
+
+USER:
+Asked to search the game folder:
+/storage/emulated/0/Download/PC GAMES/StrandedDeep
+
+TERMUX SEARCH RESULT:
+The following files were found:
+
+Managed:
+- Stranded_Deep_Data/Managed/Assembly-CSharp-firstpass.dll
+- Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+- Stranded_Deep_Data/Managed/Rewired_Core.dll
+- Stranded_Deep_Data/Managed/Rewired_Windows.dll
+- Stranded_Deep_Data/Managed/Rewired_Windows_Functions.dll
+- Stranded_Deep_Data/Managed/com.rlabrecque.steamworks.net.dll
+
+Native/plugin:
+- Stranded_Deep_Data/Plugins/x86_64/Rewired_DirectInput.dll
+- Stranded_Deep_Data/Plugins/x86_64/steam_api64.dll
+- UnityPlayer.dll
+
+USER:
+Ran a size + SHA-256 audit for those files. Exact results:
+
+| File | Size | SHA-256 |
+|---|---:|---|
+| Assembly-CSharp-firstpass.dll | 627K | 05dc598d55fcd2440946fceb7a47a829fa23de26f7c05283080013e4c1c588ae |
+| Assembly-CSharp.dll | 3.3M | d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc |
+| Rewired_Core.dll | 2.0M | 018f083660e95467146c23ef07246ee4150401c5e6f3437e7ead33c052c40ab4 |
+| Rewired_Windows.dll | 908K | 956b674bb57869657aa27f1bea133ea3737cef497fba2898eb6d9e7d52c13cbd |
+| Rewired_Windows_Functions.dll | 4.0K | b5863c2d83d6c12a32188a2f91257dd35a7ce71aaf322112120638592e13b516 |
+| com.rlabrecque.steamworks.net.dll | 358K | 465c8f4e30120e3060d57efd4d4ffb5061fbcfa85d1320f286bedd1e4152f49c |
+| Rewired_DirectInput.dll | 13K | 9989b282d43621259160954f3c2191afc3e3a13adb0091c3f60be228831858ad |
+| steam_api64.dll | 1.7M | 53ca528e1cf660e8b53c5bbc78decb994cb650709155407fa9978200f9a05ae2 |
+| UnityPlayer.dll | 28M | e75ab32370fcd78d454dbac6d1648ee19d9ff6d9b9e481538216409fd860af2e |
+
+USER:
+Created an audit ZIP in Termux:
+/storage/emulated/0/Download/CASTAWAY_PInvoke_Audit.zip
+
+Steps:
+- Generated PInvoke_SHA256_MANIFEST.txt from all *.dll files under Stranded_Deep_Data/Managed using sha256sum.
+- Created ZIP containing the entire Stranded_Deep_Data/Managed/ directory (all managed DLLs, not only the clue list), Stranded_Deep_Data/Plugins/x86_64/, UnityPlayer.dll, and PInvoke_SHA256_MANIFEST.txt.
+- ZIP command output showed Rewired, Steamworks, UnityEngine module assemblies, game assemblies, and other managed libraries were included.
+- ZIP size reported by Termux: 25 MB; timestamp/size output showed 25M on Nov 13 at 22:39.
+
+AUDIT STATUS:
+- ZIP creation succeeded according to Termux output.
+- The ZIP has not yet been uploaded into this ChatGPT conversation, so no DLL metadata has yet been inspected here.
+- No P/Invoke counts, module names, entry points, calling conventions, or signatures have been established from the ZIP yet.
+- Next step: user uploads CASTAWAY_PInvoke_Audit.zip; then inspect all managed assemblies for ECMA-335 P/Invoke metadata (ImplMap table / PInvokeImpl flags / ModuleRef) and inspect native PE import/export tables where relevant. Distinguish managed P/Invoke declarations from ordinary native DLL imports and Unity internal native bindings.
+
+IMPORTANT PROJECT BOUNDARY:
+This is a forensic/reference audit of the user's Stranded Deep installation only. Do not copy these DLLs, their code, IL, or proprietary content into CASTAWAY DEPTHS. Record only code-free findings that can inform independently written CASTAWAY DEPTHS architecture. Do not upload the audit ZIP or original DLL binaries to the CASTAWAY DEPTHS source repository.
+
+======================================================================
+PROJECT LEAD WORKING AGREEMENT
+======================================================================
+
+User is the project lead and expects the assistant to follow their direction. Keep explanations concise, use actual evidence, do not invent inspection results, and do not import legacy files into the original CASTAWAY DEPTHS implementation without explicit direction and provenance review.
