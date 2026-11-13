@@ -165,3 +165,36 @@ Expected outcome for a clean mapping check: 360/360 valid table references, 360/
 Only after this direct 360-row validation passes should the scanner be instrumented to report per-ImplMap extraction counters (rows iterated, table accepted, RID accepted, MethodDef resolved, declaration emitted, rejection reason). Do not rerun all 119 DLLs yet.
 
 **Current Stage 3 status:** 🟡 RID mapping confirmed on 5/360 sampled rows; full 360-row validation and scanner extraction diagnosis pending.
+
+
+## 2026-11-14 — Stage 3 full Assembly-CSharp RID validation PASS
+
+User ran the full read-only RID validation against:
+`Stranded_Deep_Data/Managed/Assembly-CSharp.dll`.
+
+**Exact observed output:**
+- ImplMap rows: **360**
+- MethodDef rows: **26,143**
+- `methoddef_table_ok`: **360**
+- `valid_rid`: **360**
+- `name_match`: **360**
+- `duplicate RID values`: **0**
+- `duplicate RID occurrences`: **0**
+- Error samples: none
+- `Total errors`: **0**
+- Final result: **RID mapping: PASS**
+
+**Conclusion:** All 360 ImplMap rows in Assembly-CSharp.dll resolve to the corresponding MethodDef through `MemberForwarded.row_index` and `MethodDef.rows[rid - 1]`, with matching method names, no invalid RIDs, no wrong tables, no name mismatches, and no duplicate RIDs. This supersedes the earlier 5/360 sampled-only status.
+
+**Important scope limit:** This proves the metadata RID mapping for the 360 ImplMap rows in Assembly-CSharp.dll only. It does not yet prove that the Stage 3 scanner emits all 360 declarations, nor that all 3,791 declarations across 119 managed DLLs are joined correctly. Stage 3 therefore remains 🟡.
+
+**Next action — inspect the exact scanner implementation before changing it:**
+1. Locate the existing `pinvoke_stage3_scan.py` on the user's Termux device.
+2. Print the code around `pinvoke_declarations_seen`, `ImplMap`, `MemberForwarded`, and the P/Invoke declaration join.
+3. Identify the precise branch/counter that rejects or skips valid ImplMap rows.
+4. Make the smallest evidence-based correction, then run Assembly-CSharp.dll alone and require 360 declarations with zero resolution errors.
+5. Only after the isolated test passes, rerun the 119-DLL scan.
+
+Do not replace the scanner wholesale, alter original game files, or run the full scan before inspecting the current code.
+
+**Updated Stage 3 status:** 🟡 Full RID mapping PASS for Assembly-CSharp.dll (360/360); scanner extraction diagnosis pending.
