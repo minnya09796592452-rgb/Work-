@@ -461,3 +461,89 @@ User requests a new-conversation handoff and archive update. The latest next tas
 ======================================================================
 END CONVERSATION ADDENDUM
 ======================================================================
+
+
+======================================================================
+CONVERSATION ADDENDUM — 2026-11-14 — ORIGINAL ASSEMBLY-CSharp IL SCAN + PLATFORM CLUES
+======================================================================
+
+USER
+The user asked to review the GitHub-hosted STAGE4_EOS_TARGETED_SCREEN_SUMMARY.txt, continue the next necessary work, and provide a single practical Termux direction.
+
+ASSISTANT / REVIEW
+- The targeted screen had 4,562 candidate rows, 656 unique caller types, and 255 EOS-related text-match rows.
+- The 255 rows are candidates, not proof of gameplay EOS calls. The displayed caller types included Epic.OnlineServices wrapper types (Sessions, Lobby, Connect, Auth). Wrapper-internal helper/delegate/callback machinery must not be confused with game-specific callers.
+- il_call_sites.csv contains call instructions, not ldstr operands; original IL inspection was still required.
+
+USER — DLL SEARCH AND IDENTITY
+The user searched Download and found five Assembly-CSharp.dll copies. A loop checked all five. Every copy was exactly 3,432,448 bytes and had SHA-256:
+d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc
+
+Copies:
+1. /storage/emulated/0/Download/PC GAMES/StrandedDeep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+2. /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+3. /storage/emulated/0/Download/PC GAMES/Game play/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+4. /storage/emulated/0/Download/3zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+5. /storage/emulated/0/Download/TERMUX-PRE-CLEAN-BACKUP/stranded_native_port/logic/Assembly-CSharp.dll
+
+The working directory was ~/PINVOKE_STAGE3_20261114, not the game root; relative ./Stranded_Deep_Data/... initially failed. The audit thereafter used absolute path 2 (Game Zip).
+
+USER — SCANNER SETUP
+- Initial check showed eos_ldstr_audit.py did not exist; dnfile/dncil imports succeeded.
+- The assistant then supplied a script; user created it with a heredoc.
+- python -m py_compile passed.
+- dnfile and dncil import check passed; SCRIPT_CHECK=PASS.
+
+USER — ORIGINAL IL SCAN OUTPUT
+User ran the read-only scanner against the Game Zip Assembly-CSharp.dll. Exact output:
+- status: COMPLETE
+- sha256: d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc
+- dll_size: 3432448
+- methoddef_rows: 26143
+- methods_with_rva_scanned: 23276
+- methods_with_parsed_bodies: 23276
+- eos_ldstr_hits: 0
+- parse_error_count: 0
+- parse_errors: []
+- CSV: $HOME/PINVOKE_STAGE4_LDSTR_20261114/EOS_LDSTR_HITS.csv
+- Summary: $HOME/PINVOKE_STAGE4_LDSTR_20261114/EOS_LDSTR_SUMMARY.json
+- TERMUX_RUN.txt was also created in the same output directory.
+The CSV contained only the header, confirming zero matched rows.
+
+ASSISTANT — INTERPRETATION
+- No string matching the scanner's EOS pattern was found in ldstr operands in the scanned Assembly-CSharp.dll method bodies.
+- This is a bounded negative result only. It does not rule out TypeRef/MemberRef/AssemblyRef metadata, ldtoken, reflection using other strings, generated bindings, delegates/callbacks, native plugin loading, or EOS references in other assemblies.
+- It does not negate the previously verified 382 Assembly-CSharp → EOS native P/Invoke wrapper-boundary callsites.
+- Do not infer EOS is unused or remove it based only on this scan.
+
+USER
+The user directed the assistant to search the web for clues before asking for more local work.
+
+ASSISTANT — WEB RESEARCH SUMMARY
+- Public desktop SteamDB manifests were reviewed for Windows/macOS/Linux; no Android depot was identified in the reviewed public evidence.
+- Photon/Bolt/UDPKit filenames appeared in public desktop manifest evidence: Photon3Unity3D.dll, PhotonBolt.dll, PhotonRealtime.dll, bolt.dll, bolt.user.dll, udpkit.dll, udpkit.platform.photon.dll, udpkit.platform.null.dll.
+- These are strong clues about desktop networking middleware, but exact local-build confirmation is still required.
+- PCGamingWiki was reported to reference EOSSDK-Win64-Shipping.dll under Stranded_Deep_Data/Plugins/x86_64, while reviewed SteamDB manifest evidence did not show that native EOS binary in the listed depots. This is a conflict, possibly version/build mismatch or incomplete/outdated third-party data.
+- The online co-op feature announcement does not establish which middleware the exact local build uses.
+- Epic's official documentation confirms an Android EOS SDK exists, but the Windows EOS native binary and existing wrappers are not thereby Android-compatible.
+- Previously reviewed EOS SDK release-note caveat: 1.19.0.3+ no longer supports 32-bit Android or Android OS 6/7; requires 64-bit Android above OS 7 and StaticSTDC flavor. Exact game SDK version remains unknown.
+
+ASSISTANT — CURRENT DECISION
+- Treat Photon/Bolt/UDPKit as promising desktop networking clues and EOS as unresolved/version-dependent.
+- Do not remove EOS, replace Photon, or change the Android Native Vulkan architecture until the exact local build's files and metadata corroborate the dependency map.
+- CASTAWAY DEPTHS remains an original native Android game; Stranded Deep investigation remains reference-only. No third-party code/assets/DLLs/IL may be imported into the original game.
+
+NEXT ACTION GIVEN TO USER
+A single read-only Termux inventory command was supplied. It uses:
+ROOT="/storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep"
+It recursively lists EOS/Epic/Photon/Bolt/UDPKit/Steam-named files under Stranded_Deep_Data, lists all top-level DLL names under Stranded_Deep_Data/Managed, and recomputes the Assembly-CSharp.dll SHA-256. Await the user's complete output. Then audit TypeRef, MemberRef, AssemblyRef, MethodSpec, ModuleRef, ImplMap and correlate local native plugins.
+
+GITHUB RECORDS UPDATED
+- docs/research/PINVOKE_STAGE4_LDSTR_AND_PLATFORM_EVIDENCE_20261114.md
+- docs/PROJECT_STATE.md
+- docs/NEXT_CONVERSATION_HANDOFF.md
+- This conversation archive is being appended with this addendum.
+
+======================================================================
+END CONVERSATION ADDENDUM
+======================================================================
