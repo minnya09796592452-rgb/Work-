@@ -31,12 +31,39 @@
 - managed_pinvoke_all_3791.csv နှင့် managed_module_refs_all.csv ကို အဓိက row-level evidence အဖြစ် အသုံးပြုရန်။
 
 ### 3. Runtime Call-Site နှင့် Dynamic Native Loading စစ်ဆေးခြင်း
-<badge color="danger">🔴 မပြီးသေး</badge>
-- Declaration 3,791 ခုထဲမှ ဘယ် methods တွေကို call-site မှ တကယ်ခေါ်သလဲ စစ်ရန်။
+<badge color="warning">🟡 စစ်ဆေးနေဆဲ — ပထမ IL scan ရလဒ်ရရှိ၊ P/Invoke join မပြည့်စုံသေး</badge>
+- Declaration 3,791 ခုထဲမှ ဘယ် methods တွေကို call-site မှ တကယ်ခေါယ်သလဲ စစ်ရန်။
 - Call graph / caller-callee chain များကို ရှာဖွေပြီး runtime reachability ကို ခွဲခြားရန်။
 - Platform conditionals, feature flags, optional integrations, offline/online pathways များကို စိစစ်ရန်။
 - LoadLibrary, GetProcAddress, dlopen, dlsym နှင့် အလားတူ dynamic-loading လမ်းကြောင်းများကို ရှာဖွေရန်။
 - Metadata declaration ရှိခြင်းနှင့် runtime တွင် အမှန်တကယ် load/call ဖြစ်ခြင်းကို သီးခြား status သတ်မှတ်ရန်။
+
+#### Stage 3 — Termux ပထမ full-scan ရလဒ် (2026-11-14)
+User ran `pinvoke_stage3_scan.py` against the original Managed directory. The first attempt was manually interrupted with Ctrl-C while parsing IL; the subsequent run completed.
+
+**Observed output:**
+- DLL files found: 119
+- Managed files scanned: 119
+- MethodDefs seen: 208,570
+- Method bodies parsed: 182,514
+- IL call instruction rows: 695,709
+- Opcode counts: call 355,546; callvirt 266,203; newobj 67,817; ldftn 5,933; ldvirtftn 210
+- P/Invoke callsite/declaration CSV rows: 27
+- Dynamic loader CSV rows: 27
+- `pinvoke_declarations_seen`: **0** (unexpected and inconsistent with the independently verified Stage 1 inventory of 3,791 declarations)
+- Two warnings appeared: `invalid compressed int: leading byte: 0xfb`.
+
+**Follow-up dnfile diagnostic on Assembly-CSharp.dll:**
+- MethodDef rows: 26,143
+- ImplMap rows: **360**
+- First five ImplMap rows successfully exposed MemberForwarded method names, ImportName and ImportScope DLL name `EOSSDK-Win64-Shipping`.
+- `MemberForwarded.row` returned a MethodDef row object, but `getattr(m, "row_index", None)` returned None. The current scanner's RID lookup relies on Python object identity and/or `row_index`; the zero declaration count indicates this join is failing.
+- This diagnostic proves the metadata tables and 360 ImplMap rows are readable in Assembly-CSharp.dll. It does not yet prove the scanner has correctly mapped the methods to MethodDef RIDs.
+- The 27 CSV rows must not be interpreted as all P/Invoke declarations or complete dynamic-loader coverage.
+
+**Next required action:** inspect the dnfile coded-index object and MethodDef row attributes / stable metadata index, then repair the ImplMap-to-MethodDef RID mapping. Re-run a small Assembly-CSharp-only test first and require 360 resolved declarations before re-running all 119 DLLs. Also investigate the two compressed-int warnings; do not silently count malformed signatures as successful parse coverage.
+
+**Stage 3 status remains 🟡.** Static IL inventory is now available, but P/Invoke declaration joining and runtime reachability are not complete.
 
 ### 4. Native Module / Export Symbol / Function Implementation ဆက်စပ်စစ်ဆေးခြင်း
 <badge color="danger">🔴 မပြီးသေး</badge>
@@ -60,7 +87,7 @@
 ## လက်ရှိအခြေအနေ အကျဉ်း
 - **အဆင့် 1 — 🟢 FULL SUCCESS**
 - **အဆင့် 2 — 🟡 စစ်ဆေးနေဆဲ**
-- **အဆင့် 3 — 🔴 မပြီးသေး**
+- **အဆင့် 3 — 🟡 ပထမ IL scan ရရှိ၊ P/Invoke RID join ပြင်ရန်ကျန်**
 - **အဆင့် 4 — 🔴 မပြီးသေး**
 
 **ပြီးဆုံးမှုကို အရေအတွက်တစ်ခုတည်းဖြင့် မဆုံးဖြတ်ရ။ အဆင့်တိုင်းတွင် reproducible evidence နှင့် cross-check ရှိမှသာ 🟢 FULL SUCCESS သတ်မှတ်ရမည်။**
