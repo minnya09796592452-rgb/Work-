@@ -132,3 +132,24 @@ Local checks completed:
 - These tests used dependency stubs for import/helper isolation; they do NOT validate dnfile/dncil behavior on the real 119-DLL Managed directory.
 
 **Next action:** user should place the candidate script in Termux, run syntax/dependency checks, then execute a read-only scan against `./Stranded_Deep_Data/Managed` with output under `$HOME`. Review the actual summary/errors before assigning Stage 3 PASS/FAIL. Original DLLs remain read-only. Do not claim runtime success until Termux output is received and checked.
+
+
+## Stage 3 Termux runtime validation (2026-11-14) — user-provided output
+
+The repaired candidate `pinvoke_stage3_scan_fixed.py` was executed by the user in Termux against the original `./Stranded_Deep_Data/Managed` directory, with output isolated at `$HOME/PINVOKE_STAGE3_20261114`.
+
+Observed run results:
+- Dependency import check: `DEPENDENCIES=PASS` (`dnfile`, `dncil`).
+- Scan completed all **119/119 DLLs**.
+- `implmap_rows_seen=3,791`; `pinvoke_flagged_methoddefs=3,791`; `pinvoke_declarations_resolved=3,791`.
+- `pinvoke_missing_implmap=0`; `implmap_orphan_rows=0`.
+- `methoddefs_seen=208,570`; `method_bodies_attempted=182,514`; `method_bodies_parsed=182,514`.
+- `call_instruction_rows=695,709`; `pinvoke_declaration_rows=3,791`; `dynamic_loader_rows=27`.
+- Fatal validation counters all zero: file errors, method-body parse errors, ImplMap resolution errors, P/Invoke flag read errors, missing ImplMap, orphan ImplMap rows, duplicate MethodDef mappings.
+- Scanner reported `validation=PASS` and `STAGE3_VALIDATION=PASS`.
+- Two warnings appeared: `invalid compressed int: leading byte: 0xfb`.
+- `memberref_identity_incomplete=300,068`; therefore a large set of MemberRef identities could not be fully resolved. These are not counted as fatal by this scanner and must remain an explicit limitation, not be interpreted as successfully linked callsites.
+
+**Status:** Stage 3's implemented scanner validation gate is **GREEN / PASS** for the 119-DLL inventory and the reported declaration/ImplMap and method-body parsing checks. MemberRef/MethodSpec association completeness remains **YELLOW / unresolved** because 300,068 identities were incomplete, and the two compressed-integer warnings need attribution. This PASS does not prove runtime reachability, Android compatibility, or native-library availability.
+
+**Next action:** Inspect the generated CSVs and summary in `$HOME/PINVOKE_STAGE3_20261114`, especially the declaration-to-callsite linkage and unresolved MemberRef records. Do not rerun Stage 1/2 or modify original DLLs. Stage 4 remains incomplete until its evidence-based analysis is performed.
