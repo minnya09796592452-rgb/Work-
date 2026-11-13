@@ -43,3 +43,9 @@ Track each gate independently. Attach logs or other reproducible evidence before
 - Include commit SHA, device model/GPU, Android version, command used, result, and evidence path for device tests.
 - A successful compile does not imply runtime success.
 - A successful Vulkan device enumeration does not imply presentation or rendering success.
+
+
+## 2026-11-13 evidence update
+- P/Invoke binary audit package prepared on the user's Android device; awaiting upload for inspection. No P/Invoke inventory is verified yet. See `docs/research/PINVOKE_DLL_AUDIT.md`.
+- Historical NYAMIST Android WSI source was inspected in the conversation, including a one-shot swapchain image transition and present path. This is not a CASTAWAY DEPTHS implementation and no device runtime log was supplied for this source. Therefore SURFACE, SWAPCHAIN, SUBMIT/PRESENT, and RENDER OUTPUT remain NOT STARTED / UNVERIFIED for CASTAWAY DEPTHS.
+- No source, binary, APK, or asset was imported from the historical project into the CASTAWAY DEPTHS implementation.
