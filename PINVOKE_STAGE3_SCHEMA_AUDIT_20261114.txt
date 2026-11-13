@@ -1,0 +1,243 @@
+
+=================================================================
+FILE: il_call_sites.csv
+=================================================================
+
+COLUMNS:
+['assembly', 'assembly_identity', 'caller_type', 'caller_method', 'caller_method_rid', 'il_offset', 'opcode', 'target_token', 'target_table', 'target_kind', 'target_assembly', 'target_type', 'target_method', 'target_signature_hex', 'pinvoke_dll', 'pinvoke_entrypoint']
+
+TOTAL ROWS: 695709
+
+NON-EMPTY COUNTS:
+assembly: 695709/695709
+assembly_identity: 695709/695709
+caller_type: 695709/695709
+caller_method: 695709/695709
+caller_method_rid: 695709/695709
+il_offset: 695709/695709
+opcode: 695709/695709
+target_token: 695709/695709
+target_table: 695709/695709
+target_kind: 695709/695709
+target_assembly: 395641/695709
+target_type: 395641/695709
+target_method: 695709/695709
+target_signature_hex: 695709/695709
+pinvoke_dll: 4318/695709
+pinvoke_entrypoint: 4318/695709
+
+FIRST 3 ROWS:
+
+ROW 1
+assembly = Assembly-CSharp-firstpass.dll
+assembly_identity = Assembly-CSharp-firstpass|0.0.0.0|neutral|null
+caller_type = BuildInformation
+caller_method = GetPrettyString
+caller_method_rid = 2
+il_offset = 22
+opcode = call
+target_token = 0x06000001
+target_table = 0x06
+target_kind = MethodDef
+target_assembly = Assembly-CSharp-firstpass|0.0.0.0|neutral|null
+target_type = BuildInformation
+target_method = get_MultiplayerVersion
+target_signature_hex = 000007
+pinvoke_dll = 
+pinvoke_entrypoint = 
+
+ROW 2
+assembly = Assembly-CSharp-firstpass.dll
+assembly_identity = Assembly-CSharp-firstpass|0.0.0.0|neutral|null
+caller_type = BuildInformation
+caller_method = GetPrettyString
+caller_method_rid = 2
+il_offset = 32
+opcode = call
+target_token = 0x0A000022
+target_table = 0x0A
+target_kind = MemberRef
+target_assembly = 
+target_type = 
+target_method = Format
+target_signature_hex = 00030e0e1c1c
+pinvoke_dll = 
+pinvoke_entrypoint = 
+
+ROW 3
+assembly = Assembly-CSharp-firstpass.dll
+assembly_identity = Assembly-CSharp-firstpass|0.0.0.0|neutral|null
+caller_type = BuildInformation
+caller_method = GetPrettyString
+caller_method_rid = 2
+il_offset = 38
+opcode = call
+target_token = 0x0A000023
+target_table = 0x0A
+target_kind = MemberRef
+target_assembly = 
+target_type = 
+target_method = get_isPlaying
+target_signature_hex = 000002
+pinvoke_dll = 
+pinvoke_entrypoint = 
+
+=================================================================
+FILE: pinvoke_declarations.csv
+=================================================================
+
+COLUMNS:
+['assembly', 'assembly_identity', 'managed_type', 'managed_method', 'method_rid', 'dll', 'entrypoint', 'signature_hex']
+
+TOTAL ROWS: 3791
+
+NON-EMPTY COUNTS:
+assembly: 3791/3791
+assembly_identity: 3791/3791
+managed_type: 3791/3791
+managed_method: 3791/3791
+method_rid: 3791/3791
+dll: 3791/3791
+entrypoint: 3791/3791
+signature_hex: 3791/3791
+
+FIRST 3 ROWS:
+
+ROW 1
+assembly = Assembly-CSharp.dll
+assembly_identity = Assembly-CSharp|0.0.0.0|neutral|null
+managed_type = Epic.OnlineServices.Helper
+managed_method = EOS_EResult_IsOperationComplete
+method_rid = 2381
+dll = EOSSDK-Win64-Shipping
+entrypoint = EOS_EResult_IsOperationComplete
+signature_hex = 0001081185b8
+
+ROW 2
+assembly = Assembly-CSharp.dll
+assembly_identity = Assembly-CSharp|0.0.0.0|neutral|null
+managed_type = Epic.OnlineServices.ContinuanceToken
+managed_method = EOS_ContinuanceToken_ToString
+method_rid = 2463
+dll = EOSSDK-Win64-Shipping
+entrypoint = EOS_ContinuanceToken_ToString
+signature_hex = 00031185b8181282951008
+
+ROW 3
+assembly = Assembly-CSharp.dll
+assembly_identity = Assembly-CSharp|0.0.0.0|neutral|null
+managed_type = Epic.OnlineServices.EpicAccountId
+managed_method = EOS_EpicAccountId_FromString
+method_rid = 2468
+dll = EOSSDK-Win64-Shipping
+entrypoint = EOS_EpicAccountId_FromString
+signature_hex = 0001180e
+
+=================================================================
+FILE: pinvoke_callsite_and_declarations.csv
+=================================================================
+
+COLUMNS:
+['assembly', 'assembly_identity', 'caller_type', 'caller_method', 'caller_method_rid', 'il_offset', 'opcode', 'target_token', 'target_table', 'target_kind', 'target_assembly', 'target_type', 'target_method', 'target_signature_hex', 'pinvoke_dll', 'pinvoke_entrypoint', 'managed_type', 'managed_method', 'method_rid', 'dll', 'entrypoint', 'signature_hex']
+
+TOTAL ROWS: 8109
+
+NON-EMPTY COUNTS:
+assembly: 8109/8109
+assembly_identity: 8109/8109
+caller_type: 4318/8109
+caller_method: 4318/8109
+caller_method_rid: 4318/8109
+il_offset: 4318/8109
+opcode: 4318/8109
+target_token: 4318/8109
+target_table: 4318/8109
+target_kind: 4318/8109
+target_assembly: 4318/8109
+target_type: 4318/8109
+target_method: 4318/8109
+target_signature_hex: 4318/8109
+pinvoke_dll: 4318/8109
+pinvoke_entrypoint: 4318/8109
+managed_type: 3791/8109
+managed_method: 3791/8109
+method_rid: 3791/8109
+dll: 3791/8109
+entrypoint: 3791/8109
+signature_hex: 3791/8109
+
+FIRST 3 ROWS:
+
+ROW 1
+assembly = Assembly-CSharp.dll
+assembly_identity = Assembly-CSharp|0.0.0.0|neutral|null
+caller_type = Epic.OnlineServices.Helper
+caller_method = IsOperationComplete
+caller_method_rid = 2380
+il_offset = 13
+opcode = call
+target_token = 0x0600094D
+target_table = 0x06
+target_kind = MethodDef
+target_assembly = Assembly-CSharp|0.0.0.0|neutral|null
+target_type = Epic.OnlineServices.Helper
+target_method = EOS_EResult_IsOperationComplete
+target_signature_hex = 0001081185b8
+pinvoke_dll = EOSSDK-Win64-Shipping
+pinvoke_entrypoint = EOS_EResult_IsOperationComplete
+managed_type = 
+managed_method = 
+method_rid = 
+dll = 
+entrypoint = 
+signature_hex = 
+
+ROW 2
+assembly = Assembly-CSharp.dll
+assembly_identity = Assembly-CSharp|0.0.0.0|neutral|null
+caller_type = Epic.OnlineServices.ContinuanceToken
+caller_method = ToString
+caller_method_rid = 2462
+il_offset = 20
+opcode = call
+target_token = 0x0600099F
+target_table = 0x06
+target_kind = MethodDef
+target_assembly = Assembly-CSharp|0.0.0.0|neutral|null
+target_type = Epic.OnlineServices.ContinuanceToken
+target_method = EOS_ContinuanceToken_ToString
+target_signature_hex = 00031185b8181282951008
+pinvoke_dll = EOSSDK-Win64-Shipping
+pinvoke_entrypoint = EOS_ContinuanceToken_ToString
+managed_type = 
+managed_method = 
+method_rid = 
+dll = 
+entrypoint = 
+signature_hex = 
+
+ROW 3
+assembly = Assembly-CSharp.dll
+assembly_identity = Assembly-CSharp|0.0.0.0|neutral|null
+caller_type = Epic.OnlineServices.EpicAccountId
+caller_method = IsValid
+caller_method_rid = 2465
+il_offset = 18
+opcode = call
+target_token = 0x060009A6
+target_table = 0x06
+target_kind = MethodDef
+target_assembly = Assembly-CSharp|0.0.0.0|neutral|null
+target_type = Epic.OnlineServices.EpicAccountId
+target_method = EOS_EpicAccountId_IsValid
+target_signature_hex = 00010818
+pinvoke_dll = EOSSDK-Win64-Shipping
+pinvoke_entrypoint = EOS_EpicAccountId_IsValid
+managed_type = 
+managed_method = 
+method_rid = 
+dll = 
+entrypoint = 
+signature_hex = 
+
+=== SCHEMA AUDIT COMPLETE ===
