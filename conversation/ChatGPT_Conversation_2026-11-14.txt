@@ -121,3 +121,154 @@ USER
 ======================================================================
 EXPORT NOTE
 No new Termux aggregation output was supplied after the command above. The next expected user action is to run that command and send its output. Continue from that exact point.
+
+======================================================================
+CURRENT CONVERSATION CONTINUATION — 2026-11-14
+(Transcript addendum: aggregation report archive, schema audit, and next handoff)
+
+USER
+System.Net.NetworkInformation.MacNetworkChange | LoadRunLoopMode | 47 | dlsym
+System.dll | System.Net.NetworkInformation.MacNetworkChange | LoadRunLoopMode | 114 | dlclose
+mscorlib.dll | Microsoft.Win32.SafeHandles.SafeLibraryHandle | ReleaseHandle | 7 | FreeLibrary
+mscorlib.dll | System.TimeZoneInfo | TryGetLocalizedNameByNativeResource | 19 | LoadLibraryEx
+
+Then showed Termux prompt after entering:
+cd "$HOME/PINVOKE_STAGE3_20261114"
+OUT="/storage/emulated/0/Download/PINVOKE_STAGE3_AGGREGATION_20261114.txt"
+python - > "$OUT" <<'PY'
+and asked for help with the continuation prompt.
+
+ASSISTANT
+Explained that the shell was waiting for the rest of the heredoc; clarified the four dynamic-loader lines were output rather than Python source.
+
+USER
+လွှဲကုန်ပြီး Scrpic သာပြန်ရေးပေးတော့
+
+ASSISTANT
+Supplied a complete one-shot Termux script that reads the three Stage 3 CSV files and writes the aggregation report to:
+ /storage/emulated/0/Download/PINVOKE_STAGE3_AGGREGATION_20261114.txt
+The script reports linked calls by native module, caller assembly, target kind, top caller types, join multiplicity, and all dynamic-loader callsites.
+
+USER
+https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS/blob/8fc08901befdaf210eedecb9ec822220c9828255/PINVOKE_STAGE3_AGGREGATION_20261114.txt
+
+စစ်ဆေးပြီး သူ့နေရာမှာသူထားလိုက်ပြီးရင်အတည်ပြု။ အောင်မြင်ရင်နောက်တစ်ဆင့်လမ်းဆက်ညွှန်တစ်ခါတည်း
+
+ASSISTANT
+Fetched the aggregation TXT from the supplied commit and reviewed it. Verified:
+- 4,318 linked static IL callsite rows, all target kind MethodDef.
+- Top native-module linked-call counts: steam_api64 1,321; gdiplus 639; EOSSDK-Win64-Shipping 382; Microsoft.Xbox.Services.141.GDK.C.Thunks 333; XGamingRuntimeThunks 203; libmono-btls-shared 189; kernel32.dll 167; steam_api 116; user32.dll 80; advapi32.dll 67; SDL2 55; libSDL2-2.0.so.0 55.
+- Top caller assemblies include com.rlabrecque.steamworks.net.dll 1,214; System.Drawing.dll 784; XGamingRuntime.dll 536; Rewired_Windows.dll 494; System.dll 458; Assembly-CSharp.dll 382.
+- Assembly-CSharp.dll has 382 static linked callsite rows to EOS wrappers. This is not proof of runtime reachability or EOS necessity for offline play.
+- The multiplicity key was blank on 3,791 declaration-only rows; the 17 repeated blank-key groups are not duplicate callsites. The other 4,318 populated callsite keys appear once.
+- All 27 dynamic-loader references were reviewed: Apple/macOS Mono CoreFoundation/CFNetwork contexts use dlopen/dlsym/dlclose; Windows framework contexts use GetProcAddress/LoadLibraryEx/FreeLibrary. No Android-specific caller appears in this 27-row set.
+The report was moved to docs/research/PINVOKE_STAGE3_AGGREGATION_20261114.txt; exact contents were re-fetched and verified; root copy deleted. Handoff, project state, and audit were updated and re-fetched.
+
+USER
+လွှဲကုန်ပြီး Scrpic သာပြန်ရေးပေးတော့
+
+ASSISTANT
+Provided a consolidated Termux script to save the aggregation output in the Android Download folder.
+
+USER
+https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS/blob/de877d735fa575f7876d9afef30d01eb728a89dd/PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt
+
+ဒီတစ်ခေါက် Update ကို ဒီCovnversation မှာပြောခဲ့သမျှစာတွေကိုပါ Copy နဲ့ Chatgpt txt မှာတစ်ခါတည်းတင်ပြီး နောက် Conversation က ကောင်နားလည်အောင် မြင်နိုင်တဲ့နေရာမှာ ဆက်သွားမယ့်နေရာကိုပါ တစ်ခါတည်းထည့်ရေးလိုက်တော့
+
+ASSISTANT
+Fetched and reviewed the supplied schema audit file at commit de877d735fa575f7876d9afef30d01eb728a89dd. Verified the CSV schemas and counts:
+- il_call_sites.csv: 695,709 rows. All callsite identity fields are populated on all rows. pinvoke_dll and pinvoke_entrypoint are populated on 4,318 rows.
+- pinvoke_declarations.csv: 3,791 rows. All 8 columns populated on all rows.
+- pinvoke_callsite_and_declarations.csv: 8,109 rows. Callsite columns populated on exactly 4,318 rows; declaration columns populated on exactly 3,791 rows.
+- The joined CSV is a combined output containing 4,318 linked callsite rows and 3,791 declaration rows. It is not 8,109 unique calls.
+- The earlier 17 repeated blank-key groups were caused by declaration-only rows having empty callsite identity fields; they are not verified duplicate calls.
+Archived the exact 244-line schema report at docs/research/PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt and verified its content against the uploaded report.
+
+ASSISTANT
+Sent a partial result to the user: 4,318 callsite rows and 3,791 declaration rows are distinct groups; 8,109 must not be counted as calls; 300,068 incomplete MemberRef identities remain unresolved.
+
+USER
+ဒီတစ်ခေါက် Update ကို ဒီCovnversation မှာပြောခဲ့သမျှစာတွေကိုပါ Copy နဲ့ Chatgpt txt မှာတစ်ခါတည်းတင်ပြီး နောက် Conversation က ကောင်နားလည်အောင် မြင်နိုင်တဲ့နေရာမှာ ဆက်သွားမယ့်နေရာကိုပါ တစ်ခါတည်းထည့်ရေးလိုက်တော့
+
+USER
+(Repeated request in the same turn) Update the ChatGPT transcript with all available conversation messages and place the next resume point where the next conversation can see it.
+
+ASSISTANT
+Beginning the GitHub transcript/handoff synchronization. The prior transcript is preserved; this is an appended continuation, not a replacement. Hidden/collapsed messages are not fabricated as verbatim text.
+
+======================================================================
+SCHEMA AUDIT VERIFIED FINDINGS — 2026-11-14
+
+1. il_call_sites.csv
+- 695,709 total rows.
+- Columns: assembly, assembly_identity, caller_type, caller_method, caller_method_rid, il_offset, opcode, target_token, target_table, target_kind, target_assembly, target_type, target_method, target_signature_hex, pinvoke_dll, pinvoke_entrypoint.
+- All callsite identity columns are populated on all 695,709 rows.
+- pinvoke_dll and pinvoke_entrypoint are populated on 4,318 rows.
+
+2. pinvoke_declarations.csv
+- 3,791 total rows.
+- All 8 columns populated on all 3,791 rows: assembly, assembly_identity, managed_type, managed_method, method_rid, dll, entrypoint, signature_hex.
+
+3. pinvoke_callsite_and_declarations.csv
+- 8,109 total rows.
+- Callsite columns populated on exactly 4,318 rows.
+- Declaration columns populated on exactly 3,791 rows.
+- The first sample rows show linked callsite rows with declaration-only fields blank.
+- Therefore this file contains two row groups: 4,318 linked callsite records + 3,791 declaration records. It does not represent 8,109 unique calls.
+- The earlier 17 repeated blank-key buckets came from declaration-only rows whose callsite identity columns were blank; they are not verified duplicate callsites.
+- This resolves the previous join-multiplicity ambiguity for the supplied CSV schema.
+
+4. Evidence archive
+- Original uploaded report: PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt
+- Archived at: docs/research/PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt
+- Archive contains 244 lines and was fetched again; exact text equality with the uploaded source was verified.
+- Archive commit: c2657e90629de39defc8c0a943356b8809641361
+- Archive blob SHA: 4bb0953c807faff032b8b6b0bf77b2fb499619ed
+
+======================================================================
+NEXT CONVERSATION — READ THIS RESUME POINT FIRST
+
+PROJECT: CASTAWAY DEPTHS
+Repository: devmyatmin/Read-CASTAWAY-DEPTHS
+Branch: main
+Authority: User is Project Lead / Chief Engineer. Follow the user's lead. GitHub is the project source of truth. Keep explanations concise and evidence-based.
+
+PROJECT BOUNDARIES
+- This is an original native Android survival game project, not a Stranded Deep port.
+- P/Invoke investigation is forensic/reference-only.
+- Do not import/reuse third-party game code, IL, DLLs, binaries, assets, or branding.
+- Preserve original Managed DLLs as read-only.
+- Do not restart Stage 1 or Stage 2.
+- Do not introduce Godot unless the user explicitly reintroduces it.
+- Static metadata/callsites do not prove runtime reachability, actual library loading, Android compatibility, or native library availability.
+
+CURRENT STATUS
+- Stage 1: GREEN / PASS.
+- Stage 2: GREEN / PASS / CLOSED.
+- Stage 3 scanner execution and declaration/ImplMap validation: GREEN / PASS.
+- Stage 3 linked static callsite subset: GREEN / 4,318 rows.
+- Stage 3 join schema explanation: GREEN / RESOLVED for the supplied CSV schema; 4,318 callsite rows and 3,791 declaration rows are separate groups in the 8,109-row combined output.
+- Stage 3 MemberRef/MethodSpec association completeness: YELLOW / unresolved; 300,068 incomplete identities remain.
+- Two warnings, "invalid compressed int: leading byte: 0xfb", remain unattributed.
+- Stage 4 native dependency map: YELLOW / IN PROGRESS; not yet complete.
+- The 27 dynamic-loader references were inspected. Apple/macOS Mono CoreFoundation/CFNetwork contexts use dlopen/dlsym/dlclose; Windows framework contexts use GetProcAddress/LoadLibraryEx/FreeLibrary. No Android-specific loader caller appears in this 27-row set. These are static references only.
+
+NEXT TASK — START STAGE 4 NATIVE DEPENDENCY MAP
+Use the archived evidence:
+- docs/research/PINVOKE_STAGE3_AGGREGATION_20261114.txt
+- docs/research/PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt
+- docs/research/PINVOKE_GROUP_AUDIT.md
+- docs/PROJECT_STATE.md
+
+Build an evidence-based map of the 4,318 linked static callsites and 3,791 declarations:
+1. Group native modules by platform family: Windows-only, Apple/macOS-only, Linux/POSIX, cross-platform/unknown. Mark uncertain cases as unknown rather than guessing.
+2. Correlate each module with caller assembly, caller type, managed method, entrypoint, and callsite counts where the source CSV supports them.
+3. Separate third-party/framework dependencies (Steamworks, EOS, Xbox/XGamingRuntime, Rewired, System.Drawing/GDI+, Mono BTLS, SDL, etc.) from game-assembly references.
+4. Identify which dependencies are direct references from Assembly-CSharp.dll versus indirect/framework references.
+5. Record static evidence separately from runtime reachability and Android availability. Do not claim a dependency is required for startup or gameplay unless a new evidence source establishes that.
+6. Keep the 300,068 incomplete MemberRef identities and two unattributed compressed-int warnings explicitly YELLOW; do not conceal them.
+7. Produce a dependency matrix and a short list of the highest-priority unresolved questions. Do not alter source DLLs or scanner output.
+
+Before doing new work, fetch the current main versions of the handoff, project state, and research docs. Record results in GitHub, then re-fetch and verify every update. Do not ask the user to repeat facts already recorded here.
+
+END OF CURRENT CONVERSATION ADDENDUM
