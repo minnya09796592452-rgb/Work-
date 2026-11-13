@@ -182,3 +182,30 @@ Verified metadata: 3,432,448 bytes; modified 2024-01-24 05:51:28 (+0630); SHA-25
 Termux: Python 3.14.10; pip 26.3; `dnfile`, `dncil`, and `pefile` are importable; `lief` is unavailable. The Managed directory contains `Assembly-CSharp-firstpass.dll`, the target `Assembly-CSharp.dll`, and supporting Rewired, Photon, GDK utility, and Unity managed assemblies.
 
 Status: GREEN to begin read-only managed metadata and IL call-site analysis with the available Python packages. Keep the original DLL untouched. First validate dnfile/dncil compatibility against this exact file, then enumerate MethodDef bodies and call operands referencing the 360 EOS P/Invoke declarations. Do not classify EOS as optional or mandatory until call-site, startup/control-flow, and runtime evidence supports the conclusion.
+
+
+## 13. dnfile/dncil API and target metadata validation (2026-11-14)
+
+User ran the compatibility check in Termux against the original Assembly-CSharp.dll.
+
+Verified Python package locations:
+- dnfile: /data/data/com.termux/files/usr/lib/python3.14/site-packages/dnfile/__init__.py
+- dncil: /data/data/com.termux/files/usr/lib/python3.14/site-packages/dncil/cil/body/__init__.py
+
+Verified parser API:
+- CilMethodBody(reader) constructor signature: (reader: 'CilMethodBodyReaderBase')
+- CilMethodBodyReaderBytes(bs: 'bytes') constructor signature.
+- Reader implementation: dncil/cil/body/reader.py.
+
+Target DLL metadata parsed successfully with dnfile.dnPE:
+| Metadata item | Count / result |
+|---|---:|
+| CLI metadata | Present |
+| MethodDef rows | 26,143 |
+| MemberRef rows | 6,078 |
+| ModuleRef rows | 1 |
+| ImplMap / P/Invoke rows | 360 |
+
+**Result: PASS.** The original DLL is readable by the installed metadata/IL tooling, and its 360 P/Invoke rows match the previously isolated Assembly-CSharp EOS declaration count. This validates the parser environment and target metadata only; no IL call-site scan has been run yet, so no wrapper call references or runtime reachability conclusions are claimed.
+
+**Next action:** build and run a read-only IL scanner using dnfile plus dncil.cil.body.reader.CilMethodBodyReaderBytes, map the 360 ImplMap methods to MethodDef tokens, and enumerate IL operands (call, callvirt, ldftn, ldvirtftn, and relevant function-pointer forms) that reference those methods. Record direct references separately from transitive call-chain inference. Preserve the source DLL unchanged and keep all outputs in a separate $HOME audit directory.
