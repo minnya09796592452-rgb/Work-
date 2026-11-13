@@ -189,3 +189,16 @@ Next: aggregate the linked callsites by native module, caller assembly/type, and
 - All 27 dynamic-loader callsites were inspected: Apple/macOS CoreFoundation/CFNetwork paths use `dlopen/dlsym/dlclose`; Windows framework paths use `GetProcAddress/LoadLibraryEx/FreeLibrary`. No Android-specific loader caller appears in this set. Static references do not prove runtime loading.
 - Stage 3 scanner/declaration validation remains 🟢 PASS; MemberRef/MethodSpec association remains 🟡 (300,068 incomplete identities); Stage 4 native dependency mapping remains 🟡 IN PROGRESS.
 - Next: audit raw CSV headers, per-column populated counts, and sample rows to establish the correct joined-row schema; then complete the Stage 4 platform/native dependency map. Original Managed DLLs remain read-only; research remains reference-only.
+
+
+## 2026-11-14 — Stage 3 schema audit verified; Stage 4 resume point
+
+- Schema report archived at `docs/research/PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt` (244 lines; exact copy verified).
+- `il_call_sites.csv`: 695,709 rows; all callsite identity fields populated; P/Invoke link fields populated in 4,318 rows.
+- `pinvoke_declarations.csv`: 3,791 rows; all columns populated.
+- `pinvoke_callsite_and_declarations.csv`: 8,109 rows consisting of 4,318 linked callsite rows plus 3,791 declaration rows. This is not 8,109 unique calls.
+- The 17 repeated blank-key groups from the earlier multiplicity check were declaration-only rows with empty callsite identity fields, not duplicate callsites. Join-schema interpretation is now GREEN / RESOLVED for the supplied files.
+- Stage 3 scanner and declaration/ImplMap validation remain GREEN. MemberRef/MethodSpec completeness remains YELLOW (300,068 incomplete identities); two compressed-integer warnings remain unattributed.
+- Stage 4 remains YELLOW / IN PROGRESS. Next: build a platform/native-module dependency matrix from 4,318 linked callsites and 3,791 declarations, correlate module-to-caller and entrypoint evidence, distinguish Assembly-CSharp direct references from framework/third-party references, and keep static references separate from runtime reachability and Android availability.
+- Handoff is recorded in `docs/NEXT_CONVERSATION_HANDOFF.md`; conversation continuation is appended to `conversation/ChatGPT_Conversation_2026-11-14.txt`. Hidden/collapsed conversation messages are not represented as verbatim text.
+- Preserve original Managed DLLs read-only. Do not restart Stage 1/2 or reuse third-party game code/assets.
