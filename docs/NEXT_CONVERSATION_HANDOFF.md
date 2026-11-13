@@ -268,3 +268,26 @@ Build an evidence-based dependency matrix from the 4,318 linked callsites and 3,
 Project boundaries remain unchanged: CASTAWAY DEPTHS is an original native Android survival game; this P/Invoke analysis is reference-only. Do not restart Stage 1/2, reuse third-party code/assets, or introduce excluded technologies. User is Project Lead; follow their lead and keep narration concise.
 
 The conversation continuation was appended to `conversation/ChatGPT_Conversation_2026-11-14.txt`; the transcript explicitly notes that hidden/collapsed messages are not fabricated as verbatim content.
+
+
+## 2026-11-14 — Stage 4 EOS wrapper linkage verified; current resume point
+
+User supplied `hhh.txt` containing the Termux output of `STAGE4_EOS_GAME_DEPENDENCY_AUDIT`.
+
+Verified findings:
+- `Assembly-CSharp.dll` has **382** linked static callsites to `EOSSDK-Win64-Shipping`.
+- The report contains **382 unique** managed caller-type / caller-method / native-entrypoint tuples across **33** `Epic.OnlineServices.*` managed wrapper types; grouped counts sum to 382.
+- Important interpretation: the P/Invoke callers shown are EOS managed wrapper types inside `Assembly-CSharp.dll`, not yet identified game-specific gameplay/UI callers. This establishes the wrapper-to-native boundary, not the game-feature call graph.
+- Declaration modules = **66**; linked-callsite modules = **65**. `comdlg32.dll` has 2 declarations and no linked callsites. Case-only module-name spellings remain separate raw strings.
+- Full verified totals and all 33 caller-type counts are archived in `docs/research/PINVOKE_STAGE4_EOS_GAME_DEPENDENCY_AUDIT_20261114.md`.
+- Static linkage does not prove runtime invocation, startup requirement, offline-mode requirement, or Android compatibility.
+
+### Current status
+- Stage 1 🟢 PASS.
+- Stage 2 🟢 PASS / CLOSED.
+- Stage 3 scanner and declaration/ImplMap validation 🟢 PASS.
+- Stage 3 MemberRef/MethodSpec identity completeness 🟡 unresolved (300,068 incomplete identities); two compressed-integer warnings remain unattributed.
+- Stage 4 🟡 IN PROGRESS; EOS wrapper/native linkage verified, game-level wrapper callers not yet mapped.
+
+### NEXT ACTION — TRACE GAME TYPES INTO EOS WRAPPERS
+Run a read-only analysis of `il_call_sites.csv` for ordinary managed call instructions in `Assembly-CSharp.dll` whose target type begins `Epic.OnlineServices.`. Group by calling game type/method and target wrapper type/method. This identifies which game-specific systems actually reference EOS wrappers. Do not modify original Managed DLLs, rerun closed stages, or claim runtime reachability/Android compatibility.
