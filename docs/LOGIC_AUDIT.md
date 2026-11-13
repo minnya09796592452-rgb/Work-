@@ -113,3 +113,14 @@ The user-provided `CASTAWAY_PInvoke_Audit.zip` was subsequently inspected in the
 No complete per-assembly ECMA-335 P/Invoke inventory has yet been recorded. Every managed DLL still needs inspection of MethodDef P/InvokeImpl flags, ImplMap, and ModuleRef, with declaring type, method signature, module name, entry point, and mapping/calling-convention flags. Native PE import/export analysis remains a separate inventory. See `docs/research/PINVOKE_DLL_AUDIT.md` for the detailed binary audit and evidence limits.
 
 All findings are REFERENCE ONLY. No Stranded Deep code, binaries, IL, assets, shaders, or proprietary implementation are to be used in CASTAWAY DEPTHS.
+
+
+## Full P/Invoke metadata audit — 2026-11-13
+
+The uploaded `CASTAWAY_PInvoke_Audit_SAFE.zip` was fully inspected. ZIP integrity PASS; 119/119 Managed DLLs parsed; 119/119 manifest SHA-256 checks matched. ECMA-335 MethodDef/ImplMap cross-check PASS: 3,791 P/InvokeImpl methods and 3,791 ImplMap rows across 17 assemblies; 102 assemblies contain zero P/Invoke. The inventory identifies 66 distinct native module names and 3,563 distinct module/entry-point pairs. Managed signature decoding completed with zero errors.
+
+Three native binaries outside Managed were also audited: `UnityPlayer.dll`, `steam_api64.dll`, and `Rewired_DirectInput.dll`. All are Windows PE32+ x86-64, with 28 imported-DLL dependency entries, 692 named imported symbols, and 1,148 named exports combined. These are not Android ELF libraries.
+
+Key interop concentrations: `com.rlabrecque.steamworks.net.dll` 921 declarations; `System.Drawing.dll` 696; `XGamingRuntime.dll` 540; `Rewired_Windows.dll` 513; `System.dll` 386; `Assembly-CSharp.dll` 360 (all 360 targeting `EOSSDK-Win64-Shipping`). Full report: [PINVOKE_FULL_METADATA_INVENTORY.md](research/PINVOKE_FULL_METADATA_INVENTORY.md).
+
+This remains forensic reference only. No Stranded Deep payload or implementation was added to CASTAWAY DEPTHS.
