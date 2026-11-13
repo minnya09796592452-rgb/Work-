@@ -404,3 +404,28 @@ for cats, r in rows[:120]:
 print("STAGE4_EOS_INDIRECT_CALLSITE_SCREEN_END")
 PY
 ```
+
+
+## 2026-11-14 — Stage 4 broad indirect callsite screen; latest resume point
+
+User supplied first-pass read-only screen results from `$HOME/PINVOKE_STAGE3_20261114/il_call_sites.csv`, restricted to `Assembly-CSharp.dll`:
+- Reflection-name candidates: **1,586 rows**, **398** unique caller types.
+- Delegate/event candidates: **2,980 rows**, **494** unique caller types.
+- Callback-prefix candidates: **17 rows**, **5** unique caller types.
+- Total matched rows after per-row category de-duplication: **4,579**. Category totals add to 4,583, so four rows overlap categories; do not sum category totals as unique rows.
+- Only the first 120 candidate rows were printed.
+
+Interpretation:
+- These are broad candidates, not confirmed EOS indirect calls.
+- Sample `Beam.Serialization.Json.JObject.GetField` calls are JSON field access, not evidence of reflection.
+- `GetTypeFromHandle` alone is metadata/type-handle access, not EOS lookup.
+- Sample `ldftn` targets are ordinary game delegates/event handlers; `Combine`, `Remove`, and `Invoke` are common C# event/delegate patterns.
+- Callback-like name prefixes may be unrelated registration APIs.
+- The sample demonstrates substantial false-positive potential; no EOS-specific reflection, string lookup, delegate wiring, or callback registration is confirmed by this output.
+- This call-instruction CSV screen does not inspect `ldstr` operands, so string-based EOS lookup remains untested.
+
+Detailed report: `docs/research/PINVOKE_STAGE4_EOS_INDIRECT_CALLSITE_SCREEN_20261114.md` (commit `630733bf626a694520822168910763a93bd444c3`).
+
+Status: Stage 4 remains 🟡 IN PROGRESS. Broad candidate screen executed; semantic/EOS attribution unresolved. Do not mark Stage 4 complete or infer runtime reachability, startup dependency, offline necessity, or Android compatibility.
+
+**NEXT ACTION:** inspect original `Assembly-CSharp.dll` IL read-only for `ldstr` operands containing EOS identifiers (e.g. `Epic.OnlineServices`, `EOS_`, wrapper type/method names), recording enclosing caller type/method and nearby reflection/delegate/callback instructions. Separately narrow callsite candidates by resolving actual target declaring type/assembly and excluding ordinary JSON accessors and game-event delegates. Preserve original DLLs and Stage 3 CSVs read-only.
