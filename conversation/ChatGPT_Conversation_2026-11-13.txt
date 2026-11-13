@@ -769,3 +769,169 @@ Observed:
 NEXT:
 - Correctly process the dll column and perform more exact row-level metadata
   analysis. Wait for the Project Lead's next instruction.
+
+
+================================================================================
+# CONVERSATION ADDENDUM — FULL P/INVOKE STAGE 2 / EOS IL SCAN PREPARATION
+# 2026-11-14 (continuation)
+================================================================================
+
+This section records the visible conversation continuation and the user's
+Termux evidence. Existing transcript content above is preserved unchanged.
+
+USER:
+Ran $HOME/pinvoke_group_audit.sh against:
+$HOME/PINVOKE_STAGE2_20261113_235016/extracted/CASTAWAY_PInvoke_Full_Audit/managed_pinvoke_all_3791.csv
+
+GROUP AUDIT RESULT:
+- Rows: 3,791
+- Columns: 21
+- Native DLL groups: 66
+- Assembly groups: 17
+- Unique ABI combinations: 33
+- Unique exact signatures: 1,976
+- Duplicate DLL + EntryPoint keys: 196
+- Output: $HOME/PINVOKE_GROUP_AUDIT_20261113_235658
+
+Missing-field check:
+- 11_missing_fields.tsv contains only its header (wc -l = 1).
+- Therefore, zero data rows were flagged for missing required fields:
+  type, method, dll, entrypoint, assembly, signature, calling_convention,
+  mapping_flags.
+
+Native DLL distribution (leading entries from 01_native_dll_groups.tsv):
+- steam_api64: 1,025
+- gdiplus: 556
+- EOSSDK-Win64-Shipping: 360
+- Microsoft.Xbox.Services.141.GDK.C.Thunks: 350
+- XGamingRuntimeThunks: 190
+- libmono-btls-shared: 188
+- kernel32.dll: 125
+- steam_api: 115
+- user32.dll: 79
+- SDL2: 55
+- libSDL2-2.0.so.0: 55
+- Rewired_DirectInput: 52
+- advapi32.dll: 53
+- odbc32.dll: 45
+- Additional macOS, Linux, Windows and internal modules appear in the full TSV.
+
+ABI matrix leading combinations:
+- Winapi / charset unspecified / flags 256: 1,621
+- Cdecl / charset unspecified / flags 512: 958
+- StdCall / charset unspecified / flags 768: 554
+- Winapi / charset unspecified / flags 320: 122
+- Cdecl / Ansi / flags 514: 110
+- Cdecl / charset unspecified / flags 513: 91
+- Winapi / Unicode / flags 260: 59
+- Winapi / Unicode / flags 324: 47
+- Remaining combinations are in 06_abi_matrix.tsv (33 unique combinations).
+
+Duplicate-entrypoint examples include:
+- CoreFoundation CFRelease (3 declarations)
+- EOS_Ecom_Entitlement_Release (2)
+- EOS_Lobby_Attribute_Release (2)
+- Kernel32 SetNamedPipeHandleState (2)
+- SDL2 SDL_GameControllerMappingForGUID (2)
+- User32 message/window functions
+- advapi32 RegQueryValueExW (5) and RegSetValueExW (5)
+The duplicate report is keyed by DLL + EntryPoint. Duplicates are not automatically
+errors; distinct managed declarations may intentionally share a native export.
+
+Signature-shape heuristic groups (leading):
+- POINTER: 1,004
+- POINTER+VALUETYPE: 614
+- POINTER+BYREF+VALUETYPE: 511
+- BYREF+VALUETYPE: 203
+- VALUETYPE: 183
+- POINTER+BYREF+VALUETYPE+CLASS: 117
+- POINTER+ARRAY+VALUETYPE: 116
+- OTHER: 105
+These are textual shape heuristics, not complete semantic ABI classifications.
+
+The group audit script also generated:
+01_native_dll_groups.tsv
+02_assembly_groups.tsv
+03_calling_conventions.tsv
+04_charsets.tsv
+05_mapping_flags.tsv
+06_abi_matrix.tsv
+07_assembly_dll_abi.tsv
+08_duplicate_entrypoints.tsv
+09_exact_signature_groups.tsv
+10_signature_shapes.tsv
+11_missing_fields.tsv
+12_all_rows_sorted.csv
+plus per-field metadata distributions and SUMMARY.txt.
+
+USER:
+The user then ran a focused Assembly-CSharp EOS declaration audit. Result:
+- Rows: 360
+- Unique declaring methods: 360
+- Native module groups: 1
+- Module: EOSSDK-Win64-Shipping (360 declarations)
+- Output: $HOME/PINVOKE_GROUP_AUDIT_20261113_235658/13_game_assembly_pinvoke.tsv
+The first 40 declarations included EOS Achievements, ActiveSession, Auth and Connect
+interfaces, with signatures showing native handles, valuetype option structs,
+by-reference parameters, callback classes and EOS result/status values.
+
+USER:
+Searched for Assembly-CSharp.dll:
+- Found at:
+  /storage/emulated/0/Download/PC GAMES/StrandedDeep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+- Size: 3,432,448 bytes
+- Modified: 2024-01-24 05:51:28 +0630
+- SHA-256:
+  d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc
+- Managed DLL inventory showed Assembly-CSharp.dll, Assembly-CSharp-firstpass.dll,
+  Rewired assemblies, Steamworks and UnityEngine modules among others.
+- Initial checks showed monodis, ilspycmd, ildasm and dotnet were not installed.
+- Python 3.14.10 and pip 26.3 were available.
+- Python modules dnfile, dncil and pefile were installed; lief was not.
+
+USER:
+Validated installed parser APIs:
+- dnfile module path:
+  /data/data/com.termux/files/usr/lib/python3.14/site-packages/dnfile/__init__.py
+- dncil CilMethodBody path:
+  /data/data/com.termux/files/usr/lib/python3.14/site-packages/dncil/cil/body/__init__.py
+- CilMethodBody constructor:
+  (reader: 'CilMethodBodyReaderBase')
+- CilMethodBodyReaderBytes constructor:
+  (bs: 'bytes')
+- Reader implementation:
+  /data/data/com.termux/files/usr/lib/python3.14/site-packages/dncil/cil/body/reader.py
+
+Metadata validation using dnfile.dnPE(original Assembly-CSharp.dll):
+- CLI metadata: True
+- MethodDef rows: 26,143
+- MemberRef rows: 6,078
+- ModuleRef rows: 1
+- ImplMap / P/Invoke rows: 360
+- Output ended with: Metadata validation: PASS
+
+ASSISTANT:
+Confirmed the parser environment and original DLL metadata are ready for a read-only IL scan. The next technical task is to map the 360 EOS ImplMap declarations to MethodDef tokens and scan method bodies for direct references, including call, callvirt, ldftn and ldvirtftn. Direct IL references must be reported separately from inferred transitive call chains; a reference alone does not prove runtime execution.
+
+ASSISTANT:
+Provided a read-only Termux probe script to inspect the first three ImplMap row structures and decode the first available MethodDef body using:
+CilMethodBody(CilMethodBodyReaderBytes(pe.get_data(rva)))
+The script prints the metadata row fields, method token/RVA, body properties and first 12 instructions. The user has not yet supplied the result of this final probe.
+
+USER:
+Asked to continue and requested that the entire conversation be copied/updated into the GitHub ChatGPT repository transcript.
+
+ASSISTANT:
+Fetched the existing transcript before appending this addendum. This update preserves the earlier transcript and records the new Stage 2 grouping results, EOS-only Assembly-CSharp inventory, DLL hash, parser API validation, metadata counts and pending IL probe.
+
+CURRENT AUDIT STATUS:
+- Stage 1 — 🟢 FULL SUCCESS: 119/119 managed assemblies parsed; 3,791 P/Invoke declarations; 0 metadata/signature parse errors (see earlier transcript).
+- Stage 2 — 🟡 IN PROGRESS: group/ABI/signature profile completed; 3,791 rows have no missing required fields; 66 native DLL groups; 33 ABI combinations; 1,976 exact signature groups; 196 duplicate DLL+EntryPoint keys. Semantic ABI/marshalling interpretation is not yet complete.
+- Stage 3 — 🟡 PREPARATION / NOT YET SCANNED: original Assembly-CSharp.dll located and metadata parsed; 360 EOS P/Invoke declarations confirmed; dnfile/dncil parser API validated. Actual IL call-site scan has NOT yet run.
+- Stage 4 — 🔴 NOT COMPLETED: native export/function-body correlation remains pending.
+
+NEXT ACTION:
+Wait for the user's Termux output from the ImplMap structure / MethodDef body probe. Then build the read-only IL scanner from the verified dnfile/dncil API. Do not claim call-site reachability until actual instruction operands are resolved.
+
+PROJECT LEAD AGREEMENT:
+The user leads. Keep instructions concise, provide one clear next action at a time, preserve the user's original files, and do not start unrelated project work.
