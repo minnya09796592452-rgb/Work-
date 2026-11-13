@@ -61,3 +61,23 @@ Use these states in future reports:
 - REFERENCE ONLY: research material that must not be copied into the game.
 
 Do not mark a full subsystem PASS based only on compilation, shader-module creation, or device enumeration. Record build, install, launch, surface, swapchain, submit/present, render-output, gameplay, save/load, and device-compatibility evidence separately.
+
+
+## Managed DLL / P/Invoke investigation — 2026-11-13
+
+### GitHub evidence inspected
+Reference repository: `devmyatmin/Read`, archived Termux project snapshot:
+`termux_archive/20261113_152323/project/`.
+
+1. `logic/audit_assembly_coverage.py` hardcodes the input DLL as:
+   `/sdcard/Download/3zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll`.
+   It reads .NET metadata `TypeDef` and `MethodList`, records type/method counts and method RVAs, and compares class/method names against the selected IL extraction.
+2. `logic/extract_gameplay_il.py` also targets `Assembly-CSharp.dll`, with a second historical path under `TERMUX-PRE-CLEAN-BACKUP/stranded_native_port/logic/`. Its selected targets include Beam.Player, inventory/crafting, SaveManager, StrandedWorld, and PlayerCamera classes.
+3. `logic/resolve_gameplay_tokens.py` resolves selected TypeDef, TypeRef, MethodDef, MemberRef, Field, and user-string tokens against that same `Assembly-CSharp.dll`.
+4. The archived `assembly_method_inventory_v2.txt` and `assembly_unmatched_methods_v2.txt` files currently fetch as empty (0 characters); `assembly_type_coverage.txt` contains type-name/method-count rows. The previously recorded assembly-wide totals are coverage-analysis counts, not P/Invoke counts.
+
+### P/Invoke conclusion
+- `Assembly-CSharp.dll` is the only managed DLL explicitly identified by the inspected GitHub scripts as an input to the prior assembly/IL analysis.
+- The inspected scripts do **not** enumerate the .NET metadata `ImplMap` table, `PInvokeImpl` method flags, `ModuleRef` rows, or native import names. Therefore GitHub evidence does not establish that `Assembly-CSharp.dll` contains the complete P/Invoke set, nor identify every other DLL containing P/Invoke declarations.
+- P/Invoke metadata is stored per managed assembly; it is not necessarily centralized in one DLL. The next evidence-gathering step must inventory the game's managed DLLs (and plugin assemblies) and inspect each assembly's metadata for `ImplMap` / `PInvokeImpl` / `ModuleRef` entries. Record the managed assembly name, imported native module name, entry point, calling convention, and method signature. Do not infer native DLL names from Unity conventions.
+- All findings here are REFERENCE ONLY. Do not copy the original game's DLLs, IL, code, or proprietary implementation into CASTAWAY DEPTHS.
