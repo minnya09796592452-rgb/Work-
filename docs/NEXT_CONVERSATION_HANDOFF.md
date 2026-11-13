@@ -1,3 +1,20 @@
+# LATEST HANDOFF UPDATE — 2026-11-14 — DIRECT VULKAN PROBE SOURCE REVIEW
+
+## Read this first
+- GitHub repository: `devmyatmin/Read-CASTAWAY-DEPTHS`, branch `main`. GitHub is the project source of truth. Follow the Project Lead's direction and keep responses concise.
+- Latest user-provided artifact: complete C++ source for `~/vk_probe.cpp` in `~/PINVOKE_STAGE3_20261114`.
+- Source review report: `docs/research/VULKAN_PROBE_SOURCE_REVIEW_20261114.md`.
+- Source uses `dlopen("/system/lib64/libvulkan.so")`, requests Vulkan 1.3, creates an instance, enumerates physical devices, and lists device extensions.
+- Static review found correct structure-type constants/version encoding/device-type enum mapping, but missing null checks, ignored VkResult checks, no zero-device handling, hard-coded API 1.3, no `vkDestroyInstance`, and a manually approximated `VkPhysicalDeviceProperties` ABI layout.
+- The source paste is NOT runtime output. Do not claim this exact revision ran successfully.
+- Earlier archived live output already confirmed the direct system loader enumerated Mali-G925-Immortalis MC12 (Vulkan 1.3.278; 152 extensions), while Termux `vulkaninfo` selected llvmpipe. Preserve the distinction.
+- **Immediate next action:** wait for the user's compile/run result for this exact `vk_probe.cpp` source. Ask for full stdout/stderr and compile result only if needed. Then continue to a small isolated queue/surface test.
+- Do not change drivers, vendor files, permissions, symlinks, or global environment. Do not restart Stage 1/2. Keep the Stranded Deep investigation reference-only; CASTAWAY DEPTHS is the original native Android project.
+
+Previous handoff content follows for history.
+
+---
+
 # LATEST HANDOFF UPDATE — 2026-11-14 — READ THIS FIRST
 
 ## Project authority and fixed boundaries
