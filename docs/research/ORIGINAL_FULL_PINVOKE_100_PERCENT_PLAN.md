@@ -198,3 +198,17 @@ User ran the full read-only RID validation against:
 Do not replace the scanner wholesale, alter original game files, or run the full scan before inspecting the current code.
 
 **Updated Stage 3 status:** 🟡 Full RID mapping PASS for Assembly-CSharp.dll (360/360); scanner extraction diagnosis pending.
+
+
+## 2026-11-14 — Stage 3 scanner file location check
+
+After the user reported that `find "$HOME" -name pinvoke_stage3_scan.py` returned no file, the GitHub repository `devmyatmin/Read-CASTAWAY-DEPTHS` was inspected directly using its recursive `main` tree.
+
+**Observed repository contents relevant to scripts:**
+- `scripts/setup_termux.sh` exists.
+- No `pinvoke_stage3_scan.py` exists anywhere in the current `main` tree.
+- The repository contains audit plans/reports and conversation records, but the Stage 3 scanner source itself is not tracked there.
+
+**Conclusion:** The previous instruction to locate the scanner under Termux `$HOME` was premature. The scanner is not present in the current audit repository either. Do not ask the user to rerun the same local `find` command. Before proceeding with scanner inspection, identify the actual source location/repository or reconstruct the scanner only if the user explicitly authorizes that. Do not invent its code or assume it is in another repository.
+
+**Stage 3 remains 🟡:** full RID mapping for Assembly-CSharp.dll is PASS (360/360), but scanner extraction has not yet been repaired or revalidated.
