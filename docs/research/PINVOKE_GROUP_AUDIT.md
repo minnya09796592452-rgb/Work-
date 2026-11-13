@@ -134,3 +134,23 @@ The user's Termux script produced:
 `01_native_dll_groups.tsv`, `02_assembly_groups.tsv`, `03_calling_conventions.tsv`, `04_charsets.tsv`, `05_mapping_flags.tsv`, `06_abi_matrix.tsv`, `07_assembly_dll_abi.tsv`, `08_duplicate_entrypoints.tsv`, `09_exact_signature_groups.tsv`, `10_signature_shapes.tsv`, `11_missing_fields.tsv`, `12_all_rows_sorted.csv`, and `SUMMARY.txt`.
 
 These TSV/CSV files remain in the user's Termux output directory unless separately uploaded. This document records the pasted summary/output and does not claim those files themselves are committed.
+
+
+## 9. Stage 3 — Assembly-CSharp / EOS declaration isolation (2026-11-14)
+
+User supplied the output of `13_game_assembly_pinvoke.tsv`.
+
+| Metric | Result |
+|---|---:|
+| Assembly-CSharp P/Invoke declarations | 360 |
+| Unique declaring methods | 360 |
+| Native module groups | 1 |
+| Sole native module | `EOSSDK-Win64-Shipping` |
+
+All 360 P/Invoke declarations in `Assembly-CSharp.dll` target `EOSSDK-Win64-Shipping`. The first 40 sorted declarations show EOS interface families including Achievements, ActiveSession, Auth, and Connect. Examples include achievement query/copy/unlock/notification APIs; active-session inspection; login/logout/token/login-status APIs; and Connect authentication notifications.
+
+**What this establishes:** the game assembly's audited static P/Invoke surface is exclusively EOS-targeted. It does not establish that every API is called, that EOS initializes during startup, or that offline gameplay is blocked without EOS. Declaration rows are not call-site evidence.
+
+**Next forensic gate:** inspect managed IL method bodies and references to identify which EOS wrappers are called from startup, scene loading, save/load, and offline gameplay paths. Distinguish declaration presence, managed call-site references, reachable call paths, and actual native invocation at runtime. Do not label EOS optional or mandatory until call-graph and runtime evidence support that conclusion.
+
+Keep this research reference-only; no EOS SDK, Stranded Deep IL/code, binaries, or assets are to be reused in CASTAWAY DEPTHS. Local report: `$HOME/PINVOKE_GROUP_AUDIT_20261113_235658/13_game_assembly_pinvoke.tsv`.
