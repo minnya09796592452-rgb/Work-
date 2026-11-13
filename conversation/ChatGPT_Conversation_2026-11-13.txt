@@ -935,3 +935,133 @@ Wait for the user's Termux output from the ImplMap structure / MethodDef body pr
 
 PROJECT LEAD AGREEMENT:
 The user leads. Keep instructions concise, provide one clear next action at a time, preserve the user's original files, and do not start unrelated project work.
+
+
+================================================================================
+# CONVERSATION ADDENDUM — ORIGINAL FULL P/INVOKE AUDIT CONTINUATION
+# 2026-11-14
+================================================================================
+
+This addendum records the current conversation's available user-visible
+discussion, evidence, decisions, corrections and handoff. The existing
+transcript above is preserved.
+
+USER:
+Uploaded the audit bundle:
+ /mnt/data/CASTAWAY_PInvoke_Full_Audit(1).zip
+
+The upload is a 9-file report bundle, not the original game binaries.
+Recorded bundle SHA-256:
+ef45a7d871fa0d7c438518ab83194f98eb9e93691e8036f14610bf7aa659fb59
+
+STAGE 1 — MANAGED P/INVOKE INVENTORY:
+- 119/119 managed DLLs parsed.
+- 3,791 P/Invoke declarations and 3,791 ImplMap rows.
+- 17 assemblies contain P/Invoke; 102 contain none.
+- 66 ModuleRef names; 3,563 distinct module/entry-point pairs.
+- No metadata/signature parse errors reported.
+- Stage 1 remains GREEN / FULL SUCCESS.
+
+STAGE 2 — ABI / SIGNATURE METADATA PROFILE:
+User reran the Stage 2 script in a fresh Termux environment:
+bash "$HOME/pinvoke_stage2.sh" "/storage/emulated/0/Download/CASTAWAY_PInvoke_Full_Audit.zip"
+
+Observed output:
+- CSV: /data/data/com.termux/files/home/PINVOKE_STAGE2_20261113_235114/extracted/CASTAWAY_PInvoke_Full_Audit/managed_pinvoke_all_3791.csv
+- 3,791 rows; 21 columns.
+- Calling conventions: Winapi 2,033; Cdecl 1,159; StdCall 599.
+- Charset: Not specified 3,384; Unicode 177; Ansi 153; Auto 77.
+- Signature heuristic counts: pointer 2,997; valuetype 2,215; byref 1,191;
+  class 523; array 375; string 221; object 1.
+- Output directory:
+  /data/data/com.termux/files/home/PINVOKE_STAGE2_20261113_235114
+- Reports: stage2_summary.txt, field_profile.tsv, signature_flags.csv.
+- Script completed successfully.
+- The displayed "native_module: NOT FOUND" must not be treated as a native
+  DLL resolution failure: the CSV schema used for that profile did not include
+  a native-module field.
+- Stage 2 profiling rerun is recorded as successful; deeper semantic ABI,
+  marshalling and signature interpretation remains distinct from completion
+  of all possible ABI analysis.
+
+STAGE 3 — RUNTIME CALL-SITE / DYNAMIC LOADING:
+- Earlier whole-managed-assembly scan reported:
+  119 files; 208,570 MethodDefs; 182,514 method bodies parsed;
+  695,709 IL instruction rows.
+- Opcode totals: call 355,546; callvirt 266,203; newobj 67,817;
+  ldftn 5,933; ldvirtftn 210.
+- An earlier scanner result claimed 27 P/Invoke declaration rows and 27
+  dynamic-loader rows, but reported pinvoke_declarations_seen = 0. This is
+  internally inconsistent and is not accepted as a successful extraction.
+- Assembly-CSharp.dll has 26,143 MethodDef rows and 360 ImplMap rows.
+- The user independently validated all 360 Assembly-CSharp ImplMap MemberForwarded
+  RIDs against MethodDef rows:
+  ImplMap rows: 360
+  MethodDef rows: 26,143
+  methoddef_table_ok: 360
+  valid_rid: 360
+  name_match: 360
+  duplicate RID values: 0
+  duplicate RID occurrences: 0
+  error samples: none
+  Total errors: 0
+  RID mapping: PASS
+- This proves the RID mapping for the 360 rows in Assembly-CSharp.dll only;
+  it does not prove the scanner's extraction logic or all 3,791 declarations.
+- The assistant previously told the user to search the local HOME directory for
+  pinvoke_stage3_scan.py. The user corrected this: the file should be searched
+  for in the repository. Inspection of the Read-CASTAWAY-DEPTHS main-branch
+  recursive tree found no pinvoke_stage3_scan.py. Do not repeat the failed
+  local find command or assume the Stage 2 script is the Stage 3 scanner.
+- The actual Stage 3 scanner source location remains unresolved.
+- Stage 3 remains YELLOW / IN PROGRESS, not passed.
+
+STAGE 4 — NATIVE MODULE / EXPORT CORRELATION:
+- Uploaded report bundle's native_pe_import_symbols.csv has 692 rows, including
+  37 parser header/section rows; 655 rows remain candidate import-symbol rows.
+  Summary counts are overstated by 37 and require correction.
+- native_pe_export_symbols.csv has 1,148 rows; quick check found no suspicious
+  header rows.
+- PE summary covers three x86-64 PE32+ binaries:
+  Rewired_DirectInput.dll, steam_api64.dll and UnityPlayer.dll.
+- Keep managed P/Invoke declarations, native PE imports/exports and Unity
+  internal bindings as separate evidence classes.
+- The uploaded ZIP contains reports, not the original binaries. The source
+  archive integrity statement and 119/119 manifest hashes are claims recorded
+  in the report bundle and cannot be independently reverified from this ZIP
+  alone.
+- Stage 4 remains INCOMPLETE.
+
+CURRENT STATUS:
+1. Stage 1 — GREEN / FULL SUCCESS.
+2. Stage 2 — GREEN for the successful metadata-profile rerun; deeper semantic
+   ABI interpretation remains an open subtask.
+3. Stage 3 — YELLOW / IN PROGRESS; scanner extraction inconsistency and scanner
+   source location remain unresolved.
+4. Stage 4 — INCOMPLETE; import-row parser defect and native implementation
+   correlation remain unresolved.
+
+USER:
+Said the conversation is about to reach its limit and asked to move to another
+conversation. The assistant mistakenly replied that the audit status was
+already recorded and said it would wait.
+
+USER CORRECTION:
+Clarified that the instruction was to upload the discussion from THIS
+conversation into the GitHub "ChatGPT txt" transcript, not merely repeat the
+audit status.
+
+ASSISTANT:
+Acknowledged the misunderstanding, retrieved the existing GitHub transcript
+at conversation/ChatGPT_Conversation_2026-11-13.txt, and appended this
+conversation addendum while preserving the prior transcript.
+
+NEXT-CONVERSATION HANDOFF:
+- Repository: https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS
+- Transcript: conversation/ChatGPT_Conversation_2026-11-13.txt
+- Canonical audit plan: docs/research/ORIGINAL_FULL_PINVOKE_100_PERCENT_PLAN.md
+- Latest known audit-plan commit before this transcript update:
+  a69ef5be9d648443d294eb279ffb17e51f76f8d0
+- Start by reading the latest transcript addendum and canonical audit plan.
+- Continue only with the user's next instruction. Do not start unrelated work.
+- Follow the Project Lead; keep responses concise and avoid repeating warnings.
