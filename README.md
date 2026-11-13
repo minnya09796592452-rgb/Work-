@@ -18,6 +18,9 @@ This is original game development, **not a Stranded Deep port**. Do not integrat
 5. When complete, produce and validate the final standalone game APK.
 6. Retire the temporary Editor/Control APK from the release workflow.
 
+## Conversation handoff
+- **Read `docs/NEXT_CONVERSATION_HANDOFF.md` first at the start of every new conversation.** It contains the current owner/assistant roles, project boundaries, ဝါစိမ်းနီ status, and exact resume point.
+
 ## Documentation index
 - `docs/PROJECT_STATE.md` — identity, constraints, and baseline.
 - `docs/ARCHITECTURE.md` — runtime layers and packaging boundaries.
