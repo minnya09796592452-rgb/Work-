@@ -74,3 +74,16 @@ Mark each gate PASS only with captured evidence: BUILD, INSTALL, LAUNCH, VULKAN 
 - No successful end-to-end runtime scan result is recorded yet. Wait for the user's next Termux output; do not infer runtime success from syntax compilation.
 - Next: inspect the user's output and the two supplied scanner variants, fix only the identified issues, run read-only against the verified original Assembly-CSharp.dll, validate coverage and outputs, then update status with evidence.
 - This P/Invoke work remains reference-only and does not change the original native Android CASTAWAY DEPTHS implementation boundary.
+
+
+## 2026-11-14 — Stage 2 rerun and Stage 3 scanner source review
+
+- Fresh Termux Stage 2 run processed the audit ZIP and reported 3,791 rows / 21 columns.
+- The profile reported Winapi 2,033, Cdecl 1,159, StdCall 599; charset unspecified 3,384, Unicode 177, Ansi 153, Auto 77.
+- Its `native_module: NOT FOUND` line is a display/schema mismatch: the source CSV column is named `dll`; the entry-point column is `entrypoint`. Do not treat it as missing native-module data. Confirm actual values with a read-only CSV check.
+- Re-reviewed the two newly uploaded Stage 3 scanner variants. Both pass syntax compilation, but neither is runtime-validated.
+- Scanner RED: CSV files are written before MemberRef/MethodSpec matching; fix output order.
+- Scanner YELLOW: method-name-only association, incomplete MemberForwarded RID resolution, ImplMap errors not fatal, and no declaration-to-ImplMap completeness gate.
+- Immediate resume point: inspect `dll` / `entrypoint` values in the extracted Stage 2 CSV; then repair the scanner before running it against the original Managed directory.
+- Full evidence: [P/Invoke Group Audit](research/PINVOKE_GROUP_AUDIT.md) and [Next Conversation Handoff](NEXT_CONVERSATION_HANDOFF.md).
+- Forensic research remains reference-only; original source DLLs remain read-only, and no Stranded Deep code, IL, binaries, or assets may be reused in CASTAWAY DEPTHS.
