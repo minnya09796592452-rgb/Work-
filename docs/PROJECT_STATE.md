@@ -32,3 +32,11 @@ The temporary Editor/Control APK is a development tool only. It controls and tes
 
 ## Validation
 Mark each gate PASS only with captured evidence: BUILD, INSTALL, LAUNCH, VULKAN DEVICE, SURFACE, SWAPCHAIN, SUBMIT/PRESENT, RENDER OUTPUT, GAMEPLAY, SAVE/LOAD, DEVICE COMPATIBILITY.
+
+
+## Current research activity — 2026-11-13
+- Active investigation: forensic inventory of P/Invoke declarations across the user's local Stranded Deep managed assemblies.
+- Audit package prepared locally as `CASTAWAY_PInvoke_Audit.zip`; awaiting upload into the analysis conversation before metadata inspection.
+- The DLL list and hashes are documented in `docs/research/PINVOKE_DLL_AUDIT.md`.
+- This is reference-only research. No third-party DLLs or code are to be added to the original CASTAWAY DEPTHS implementation.
+- Historical NYAMIST WSI work remains diagnostic/reference material; no production renderer or visible game rendering is claimed.
