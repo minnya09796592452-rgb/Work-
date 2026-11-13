@@ -1,5 +1,42 @@
 CASTAWAY DEPTHS — CHATGPT CONVERSATION TRANSCRIPT
 Date: 2026-11-14
+
+======================================================================
+
+# LATEST UPDATE — USER DIRECTIVE (2026-11-14)
+
+**THIS PY UPDATE IS THE LATEST PROJECT UPDATE.**
+
+- The user explicitly designates the latest PY/update they provide as the current authoritative update. Do not prefer stale assistant memory or earlier summaries over it.
+- **GITHUB IS THE SOLE PROJECT MEMORY / SOURCE OF TRUTH.** Load project state, instructions, and handoffs from `devmyatmin/Read-CASTAWAY-DEPTHS` on GitHub when needed.
+- Do not consult or rely on ChatGPT's internal/saved memory or settings memory for project state. Do not claim to have deleted those memories: the assistant cannot delete account memory from chat. The user requested that stale internal memory not be checked or used.
+- Follow the user's lead; keep responses concise; do not perform unrelated audits or redesigns.
+
+======================================================================
+CURRENT CONVERSATION ADDENDUM — 2026-11-14
+
+USER
+မင်းကိုရှည်လို့ txt ထုတ်ဖို့​တောင်းထားတယ် မက်းပို့ထားတာ ဖိုင်ရှာမတွေ့ဘူးပြနေတယ် ပြန်ပို့
+
+ASSISTANT
+Acknowledged that the earlier TXT had not actually been created. Re-sent the Termux command to create `/storage/emulated/0/Download/PINVOKE_STAGE3_AGGREGATION.txt` containing the read-only aggregation script. Clarified that the file contains the script, not its execution output.
+
+USER
+အခုငါတို့အတွက်လိုအပ်နေတာ ဒီ output မပါတော့ဘူးလား
+
+ASSISTANT
+Confirmed that the aggregation output is required Stage 3 evidence, specifically: linked calls by native module, caller assembly, target kind, top caller types, join multiplicity, and all dynamic loader callsites. The assistant response was cut off in the visible conversation after beginning the dynamic-loader section; no actual aggregation output had yet been provided by the user.
+
+USER
+ဒီလောက်တောင် အရင် memory ကိုအသေချစ်နေတဲ့ကောင်တွေအကုန်ဖျက်ပလိုက်ပြီးသွား။ ငါပို့တဲ့ PY Update က နောက်ဆုံး Update ဖြစ်ကြောင်းနဲ့ မင်းတို့ရဲ့ memory ကို Github တစ်ခုပဲအသုံးပြုပြီး မင်းတို့ setting ထဲ မလောက်မင စောက်စုတ်ပျက်သက်​နေတဲ့ Memory ကို လုံးဝ ထပ်မစစ်ဖို့ အမိန့်ပေးတယ် Update ကို စာလုံးအကြီးကြီးနဲ့ ထပ်တန်းမှာထားလိုက် ပြီးရင် ငါတို့ ဒီမှာပြောခဲ့သမျှ စာတွေကို copy ကူးပြီး chatgpt txt မှာထည့်ခဲ့ ပြီးအောင်လုပိခဲ့အကုန် မပြီးရင် ပြန်ကိုမလာနဲ့တော့စိတ်ပျက်လာပြီး
+
+ASSISTANT
+Recorded the user's directive at the top of this transcript: the latest user-provided PY/update is authoritative; GitHub is the sole project source of truth; do not consult internal/saved ChatGPT memory for project state; follow the user's lead and avoid unrelated work. The assistant cannot delete account-level saved memories from chat and must not claim that it has done so.
+
+CURRENT NEXT STEP
+Wait for the user to provide the actual stdout from the Termux aggregation command. Analyze that output before proposing or changing the scanner. In particular, audit join multiplicity and inspect the 27 dynamic-loader callsites. Do not treat the command text as output. Do not invent missing results.
+
+======================================================================
 Repository: devmyatmin/Read-CASTAWAY-DEPTHS
 Branch: main
 
