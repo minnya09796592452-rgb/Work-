@@ -316,3 +316,41 @@ PROJECT LEAD WORKING AGREEMENT
 ------------------------------
 
 The user leads the project and expects the assistant to follow their direction. Keep explanations concise, work from actual repository/Termux evidence, preserve original files, and do not move or upload files until the user directs it and classification is complete. The ChatGPT transcript is intentionally maintained separately under conversation/; the user has now explicitly requested that this conversation be recorded there.
+
+
+## 2026-11-13 — WSI source and Vulkan probe inspection
+
+User supplied the requested Termux inspection output.
+
+### Confirmed source evidence
+- WSI source: `~/stranded_native_port/build/android_wsi/nyamist_wsi.cpp`
+- SHA-256: `17a12616e54bddb1b97475f8ffa6611afdad23683ff6f628bdfad580b5a3fca3`
+- Source includes Android NativeActivity/native-window headers and Vulkan.
+- Dynamic dispatch function pointers are declared for Android surface operations and swapchain operations.
+- `loadInstanceWsiFunctions()` loads Android surface and physical-device surface query functions through `vkGetInstanceProcAddr`.
+- `loadDeviceWsiFunctions()` loads swapchain functions through `vkGetDeviceProcAddr`.
+- `onWindowCreated()` creates a Vulkan 1.1 instance with `VK_KHR_surface` and `VK_KHR_android_surface`, creates an Android surface, searches for a GPU/queue family supporting both graphics and presentation and `VK_KHR_swapchain`, creates a logical device, then queries surface capabilities and formats.
+- The supplied excerpt ends during surface-format selection; swapchain creation, presentation, NativeActivity callback registration, and teardown behavior still need the remainder of the file.
+
+### Patch script review
+- `build_android_wsi_patch.py` textually inserts the WSI function-pointer declarations, macros, loader functions, and loader calls.
+- Its `NYAMIST WSI DYNAMIC DISPATCH PATCH: PASS` message only confirms the script completed its textual patch operation. It does not prove compilation, APK installation, NativeActivity startup, surface/swapchain creation, or rendered frames.
+
+### Manifest and diagnostic review
+- `AndroidManifest.xml` package: `com.nyamist.strandeddeep`; NativeActivity library name: `nyamist_wsi`; landscape orientation; min SDK 24; target SDK 28; Vulkan feature version integer 4194304.
+- These are historical NYAMIST identifiers and must not be copied into CASTAWAY DEPTHS unchanged.
+- `test_dlopen.cpp` only calls `dlopen("./build/android_wsi/libnyamist_wsi.so", RTLD_NOW)` and `dlclose`; it does not test Android APK loading or rendering.
+- `stranded_deep_vk_core_test.cpp` is a historical Vulkan diagnostic that loads `/system/lib64/libvulkan.so`, creates an instance, and inspects the physical device/extensions. It is not CASTAWAY production game code.
+
+### Repository and provenance decision
+- User's `~/Castaway-Depths` worktree was clean and up to date before inspection.
+- No historical Termux files have been imported into CASTAWAY DEPTHS.
+- Continue auditing source and provenance before any reuse; do not copy Stranded Deep/NYAMIST identifiers or proprietary implementation into the new game.
+- Never copy, upload, or expose `nyamist-release.jks`.
+
+### Next required inspection
+Run:
+```bash
+sed -n '281,560p' ~/stranded_native_port/build/android_wsi/nyamist_wsi.cpp
+```
+Then inspect any remaining lines if the file extends beyond 560. Need the full tail to verify swapchain setup, command buffers/rendering/presentation, and NativeActivity callback registration. A successful build command and runtime log are still needed before claiming WSI runtime success.
