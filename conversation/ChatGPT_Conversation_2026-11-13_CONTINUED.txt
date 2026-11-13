@@ -83,3 +83,82 @@ The script reads the original CSV and writes reports under `$HOME/PINVOKE_GROUP_
 - Validate schema and ABI semantics against original metadata; counts/pattern heuristics alone are not proof of ABI correctness.
 - Keep status labels honest: completed evidence = green; pending/not completed = red; actively being checked = yellow.
 - Preserve original files; do not generate replacement game assets or alter source payloads.
+
+
+---
+
+## Conversation appended — 2026-11-14 (P/Invoke Stage 3 RID investigation)
+
+### User instruction and scope
+- User asked to inspect the entire `Read-CASTAWAY-DEPTHS` repository in detail, but requested concise replies rather than lengthy explanations.
+- User explicitly instructed: **“@GitHub is your memory”**. GitHub repository records are the durable project memory; update the TXT conversation record and the audit plan as work proceeds.
+- User temporarily authorized the assistant to guide the next steps without waiting for a separate instruction, while still following the user's lead.
+- Current task remains the **original full P/Invoke audit**. Do not switch to Android APK implementation or unrelated project work during this audit.
+
+### Stage 3 first full scan — user-provided Termux output
+Command executed against:
+`/storage/emulated/0/Download/PC GAMES/StrandedDeep/Stranded_Deep_Data/Managed`
+
+The first attempt was interrupted with Ctrl-C while parsing IL. The subsequent run completed and reported:
+- DLL files found / managed files scanned: 119 / 119
+- MethodDefs seen: 208,570
+- Method bodies parsed: 182,514
+- P/Invoke declarations seen: **0**
+- IL call instruction rows: 695,709
+- P/Invoke callsite/declaration rows: 27
+- Dynamic loader rows: 27
+- Opcode counts: call 355,546; callvirt 266,203; newobj 67,817; ldftn 5,933; ldvirtftn 210
+- Warnings: `invalid compressed int: leading byte: 0xfb` (twice)
+- Important limitations in scanner output: MemberRef cross-assembly resolution is not guaranteed; static IL is not runtime reachability proof; indirect calls/reflection/native callbacks/computed loader names may require deeper analysis; a declaration-only row does not prove a call.
+
+### Assembly-CSharp ImplMap diagnostic — user-provided output
+User ran dnfile against the original:
+`.../Stranded_Deep_Data/Managed/Assembly-CSharp.dll`
+
+First diagnostic:
+- MethodDef rows: 26,143
+- ImplMap rows: **360**
+- First five rows exposed managed method names, ImportName values, and ImportScope DLL `EOSSDK-Win64-Shipping`.
+- `MemberForwarded.row` is a MethodDefRow object, but `row_index` is not an attribute on that returned row object.
+
+Detailed diagnostic:
+- `MemberForwarded` type: `dnfile.codedindex.MemberForwarded`
+- `vars(mf)` includes:
+  - `row_index: 2381` (for the first ImplMap row examined)
+  - `table: <dnfile.mdtable.MethodDef ...>`
+- `mf.row` type: `dnfile.mdtable.MethodDefRow`
+- `vars(mf.row)` has no row_index field.
+- `dir(mf.row)` shows no RID/index attribute.
+- The target method name was `EOS_EResult_IsOperationComplete`.
+**Conclusion supported by this output:** the stable RID is carried by `mf.row_index` on the coded-index object, not by `mf.row`. The target table is exposed as `mf.table`. This identifies why the original scanner's row-object identity/RID lookup did not resolve declarations.
+
+### Scanner patch and isolated test — current result
+A patched local `pinvoke_stage3_scan.py` was prepared to read `mf.row_index` when `mf.table` is the current MethodDef table and validate the RID against the MethodDef row count. Local Python syntax compilation passed. However, the subsequent Termux test did **not** resolve declarations:
+- User copied only `Assembly-CSharp.dll` into `$HOME/PINVOKE_STAGE3_TEST`.
+- Ran the patched scanner on that one-DLL directory.
+- Result:
+  - DLL files found: 1
+  - MethodDefs seen: 26,143
+  - Method bodies parsed: 23,276
+  - P/Invoke declarations seen: **0**
+  - IL call instruction rows: 82,804
+  - P/Invoke callsite/declaration rows: 0
+  - Dynamic loader rows: 0
+  - Opcode counts: call 43,182; callvirt 31,414; newobj 5,995; ldftn 2,160; ldvirtftn 53
+- Therefore the patch has **not** passed runtime validation. Do not claim the RID fix works yet.
+- The isolated test directory contains only Assembly-CSharp.dll, so the next diagnostic should inspect the exact live `MemberForwarded.row_index`, `MemberForwarded.table`, and corresponding `MethodDef.rows[rid-1]` names for several rows, then inspect the scanner's join logic and counters. Do not rerun all 119 DLLs until the isolated declaration mapping works.
+
+### Current requested next action — WAIT
+The assistant most recently asked the user to run a direct diagnostic that prints:
+- ImplMap row count and MethodDef row count
+- MethodDef table type
+- For first five ImplMap rows: MemberForwarded RID, MemberForwarded table type, whether table object identity matches `md.MethodDef`, target method name, `MethodDef[RID-1]` name, and whether names match.
+
+**Current state: WAITING FOR USER'S NEXT TERMUX DIAGNOSTIC OUTPUT.**
+Do not proceed with another scanner patch or request a different command until the user sends that output. Once received, compare the actual values and continue the isolated Assembly-CSharp test first.
+
+### Stage status at this handoff
+- Stage 1 — Managed metadata inventory: 🟢 completed (3,791 declarations / 3,791 ImplMap rows independently inventoried across 119 DLLs).
+- Stage 2 — ABI interpretation: 🟡 ongoing.
+- Stage 3 — IL call-site / dynamic loader scan: 🟡 partial scan evidence exists, but P/Invoke declaration mapping is currently failing (0 detected in both full and isolated scans); RID diagnosis is still in progress.
+- Stage 4 — native export/function correlation: 🟡 partial symbol-level evidence only; no complete ABI/function-body validation.
