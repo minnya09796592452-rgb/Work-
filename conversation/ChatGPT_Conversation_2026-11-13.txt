@@ -354,3 +354,24 @@ Run:
 sed -n '281,560p' ~/stranded_native_port/build/android_wsi/nyamist_wsi.cpp
 ```
 Then inspect any remaining lines if the file extends beyond 560. Need the full tail to verify swapchain setup, command buffers/rendering/presentation, and NativeActivity callback registration. A successful build command and runtime log are still needed before claiming WSI runtime success.
+
+
+## 2026-11-13 — Android WSI source: remaining lines 281–end
+
+User supplied the remainder of `~/stranded_native_port/build/android_wsi/nyamist_wsi.cpp`.
+
+Confirmed implementation:
+- Completes swapchain extent selection using `caps.currentExtent`, or clamps NativeWindow dimensions to surface min/max extents.
+- Chooses image count as minImageCount + 1, capped by maxImageCount when nonzero.
+- Selects a supported composite-alpha mode and uses FIFO present mode.
+- Creates a swapchain with `VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT`.
+- Creates a command pool and two semaphores.
+- Acquires one swapchain image, allocates one primary command buffer, records a barrier from `VK_IMAGE_LAYOUT_UNDEFINED` to `VK_IMAGE_LAYOUT_PRESENT_SRC_KHR`, submits it while waiting on imageAvailable and signaling renderFinished, then calls `vkQueuePresentKHR`.
+- Waits for queue idle and logs `ANDROID_WSI_PRESENT_PASS` and `NYAMIST_WSI_FINAL=PASS`.
+- Registers NativeActivity `onNativeWindowCreated` and `onNativeWindowDestroyed` callbacks; the created callback invokes the one-shot WSI test and the destroyed callback cleans up.
+
+Important technical qualification:
+- This is a one-frame Vulkan WSI/presentation smoke test, not a game renderer. It contains no graphics pipeline, shader, render pass/dynamic-rendering commands, draw calls, or game frame loop. The swapchain image is transitioned and presented without drawing pixels, so successful present does not prove visible game rendering or a correct black-screen fix.
+- The logged PASS messages are source-level success paths; runtime success requires actual APK launch/logcat evidence on device.
+- Review surface-format edge cases, swapchain image acquisition/presentation results (including out-of-date/suboptimal), repeated window lifecycle, and cleanup on partial initialization before adapting any concepts.
+- No legacy source files have been imported into CASTAWAY DEPTHS; the repository should remain unchanged until the adaptation boundary and provenance are approved.
