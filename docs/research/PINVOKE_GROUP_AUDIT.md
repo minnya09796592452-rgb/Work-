@@ -209,3 +209,20 @@ Target DLL metadata parsed successfully with dnfile.dnPE:
 **Result: PASS.** The original DLL is readable by the installed metadata/IL tooling, and its 360 P/Invoke rows match the previously isolated Assembly-CSharp EOS declaration count. This validates the parser environment and target metadata only; no IL call-site scan has been run yet, so no wrapper call references or runtime reachability conclusions are claimed.
 
 **Next action:** build and run a read-only IL scanner using dnfile plus dncil.cil.body.reader.CilMethodBodyReaderBytes, map the 360 ImplMap methods to MethodDef tokens, and enumerate IL operands (call, callvirt, ldftn, ldvirtftn, and relevant function-pointer forms) that reference those methods. Record direct references separately from transitive call-chain inference. Preserve the source DLL unchanged and keep all outputs in a separate $HOME audit directory.
+
+## 14. ဝါစိမ်းနီ Stage 3 Scanner status (2026-11-14)
+
+**Status key:** 🟢 GREEN = confirmed; 🟡 YELLOW = caution / further inspection; 🔴 RED = required fix.
+
+| Marker | Scanner finding | Current state |
+|---|---|---|
+| 🟢 GREEN | Python Variant A and Variant B syntax compilation | PASS |
+| 🟢 GREEN | Differences between the two supplied variants identified; GitHub review recorded | PASS |
+| 🟡 YELLOW | Method-name-only association | Strengthen association using metadata identity/token information |
+| 🟡 YELLOW | ImplMap processing errors can return exit code 0 | Must return a non-zero failure status |
+| 🟡 YELLOW | Declaration-to-ImplMap completeness check | Required; not yet validated |
+| 🔴 RED | CSV is emitted before MemberRef processing | Fix processing/output order before runtime validation |
+
+No successful end-to-end runtime scan result is recorded at this checkpoint. Syntax compilation does not prove runtime correctness or call-site coverage. The user indicated that the next Termux output would be supplied; inspect that output before claiming runtime results.
+
+**Resume gate:** review the supplied scanner variants and next user output; fix the RED/YELLOW items; run read-only against the verified original Assembly-CSharp.dll; validate ImplMap/declaration coverage, MemberRef mapping, IL operand references, exit code, and generated reports. Only then may Stage 3 be marked GREEN. Stage 4 remains INCOMPLETE.
