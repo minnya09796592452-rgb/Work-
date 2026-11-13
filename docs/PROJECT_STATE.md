@@ -153,3 +153,28 @@ Observed run results:
 **Status:** Stage 3's implemented scanner validation gate is **GREEN / PASS** for the 119-DLL inventory and the reported declaration/ImplMap and method-body parsing checks. MemberRef/MethodSpec association completeness remains **YELLOW / unresolved** because 300,068 identities were incomplete, and the two compressed-integer warnings need attribution. This PASS does not prove runtime reachability, Android compatibility, or native-library availability.
 
 **Next action:** Inspect the generated CSVs and summary in `$HOME/PINVOKE_STAGE3_20261114`, especially the declaration-to-callsite linkage and unresolved MemberRef records. Do not rerun Stage 1/2 or modify original DLLs. Stage 4 remains incomplete until its evidence-based analysis is performed.
+
+
+## 2026-11-14 — Stage 3 CSV callsite review
+
+User supplied the generated CSV summary from `$HOME/PINVOKE_STAGE3_20261114`.
+
+### Observed results
+- `il_call_sites.csv`: 695,709 rows; MethodDef 395,641; MemberRef 279,460; MethodSpec 20,608.
+- Rows with a populated P/Invoke link (`pinvoke_dll`): **4,318**.
+- P/Invoke declaration rows: **3,791**.
+- Joined callsite/declaration output: **8,109 rows**. This is a join-row count, not yet a verified unique-callsite count; join multiplicity must be audited.
+- Dynamic-loader callsites: **27** (`dlopen` 6, `dlclose` 6, `dlsym` 5, `GetProcAddress` 4, `FreeLibrary` 3, `LoadLibraryEx` 2, `LoadLibraryExW` 1).
+- Error CSV: **0 rows**.
+- Top declaration modules include `steam_api64` 1,025; `gdiplus` 556; `EOSSDK-Win64-Shipping` 360; `Microsoft.Xbox.Services.141.GDK.C.Thunks` 350; `XGamingRuntimeThunks` 190; `libmono-btls-shared` 188; `kernel32.dll` 125; `steam_api` 115; `user32.dll` 79.
+- Sample linked game-assembly calls target EOS wrappers such as `EOS_EResult_IsOperationComplete`, `EOS_ContinuanceToken_ToString`, and `EOS_EpicAccountId_*`.
+
+### Status and limits
+- Stage 3 scanner validation: 🟢 PASS (119 DLLs; 3,791 declarations resolved; zero missing/orphan ImplMap; 182,514/182,514 attempted method bodies parsed; zero error CSV rows).
+- Linked static P/Invoke callsite subset: 4,318 rows. This is not proof of runtime execution or reachability.
+- `memberref_identity_incomplete=300,068` remains 🟡 YELLOW; association coverage is incomplete.
+- Two compressed-integer warnings remain unattributed.
+- The 8,109 joined rows must not be described as unique calls until join multiplicity is checked.
+- Stage 4 remains in progress; no Android compatibility or native dependency availability conclusion is established.
+
+Next: aggregate the linked callsites by native module, caller assembly/type, and target kind; audit join multiplicity; inspect all 27 dynamic-loader callsites in context. Use that evidence to construct the Stage 4 native dependency map. Do not rerun Stage 1/2 or modify original Managed DLLs.
