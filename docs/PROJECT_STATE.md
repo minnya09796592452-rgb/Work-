@@ -272,3 +272,50 @@ Report: `docs/research/PINVOKE_STAGE4_EOS_INDIRECT_CALLSITE_SCREEN_20261114.md`.
 Status: Stage 4 remains 🟡 IN PROGRESS. The broad candidate screen ran successfully, but semantic/EOS attribution is unresolved. Do not infer runtime reachability, startup dependency, offline necessity, or Android compatibility.
 
 Next: inspect the original `Assembly-CSharp.dll` IL read-only for `ldstr` operands containing EOS identifiers (`Epic.OnlineServices`, `EOS_`, and known wrapper type/method names), and record enclosing caller type/method plus nearby reflection/delegate/callback instructions. Narrow callsite candidates using resolved target declaring type/assembly; exclude ordinary JSON accessors and game-event delegates. Preserve original DLLs and Stage 3 CSVs read-only.
+
+
+## 2026-11-14 — Stage 4 EOS targeted screen and Android platform research
+
+### User's latest targeted screen
+User successfully generated $HOME/PINVOKE_STAGE3_20261114/STAGE4_EOS_TARGETED_SCREEN_SUMMARY.txt using a read-only scan of il_call_sites.csv, restricted to Assembly-CSharp.dll.
+
+Console output:
+- CANDIDATE_ROWS = 4562
+- UNIQUE_CALLER_TYPES = 656
+- EOS_RELATED_ROWS = 255
+- STATUS = COMPLETE
+
+The candidate set is based on broad reflection/delegate method-name matches or ldftn/ldvirtftn opcodes. EOS-related rows are selected by text matching Epic.OnlineServices or EOS_ in caller type/method and target type/method. The 255 rows are candidates only; no semantic EOS attribution has been verified. This screen does not inspect ldstr operands. The complete TXT has not yet been uploaded for row-level review. The user's first attempt had a typo (d instead of cd) and failed before Python ran; the corrected command succeeded. No original DLL or CSV was modified.
+
+### Official EOS Android research
+Epic's official documentation confirms that an EOS SDK Android integration path exists:
+- Android SDK guide: Android Studio/NDK setup, native library loading, Android-specific initialization, same-thread requirement because EOS is not thread-safe, and foreground/background notifications using EOS_Platform_SetApplicationStatus.
+- Unity Android guide documents Android SDK installation, dependencies, initialization, Platform Interface creation, ticking, and shutdown. This is vendor documentation only; it does not change CASTAWAY-DEPTHS engine direction.
+- EOS Platform Interface documentation says services require initialization and a Platform Interface handle before accessing other EOS interfaces.
+- EOS_Initialize must precede other SDK calls, be called once, and have a matching EOS_Shutdown.
+- EOS SDK 1.19.0.3 and later no longer support 32-bit Android or Android OS 6/7; 1.19.0.3+ requires 64-bit Android above OS 7. DynamicSTDC Android binaries are no longer provided; StaticSTDC flavor is required.
+- The exact EOS SDK version embedded/used by the audited Stranded Deep build is not known.
+
+Official sources:
+- https://dev.epicgames.com/docs/epic-online-services/platforms/android
+- https://dev.epicgames.com/docs/epic-online-services/game-engines/eos-unity-integration/eos-unity-integration-android
+- https://dev.epicgames.com/docs/epic-online-services/release-notes
+- https://dev.epicgames.com/docs/epic-online-services/eos-fundamentals/eos-platform-interface
+- https://dev.epicgames.com/docs/api-ref/functions/eos-initialize
+
+### Interpretation
+Android EOS SDK availability is confirmed. This does not make EOSSDK-Win64-Shipping usable on Android and does not prove that the audited managed wrappers are Android-compatible. It does not prove runtime use, startup dependency, or offline-play necessity. Android integration feasibility would require the correct Android native SDK package, ABI and SDK version, compatible bindings, lifecycle/thread integration, and product/service configuration.
+
+### Current Stage 4 status
+- Android EOS SDK availability: 🟢 confirmed by official Epic docs.
+- Targeted-screen TXT creation: 🟢 confirmed by user's console output.
+- 255 EOS-related rows: 🟡 candidate-only; row-level review pending.
+- Audited game's exact EOS SDK version: 🟡 unknown.
+- Runtime reachability, startup dependency, offline necessity, Android compatibility: 🟡 unproven.
+- Stage 4 remains IN PROGRESS.
+
+### Next action
+1. Review the uploaded STAGE4_EOS_TARGETED_SCREEN_SUMMARY.txt row by row.
+2. Perform a read-only original-IL scan for ldstr operands containing EOS identifiers and correlate them to enclosing caller type/method and nearby reflection/delegate/callback instructions.
+3. If genuine EOS usage is identified, determine the actual services/interfaces and exact audited SDK version before evaluating Android replacement.
+4. Preserve original Managed DLLs and Stage 3 CSVs read-only; do not restart Stage 1/2 or infer runtime reachability from static callsites.
