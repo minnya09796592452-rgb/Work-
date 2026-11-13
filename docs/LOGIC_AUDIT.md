@@ -92,3 +92,24 @@ The ZIP has not yet been uploaded for inspection. Consequently, no DLL is curren
 Full evidence and SHA-256 values: `docs/research/PINVOKE_DLL_AUDIT.md`.
 
 REFERENCE ONLY: do not import any Stranded Deep DLL, IL, code, or protected content into CASTAWAY DEPTHS.
+
+
+## ZIP binary audit update — 2026-11-13
+
+The user-provided `CASTAWAY_PInvoke_Audit.zip` was subsequently inspected in the conversation. This supersedes the earlier statement that the archive had not yet been inspected, but it does **not** supersede the conclusion that the exact P/Invoke inventory remains incomplete.
+
+- ZIP integrity: PASS.
+- Archive entries reported: 123.
+- SHA-256 manifest: 119 entries checked; 119/119 matched.
+- Confirmed PE32+ x86-64 Windows binaries: `UnityPlayer.dll`, `steam_api64.dll`, and `Rewired_DirectInput.dll`.
+- `UnityPlayer.dll` identified as a Windows Unity 2021.2.7f1 runtime; inspected PE metadata: image base `0x180000000`, eight sections, no CLR header.
+- Windows imports observed in UnityPlayer include KERNEL32, USER32, OPENGL32, WINMM, WINHTTP, HID, WS2_32, ADVAPI32, GDI32, and SHELL32.
+- Rewired DirectInput plugin imports Windows DirectInput/runtime dependencies, including DINPUT8 and VCRUNTIME140.
+- Steam plugin imports Windows modules including IPHLPAPI, WS2_32, ADVAPI32, SHELL32, and KERNEL32.
+- Unity runtime backend strings include Vulkan, Direct3D 11/12, OpenGL, and OpenGL ES. These are observations about the Windows runtime, not proof of Android compatibility or a transferable renderer.
+
+### Remaining exact P/Invoke work
+
+No complete per-assembly ECMA-335 P/Invoke inventory has yet been recorded. Every managed DLL still needs inspection of MethodDef P/InvokeImpl flags, ImplMap, and ModuleRef, with declaring type, method signature, module name, entry point, and mapping/calling-convention flags. Native PE import/export analysis remains a separate inventory. See `docs/research/PINVOKE_DLL_AUDIT.md` for the detailed binary audit and evidence limits.
+
+All findings are REFERENCE ONLY. No Stranded Deep code, binaries, IL, assets, shaders, or proprietary implementation are to be used in CASTAWAY DEPTHS.
