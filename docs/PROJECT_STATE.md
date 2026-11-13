@@ -332,3 +332,16 @@ Android EOS SDK availability is confirmed. This does not make EOSSDK-Win64-Shipp
 - Stage 4 remains 🟡 IN PROGRESS. Do not remove/replace EOS or networking components based on these findings alone.
 - Immediate next action: run the supplied read-only local inventory command for EOS/Epic/Photon/Bolt/UDPKit/Steam files, list Managed DLL names, and recheck Assembly-CSharp SHA-256; then audit TypeRef/MemberRef/AssemblyRef/MethodSpec/ModuleRef/ImplMap and correlate exact local plugin files.
 - Original Managed DLLs and Stage 3 CSVs remain read-only. Stage 1/2 remain closed. CASTAWAY DEPTHS remains an original native Android game; Stranded Deep research is reference-only.
+
+
+## 2026-11-14 — Direct system Vulkan probe source review
+
+- User supplied the complete source of `~/vk_probe.cpp` from `~/PINVOKE_STAGE3_20261114`. It explicitly loads `/system/lib64/libvulkan.so`, creates a Vulkan 1.3 instance, enumerates physical devices, prints GPU properties, and enumerates device extensions.
+- Static source review confirms the Vulkan structure-type constants (ApplicationInfo 0, InstanceCreateInfo 1), Vulkan 1.3 version encoding, and physical-device type enum mapping are correct.
+- Robustness issues: missing null checks for `dlsym` and Vulkan function pointers; ignored `VkResult` values on physical-device and extension enumeration; no explicit zero-device handling; hard-coded Vulkan 1.3 request without querying loader support/fallback; no `vkDestroyInstance`; generic error reporting.
+- `VkPhysicalDeviceProperties` is manually approximated. Its printed prefix is laid out intentionally, but the hand-written ABI must be checked against official Vulkan headers for the target ABI; the 1,024-byte tail is not a typed definition of limits/sparse properties.
+- Exact source review: `docs/research/VULKAN_PROBE_SOURCE_REVIEW_20261114.md`.
+- Important: this source paste did not include execution output for this exact revision. Do not report a new successful run based on source inspection.
+- Prior independently archived direct system-loader execution already enumerated Mali-G925-Immortalis MC12 (Vulkan 1.3.278, vendor 0x13b5, device 0xd8300010, 152 device extensions); ordinary Termux `vulkaninfo` previously selected llvmpipe. These are distinct loader paths.
+- No driver, vendor file, permission, symlink, or global environment changes were made or authorized.
+- Next: wait for the user's compile/run output for this exact source revision. Then review it and continue to an isolated queue/surface test. Surface, swapchain, submission, presentation, and rendering remain unproven.
