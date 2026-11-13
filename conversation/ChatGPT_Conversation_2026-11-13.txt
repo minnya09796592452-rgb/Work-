@@ -1065,3 +1065,56 @@ NEXT-CONVERSATION HANDOFF:
 - Start by reading the latest transcript addendum and canonical audit plan.
 - Continue only with the user's next instruction. Do not start unrelated work.
 - Follow the Project Lead; keep responses concise and avoid repeating warnings.
+
+
+================================================================================
+# 🚨 TOP-PRIORITY HANDOFF — FINAL P/INVOKE SCANNER / NEXT CONVERSATION
+# 2026-11-14
+================================================================================
+
+USER'S EXPLICIT INSTRUCTIONS IN THIS CONVERSATION:
+- Record prominently what remains incomplete and what the final verified Scanner must prove.
+- Make careful repair of the Scanner a top priority.
+- Always report GREEN / YELLOW / RED status clearly and concisely.
+- Keep explanations short and direct; spend more effort on actual work than lengthy explanation.
+- Record these requirements as a top-priority checklist.
+- Record that this conversation's decisions and status have been confirmed.
+- Update the GitHub ChatGPT TXT transcript before moving to the next conversation.
+
+ASSISTANT ACTION / PERSISTENT HANDOFF:
+Created the mandatory acceptance-gate document:
+docs/research/PINVOKE_FINAL_SCANNER_ACCEPTANCE_GATE.md
+
+The document records:
+- Both uploaded Stage 3 scanner variants and their exact paths, sizes and SHA-256 hashes.
+- The distinction between Variant A and Variant B; neither is designated canonical.
+- Confirmed defects: CSV serialization occurs before later row mutations; name-only matching can produce false associations; ImplMap resolution errors do not reliably force a failing exit; no complete P/InvokeImpl-to-ImplMap reconciliation exists.
+- Final scanner acceptance checklist covering deterministic execution, complete assembly enumeration, metadata reconciliation, exact token/signature resolution, MemberRef/MethodSpec handling, IL call-site evidence, dynamic native loading, callbacks/function pointers, CSV-summary parity, negative tests and Termux runtime verification.
+- Remaining full-audit areas: semantic ABI/marshalling interpretation, dynamic loading/call-site coverage, native import/export correlation and runtime validation.
+- Traffic-light status and next-conversation instructions.
+
+SOURCE VARIANTS / VERIFICATION STATE:
+- Variant A: /mnt/data/pinvoke_stage3_scan(1)(1).py
+  10,931 bytes; SHA-256 f97cda39548cf76700b178edb54d23c6008de489d34d1bc6fb56a999dd944601
+- Variant B: /mnt/data/pinvoke_stage3_scan(2).py
+  10,825 bytes; SHA-256 347b2989687d5220fc5101e50bc21512b134497d7e6efc5db61ed967e0a130bf
+- Both passed Python syntax compilation.
+- No runtime scan was performed in this review; dnfile was unavailable in the assistant runtime.
+- No final/canonical scanner has been selected or repaired yet.
+- No scanner source code was changed.
+
+TRAFFIC LIGHT:
+- GREEN: syntax compilation of both uploaded variants; historical Assembly-CSharp 360/360 RID validation; historical Stage 1 inventory baseline.
+- YELLOW: Stage 2 semantic ABI review and scanner source comparison/resolution analysis.
+- RED: final scanner repair/selection/runtime execution/acceptance; complete dynamic-loading proof; Stage 4 native correlation and runtime validation.
+
+NEXT CONVERSATION MUST:
+1. Read docs/research/PINVOKE_FINAL_SCANNER_ACCEPTANCE_GATE.md first.
+2. Read this transcript and docs/research/ORIGINAL_FULL_PINVOKE_100_PERCENT_PLAN.md.
+3. Continue from the existing two uploaded scanner variants and recorded defects; do not restart discovery or ask the user to repeat known details.
+4. Keep both variants distinct until evidence supports a choice; do not overwrite user originals.
+5. Prioritize careful scanner repair, then execute it in the user's Termux environment and verify output/reconciliation.
+6. Give short GREEN/YELLOW/RED updates and focus on implementation and proof.
+7. Follow the Project Lead's next instruction; do not start unrelated work.
+
+This is the recorded handoff and acknowledgement of the user's top-priority instructions. The transcript is a concise factual addendum to the existing conversation history; it does not claim to reproduce hidden or unavailable message text verbatim.
