@@ -212,3 +212,27 @@ After the user reported that `find "$HOME" -name pinvoke_stage3_scan.py` returne
 **Conclusion:** The previous instruction to locate the scanner under Termux `$HOME` was premature. The scanner is not present in the current audit repository either. Do not ask the user to rerun the same local `find` command. Before proceeding with scanner inspection, identify the actual source location/repository or reconstruct the scanner only if the user explicitly authorizes that. Do not invent its code or assume it is in another repository.
 
 **Stage 3 remains 🟡:** full RID mapping for Assembly-CSharp.dll is PASS (360/360), but scanner extraction has not yet been repaired or revalidated.
+
+
+## 2026-11-14 — User reran Stage 2 successfully in fresh Termux session
+
+The user reported that the script/report appeared in the new Termux environment and executed:
+
+```bash
+bash "$HOME/pinvoke_stage2.sh" "/storage/emulated/0/Download/CASTAWAY_PInvoke_Full_Audit.zip"
+```
+
+**Observed result: Stage 2 completed successfully (exit code implied by [3/3] COMPLETE).**
+- Input ZIP: `/storage/emulated/0/Download/CASTAWAY_PInvoke_Full_Audit.zip`
+- CSV: `/data/data/com.termux/files/home/PINVOKE_STAGE2_20261113_235114/extracted/CASTAWAY_PInvoke_Full_Audit/managed_pinvoke_all_3791.csv`
+- Rows: 3,791; columns: 21
+- Calling conventions: Winapi 2,033; Cdecl 1,159; StdCall 599
+- Charset: Not specified 3,384; Unicode 177; Ansi 153; Auto 77
+- Signature pattern counts: pointer 2,997; valuetype 2,215; byref 1,191; class 523; array 375; string 221; object 1
+- `native_module: NOT FOUND` in this CSV/report profile; do not treat this as a missing P/Invoke DLL resolution result. The displayed CSV schema has 21 columns and no native-module field.
+- Output directory: `/data/data/com.termux/files/home/PINVOKE_STAGE2_20261113_235114`
+- Main report: `stage2_summary.txt`; supporting reports: `field_profile.tsv`, `signature_flags.csv`.
+
+**Interpretation:** This confirms that the Stage 2 profiling script is present and runs successfully in the user's current Termux environment, and reproduces the expected 3,791-row metadata profile. It does not validate Stage 3 scanner extraction, nor change the previously verified Assembly-CSharp RID mapping result (360/360).
+
+**Next step remains user-led:** continue with the actual Stage 3 scanner source/location when the user indicates where it appeared; do not assume the Stage 2 script is the Stage 3 scanner.
