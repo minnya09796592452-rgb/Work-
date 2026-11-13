@@ -730,3 +730,42 @@ Commit creating plan: bc3e60d3a2ff161b06cd14c3da9e4d23271846b8
 
 Current state: Stage 1 green; Stage 2 yellow; Stages 3 and 4 red.
 Wait for the Project Lead instruction before proceeding.
+
+================================================================================
+# STAGE 2 FIRST TERMUX PROFILE — 2026-11-13
+================================================================================
+
+USER REMINDER:
+- GitHub repository is the authoritative project memory. Do not rely on ChatGPT
+  Memory as the project record. Read the GitHub transcript and current project
+  plan before continuing; update those records with meaningful progress.
+
+USER RAN:
+bash "$HOME/pinvoke_stage2.sh"
+
+Output directory:
+$HOME/PINVOKE_STAGE2_20261113_235016/
+
+Observed:
+- 3,791 P/Invoke CSV rows; 21 columns.
+- Calling convention: Winapi 2,033; Cdecl 1,159; StdCall 599.
+- Charset: Not specified 3,384; Unicode 177; Ansi 153; Auto 77.
+- Signature heuristic hits: pointer 2,997; valuetype 2,215; byref 1,191;
+  class 523; array 375; string 221; object 1.
+- CSV schema includes `dll`, `entrypoint`, mapping_flags, method_flags,
+  impl_flags, calling_convention, charset, exact_spelling,
+  supports_last_error, best_fit, throw_on_unmappable_char, their hex fields,
+  pinvoke_impl_flag, signature_raw_hex and metadata_method_rid.
+- The first helper script's module-column detection was wrong: it searched for
+  a "module" header, but the actual column is "dll". Treat dll as the native
+  module field in subsequent scripts.
+- Pattern counts are heuristic text matches; they do not establish full ABI
+  correctness or runtime behavior.
+- Stage 2 remains YELLOW / စစ်ဆေးနေဆဲ. Stage 1 remains GREEN / FULL SUCCESS.
+  Stages 3 and 4 remain RED / မပြီးသေး.
+- Termux artifacts: stage2_summary.txt, field_profile.tsv and
+  signature_flags.csv in the output directory above.
+
+NEXT:
+- Correctly process the dll column and perform more exact row-level metadata
+  analysis. Wait for the Project Lead's next instruction.
