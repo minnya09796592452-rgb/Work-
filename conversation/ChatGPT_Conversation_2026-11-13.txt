@@ -684,3 +684,49 @@ NEXT STEP:
 - Maintain the project's explicit boundary: Stranded Deep is forensic reference
   only; do not reuse its code, binaries, IL, assets, shaders, models, audio,
   branding, or proprietary implementation in CASTAWAY DEPTHS.
+
+
+================================================================================
+# 🚨🚨🚨 NEXT CONVERSATION — READ THIS FIRST: ORIGINAL FULL P/INVOKE 100% PLAN 🚨🚨🚨
+================================================================================
+
+USER DIRECTIVE:
+- The active task is to investigate the ORIGINAL full P/Invoke inventory in complete and exact detail.
+- Do NOT consider APK production, Android porting, or CASTAWAY DEPTHS implementation as part of this plan.
+- Display every plan stage numerically (1, 2, 3, 4) and use clear status colors:
+  - GREEN 🟢 FULL SUCCESS = verified complete with evidence.
+  - YELLOW 🟡 စစ်ဆေးနေဆဲ = investigation in progress / unresolved edge cases.
+  - RED 🔴 မပြီးသေး = not completed / no verified result yet.
+- Keep this heading prominent in every future handoff so the next conversation knows the active task.
+- Follow the Project Lead. Do not begin the next stage until instructed.
+
+PLAN TITLE: မူရင်း Full P/Invoke 100% အတိအကျရှာဖွေခြင်း
+
+1. 🟢 FULL SUCCESS — Managed DLL P/Invoke metadata inventory.
+   - 119/119 managed DLLs parsed; 208,570 MethodDef rows scanned.
+   - 3,791 P/InvokeImpl methods exactly match 3,791 ImplMap rows.
+   - 17 assemblies contain P/Invoke; 102 contain none.
+   - 66 ModuleRef names; 3,563 module/entry-point pairs.
+   - 0 signature decode errors; 0 metadata parse errors.
+
+2. 🟡 စစ်ဆေးနေဆဲ — Declaration-by-declaration ABI and metadata interpretation.
+   - Verify declaring type, method, return/parameter signatures, module, entry point.
+   - Review calling convention, charset, mapping flags, marshalling, callbacks, structure layout and pointer-width clues.
+   - Resolve generic TypeSpec references and signature edge cases.
+
+3. 🔴 မပြီးသေး — Runtime call-site reachability and dynamic native loading.
+   - Determine which declarations are actually called; map caller/callee chains and conditional pathways.
+   - Search dynamic loading mechanisms such as LoadLibrary/GetProcAddress and dlopen/dlsym.
+   - Distinguish declaration presence from runtime load/call evidence.
+
+4. 🔴 မပြီးသေး — Native module, export-symbol and function implementation correlation.
+   - Cross-reference the 66 managed module names and P/Invoke entry points against native binary imports/exports.
+   - Check named and ordinal-only exports.
+   - Analyze relevant native function bodies and ABI details where evidence is available; mark unavailable evidence explicitly.
+
+Canonical detailed plan:
+docs/research/ORIGINAL_FULL_PINVOKE_100_PERCENT_PLAN.md
+Commit creating plan: bc3e60d3a2ff161b06cd14c3da9e4d23271846b8
+
+Current state: Stage 1 green; Stage 2 yellow; Stages 3 and 4 red.
+Wait for the Project Lead instruction before proceeding.
