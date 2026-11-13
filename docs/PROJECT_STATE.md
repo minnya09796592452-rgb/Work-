@@ -51,3 +51,13 @@ Mark each gate PASS only with captured evidence: BUILD, INSTALL, LAUNCH, VULKAN 
 - Signature-shape labels are heuristic groupings, not proof of blittability or ABI safety.
 - Detailed evidence and next checks: [P/Invoke Group Audit — Stage 2](research/PINVOKE_GROUP_AUDIT.md).
 - Audit remains reference-only. It does not change CASTAWAY DEPTHS implementation status, and no third-party Stranded Deep code, IL, binaries, or assets are to be imported.
+
+
+## 2026-11-14 — P/Invoke Stage 3: Assembly-CSharp EOS isolation
+
+- User supplied focused report output for `Assembly-CSharp.dll`: 360 P/Invoke declarations, 360 unique declaring methods, and exactly one native module target, `EOSSDK-Win64-Shipping`.
+- The first 40 sorted declarations include EOS Achievements, ActiveSession, Auth, and Connect API families.
+- This confirms the audited game-assembly P/Invoke declarations are all EOS-targeted. It does **not** prove those APIs are reached during startup or that EOS is mandatory for offline play.
+- Next evidence gate: inspect managed IL method bodies and call-site/call-graph references, then distinguish declaration presence from reachable calls and actual native invocation.
+- Detailed report: [P/Invoke Group Audit — Stage 2 and Stage 3](research/PINVOKE_GROUP_AUDIT.md).
+- Research remains reference-only; no Stranded Deep IL/code, EOS SDK, binaries, or assets are to be reused in CASTAWAY DEPTHS.
