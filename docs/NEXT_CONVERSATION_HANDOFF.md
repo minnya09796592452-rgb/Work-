@@ -291,3 +291,27 @@ Verified findings:
 
 ### NEXT ACTION — TRACE GAME TYPES INTO EOS WRAPPERS
 Run a read-only analysis of `il_call_sites.csv` for ordinary managed call instructions in `Assembly-CSharp.dll` whose target type begins `Epic.OnlineServices.`. Group by calling game type/method and target wrapper type/method. This identifies which game-specific systems actually reference EOS wrappers. Do not modify original Managed DLLs, rerun closed stages, or claim runtime reachability/Android compatibility.
+
+
+## 2026-11-14 — Stage 4 EOS zero-result diagnostic; current resume point
+
+User supplied Termux output from a read-only diagnostic over $HOME/PINVOKE_STAGE3_20261114/il_call_sites.csv. Full summary archived at docs/research/PINVOKE_STAGE4_EOS_ZERO_DIAGNOSTIC_20261114.md.
+
+Verified output:
+- Total CSV rows: **695,709**.
+- Assembly-CSharp.dll rows: **82,804**.
+- Rows with target_type containing Epic: **1,668**.
+- Rows with target_assembly containing Epic: **0**.
+- Epic-target rows by either field: **1,668**.
+- In game-assembly rows, target assembly is empty in 48,640 rows and Assembly-CSharp|0.0.0.0|neutral|null in 34,164 rows; target kinds: MemberRef 41,144, MethodDef 34,164, MethodSpec 7,496.
+- The displayed Epic-target sample shows EOS wrapper callers (Epic.OnlineServices.*) targeting other EOS wrapper types. One sample shows Epic.OnlineServices.Helper calling native EOS_EResult_IsOperationComplete via EOSSDK-Win64-Shipping.
+
+Interpretation:
+- The previous Game-to-EOS filter returned 0 after excluding callers whose type begins Epic.OnlineServices. This is consistent with the displayed wrapper-internal sample; it is not evidence that EOS is absent.
+- The 1,668 count is not yet split across EOS-wrapper and non-wrapper callers. The first-30 sample cannot establish the complete caller population.
+- EOS wrapper types are defined in the same Assembly-CSharp.dll; therefore target_assembly does not contain an Epic string. This is not a missing dependency signal.
+- Static IL references do not prove runtime invocation, startup dependency, offline necessity, or Android compatibility.
+
+Status: CSV diagnostic 🟢 complete; game-type-to-EOS-wrapper call graph 🟡 unresolved; no confirmed failure 🔴.
+
+**Next action:** Run a read-only full classification of all 1,668 Epic-target rows: count EOS-wrapper callers vs non-EOS callers; list every non-EOS caller type with target wrapper type/method; separately count blank/malformed caller types. Do not modify original DLLs/CSVs, restart closed stages, or infer runtime reachability.
