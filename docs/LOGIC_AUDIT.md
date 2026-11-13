@@ -81,3 +81,14 @@ Reference repository: `devmyatmin/Read`, archived Termux project snapshot:
 - The inspected scripts do **not** enumerate the .NET metadata `ImplMap` table, `PInvokeImpl` method flags, `ModuleRef` rows, or native import names. Therefore GitHub evidence does not establish that `Assembly-CSharp.dll` contains the complete P/Invoke set, nor identify every other DLL containing P/Invoke declarations.
 - P/Invoke metadata is stored per managed assembly; it is not necessarily centralized in one DLL. The next evidence-gathering step must inventory the game's managed DLLs (and plugin assemblies) and inspect each assembly's metadata for `ImplMap` / `PInvokeImpl` / `ModuleRef` entries. Record the managed assembly name, imported native module name, entry point, calling convention, and method signature. Do not infer native DLL names from Unity conventions.
 - All findings here are REFERENCE ONLY. Do not copy the original game's DLLs, IL, code, or proprietary implementation into CASTAWAY DEPTHS.
+
+
+## P/Invoke DLL inventory — local binary evidence, 2026-11-13
+
+The user searched the actual Stranded Deep installation and located the managed assemblies and native plugins listed in `docs/research/PINVOKE_DLL_AUDIT.md`. The user also generated a 25 MB audit ZIP containing the complete Managed directory, x86_64 plugin directory, UnityPlayer.dll, and a SHA-256 manifest.
+
+The ZIP has not yet been uploaded for inspection. Consequently, no DLL is currently confirmed to contain all P/Invoke declarations, and no P/Invoke counts, imported module names, entry points, calling conventions, or signatures are verified. The listed DLLs are investigation targets only. Inspect every managed assembly's MethodDef P/InvokeImpl flags, ImplMap table, and ModuleRef table after the archive is provided. Inspect native PE import/export tables as a separate analysis.
+
+Full evidence and SHA-256 values: `docs/research/PINVOKE_DLL_AUDIT.md`.
+
+REFERENCE ONLY: do not import any Stranded Deep DLL, IL, code, or protected content into CASTAWAY DEPTHS.
