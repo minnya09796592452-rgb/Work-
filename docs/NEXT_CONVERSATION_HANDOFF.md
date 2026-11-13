@@ -144,3 +144,34 @@ Observed run results:
 **Status:** Stage 3's implemented scanner validation gate is **GREEN / PASS** for the 119-DLL inventory and the reported declaration/ImplMap and method-body parsing checks. MemberRef/MethodSpec association completeness remains **YELLOW / unresolved** because 300,068 identities were incomplete, and the two compressed-integer warnings need attribution. This PASS does not prove runtime reachability, Android compatibility, or native-library availability.
 
 **Next action:** Inspect the generated CSVs and summary in `$HOME/PINVOKE_STAGE3_20261114`, especially the declaration-to-callsite linkage and unresolved MemberRef records. Do not rerun Stage 1/2 or modify original DLLs. Stage 4 remains incomplete until its evidence-based analysis is performed.
+
+
+## Stage 3 CSV evidence review — 2026-11-14 (latest user output)
+
+The user ran the requested read-only summary against `$HOME/PINVOKE_STAGE3_20261114`. This section supersedes the earlier “inspect generated CSVs” resume instruction above.
+
+**Observed CSV results**
+- `il_call_sites.csv`: **695,709** rows; target kinds: MethodDef **395,641**, MemberRef **279,460**, MethodSpec **20,608**.
+- Exact linked P/Invoke callsite rows in `il_call_sites.csv`: **4,318** (`pinvoke_dll` populated).
+- `pinvoke_declarations.csv`: **3,791** declarations.
+- `pinvoke_callsite_and_declarations.csv`: **8,109** rows. Treat this as joined output rows, not automatically 8,109 unique callsites; validate join multiplicity before using as a call count.
+- `dynamic_loader_call_sites.csv`: **27** rows: `dlopen` 6, `dlclose` 6, `dlsym` 5, `GetProcAddress` 4, `FreeLibrary` 3, `LoadLibraryEx` 2, `LoadLibraryExW` 1.
+- `stage3_errors.csv`: **0** rows.
+- Top declared native modules: `steam_api64` 1,025; `gdiplus` 556; `EOSSDK-Win64-Shipping` 360; `Microsoft.Xbox.Services.141.GDK.C.Thunks` 350; `XGamingRuntimeThunks` 190; `libmono-btls-shared` 188; `kernel32.dll` 125; `steam_api` 115; `user32.dll` 79; `SDL2` 55; `libSDL2-2.0.so.0` 55.
+- Sample linked rows are MethodDef calls in `Assembly-CSharp.dll` to EOS P/Invoke wrappers, including `EOS_EResult_IsOperationComplete`, `EOS_ContinuanceToken_ToString`, `EOS_EpicAccountId_IsValid`, `EOS_EpicAccountId_ToString`, and `EOS_EpicAccountId_FromString`.
+
+**Interpretation / limits**
+- The 4,318 populated-link rows are direct static IL callsite links produced by the scanner. They are not proof of runtime execution or reachability from startup/gameplay.
+- Do not interpret the 8,109 joined rows as unique calls until checking whether each IL callsite expands to multiple declaration rows.
+- `memberref_identity_incomplete=300,068` remains YELLOW; exact MemberRef/MethodSpec association is not complete. The 4,318 count must be presented as the scanner's successfully linked subset, not complete coverage.
+- The two `invalid compressed int: leading byte: 0xfb` warnings remain unattributed.
+- Zero error CSV rows and scanner `validation=PASS` confirm the scanner's own reported validation checks only; they do not remove the MemberRef limitation.
+
+**Current status**
+- Stage 1 🟢 PASS; Stage 2 🟢 PASS / CLOSED.
+- Stage 3 scanner execution and declaration/ImplMap validation 🟢 PASS.
+- Stage 3 reference-association completeness 🟡 YELLOW / unresolved.
+- Stage 4 🟡 IN PROGRESS (evidence analysis begun), not PASS.
+
+**Immediate next action**
+Run the next read-only Stage 3 CSV aggregation to quantify linked calls by native module, caller assembly, caller type, and target kind; inspect join multiplicity and print all 27 dynamic-loader callsites with caller context. Then use those results to build Stage 4's evidence-based native dependency map. Do not rerun Stage 1/2 or modify original DLLs.
