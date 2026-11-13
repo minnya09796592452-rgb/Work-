@@ -187,3 +187,44 @@ When the user writes `@GitHub` in this project, treat it as an instruction to sy
 5. Continue with the next concrete task already specified by the handoff, giving the user only the necessary next command or decision. Do not restart closed stages, modify read-only source files, introduce excluded technologies, or perform unrequested redesign.
 
 The user is Project Lead/Architect. Follow the user's lead; minimize narration and maximize verified work.
+
+
+## 2026-11-14 — Stage 3 aggregation review and Stage 4 dependency evidence
+
+User uploaded `PINVOKE_STAGE3_AGGREGATION_20261114.txt`. The exact 168-line report was archived at `docs/research/PINVOKE_STAGE3_AGGREGATION_20261114.txt`; its content was re-fetched and byte-for-byte text-equal to the uploaded root file before the root copy was deleted.
+
+### Linked static P/Invoke callsites
+
+- Successfully linked IL callsite rows: **4,318**; all target-kind rows are MethodDef.
+- By native module, highest counts: `steam_api64` 1,321; `gdiplus` 639; `EOSSDK-Win64-Shipping` 382; `Microsoft.Xbox.Services.141.GDK.C.Thunks` 333; `XGamingRuntimeThunks` 203; `libmono-btls-shared` 189; `kernel32.dll` 167; `steam_api` 116; `user32.dll` 80; `advapi32.dll` 67; `SDL2` 55; `libSDL2-2.0.so.0` 55.
+- By caller assembly, highest counts: `com.rlabrecque.steamworks.net.dll` 1,214; `System.Drawing.dll` 784; `XGamingRuntime.dll` 536; `Rewired_Windows.dll` 494; `System.dll` 458; `Assembly-CSharp.dll` 382; `mscorlib.dll` 157; `Rewired_Core.dll` 110; `System.Data.dll` 86.
+- The game assembly contributes **382 linked callsite rows** to EOS wrappers. This is direct static IL reference evidence only; it does not establish startup reachability, actual invocation, or EOS being mandatory for offline play.
+- Caller-type counts include Steamworks, XBL/XGamingRuntime, System.Drawing, and obfuscated game types. The full breakdown is preserved in the archived report.
+
+### Join-multiplicity audit — interpretation corrected
+
+The script's proposed key fields `caller_method_rid`, `il_offset`, `opcode`, and `target_token` were empty in the 3,791 declaration-only records. Consequently, the reported 17 "duplicate keys" are not verified duplicate callsites: they are 17 assembly-level buckets of declaration rows with blank callsite identity. Their multiplicities sum to **3,791**, exactly the declaration count.
+
+The other **4,318** rows have populated callsite keys and each appears once in the report's multiplicity counter. Thus the available output is consistent with **4,318 unique linked callsite rows plus 3,791 declaration-only rows**, totaling 8,109. Do not report 8,109 as call count, and do not treat the 17 blank-key buckets as duplicate calls. The raw CSV header/field audit is still needed to confirm the exact row schema and why declaration-only rows are present.
+
+### Dynamic-loader callsites — all 27 inspected
+
+The 27 static loader API references divide into clearly platform-specific caller contexts:
+
+- **Apple/macOS context:** CoreFoundation and CFNetwork-related Mono classes: `Mono.CFObject`, `Mono.CFArray`, `Mono.CFDictionary`, `Mono.CFBoolean`, `Mono.Net.CFProxy`, `Mono.Net.CFProxySettings`, and `System.Net.NetworkInformation.MacNetworkChange`. These use `dlopen`, `dlsym`, and `dlclose`.
+- **Windows context:** `System.Data.LocalDBAPI`, `System.Data.SqlClient.SNI.LocalDB`, `Microsoft.Win32.UnsafeNativeMethods`, `System.Diagnostics.Win32EventLog`, `SafeLibraryHandle.ReleaseHandle`, and `System.TimeZoneInfo.TryGetLocalizedNameByNativeResource`. These use `GetProcAddress`, `LoadLibraryEx[W]`, and `FreeLibrary`.
+- No listed dynamic-loader caller is an Android-specific loader path. These are static references in cross-platform/framework assemblies, not proof that any library was loaded on the user's device or that these methods execute on Android.
+
+### Status
+
+- Stage 1: 🟢 PASS.
+- Stage 2: 🟢 PASS / CLOSED.
+- Stage 3 scanner execution and declaration/ImplMap validation: 🟢 PASS.
+- Stage 3 MemberRef/MethodSpec association completeness: 🟡 YELLOW (300,068 incomplete identities remain); two compressed-integer warnings remain unattributed.
+- Stage 3 linked subset: 🟢 4,318 linked MethodDef callsite rows.
+- Stage 3 join schema/multiplicity explanation: 🟡 partially resolved; inspect raw headers/blank fields before final closure.
+- Stage 4 native dependency map: 🟡 IN PROGRESS, not complete.
+
+### Immediate next action
+
+Run a read-only schema audit on `il_call_sites.csv`, `pinvoke_declarations.csv`, and `pinvoke_callsite_and_declarations.csv`: print headers, non-empty counts for every column, and the first 3 rows of each file. Specifically identify the actual callsite identity columns and determine whether the joined file contains callsite rows plus declaration-only rows. Do not rerun Stage 1/2, change the scanner, or modify original Managed DLLs. After schema confirmation, build the Stage 4 platform/native-module dependency map from the 4,318 linked calls and the 27 loader contexts.
