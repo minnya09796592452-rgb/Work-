@@ -226,3 +226,47 @@ Target DLL metadata parsed successfully with dnfile.dnPE:
 No successful end-to-end runtime scan result is recorded at this checkpoint. Syntax compilation does not prove runtime correctness or call-site coverage. The user indicated that the next Termux output would be supplied; inspect that output before claiming runtime results.
 
 **Resume gate:** review the supplied scanner variants and next user output; fix the RED/YELLOW items; run read-only against the verified original Assembly-CSharp.dll; validate ImplMap/declaration coverage, MemberRef mapping, IL operand references, exit code, and generated reports. Only then may Stage 3 be marked GREEN. Stage 4 remains INCOMPLETE.
+
+
+## 15. Stage 2 rerun — raw schema profile and scanner source review (2026-11-14)
+
+User supplied a fresh Termux run of `$HOME/pinvoke_stage2.sh` against `/storage/emulated/0/Download/CASTAWAY_PInvoke_Full_Audit.zip`.
+
+### Observed metadata profile
+
+| Metric | Result |
+|---|---:|
+| CSV rows | 3,791 |
+| CSV columns | 21 |
+| Winapi | 2,033 |
+| Cdecl | 1,159 |
+| StdCall | 599 |
+| Charset unspecified | 3,384 |
+| Unicode | 177 |
+| Ansi | 153 |
+| Auto | 77 |
+
+The output's `native_module: NOT FOUND` is a field-name mismatch: the printed CSV schema contains `dll`, not `native_module`. The actual native module values should be read from `dll`; the entry-point column is `entrypoint`. This is not evidence that the CSV lacks native module data. The previous grouped audit remains the verified baseline for 66 distinct native modules, 17 assemblies, 33 ABI combinations, 1,976 exact signatures, 196 repeated DLL/entry-point keys, and zero missing-field rows.
+
+The output's signature-shape counts are overlapping tags (for example, a signature may contain both pointer and valuetype forms); they are not mutually exclusive buckets and must not be summed.
+
+### Uploaded Stage 3 scanner files reviewed
+
+Both uploaded files pass Python syntax compilation:
+- `pinvoke_stage3_scan(2).py` — SHA-256 `347b2989687d5220fc5101e50bc21512b134497d7e6efc5db61ed967e0a130bf`.
+- `pinvoke_stage3_scan(1)(1).py` — SHA-256 `f97cda39548cf76700b178edb54d23c6008de489d34d1bc6fb56a999dd944601`.
+
+The second variant adds an object-identity lookup for the MethodDef row, then falls back to `rid_of(mr)`; it does not yet prove stable resolution of the MemberForwarded coded index.
+
+| Marker | Finding |
+|---|---|
+| 🟢 GREEN | Both uploaded scripts pass `python -m py_compile`. |
+| 🟡 YELLOW | Variant B's object-identity fallback is an incremental improvement only; robust MemberForwarded table/RID resolution is still required. |
+| 🟡 YELLOW | MemberRef/MethodSpec association relies on declaring type + method name only. |
+| 🟡 YELLOW | ImplMap resolution exceptions are counted but are not included in the non-zero exit condition. |
+| 🟡 YELLOW | No declaration-to-ImplMap completeness check is performed. |
+| 🔴 RED | CSV files are written before MemberRef/MethodSpec matching mutates the in-memory rows; the later matching results are not persisted to the emitted CSVs. |
+
+No Stage 3 runtime success is established by the Stage 2 output or by syntax compilation.
+
+**Next action:** inspect the extracted CSV's real `dll` and `entrypoint` columns read-only, verify distinct-module count and missing values, then repair the scanner defects before any Stage 3 execution against the original Managed directory.
