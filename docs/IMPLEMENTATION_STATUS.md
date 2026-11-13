@@ -58,3 +58,8 @@ Track each gate independently. Attach logs or other reproducible evidence before
 - Windows runtime/plugin dependency findings are documented in `docs/research/PINVOKE_DLL_AUDIT.md`.
 - This is a reference-binary audit only. It does not change CASTAWAY DEPTHS implementation status and does not establish a complete P/Invoke metadata inventory.
 - Next audit gate: enumerate MethodDef P/InvokeImpl, ImplMap, and ModuleRef across every managed assembly, then publish exact per-assembly counts and signatures. Inspect native PE imports/exports separately.
+
+
+## Forensic P/Invoke audit update — 2026-11-13
+
+Completed full metadata inventory of the supplied audit ZIP: 119/119 Managed DLLs parsed and 119/119 manifest hashes verified; 3,791 MethodDef P/InvokeImpl flags match 3,791 ImplMap rows across 17 assemblies. Three native binaries were confirmed Windows PE32+ x86-64, not Android ELF. This does not change CASTAWAY DEPTHS implementation status or authorize reuse of the source game's materials. See [full P/Invoke inventory](research/PINVOKE_FULL_METADATA_INVENTORY.md).
