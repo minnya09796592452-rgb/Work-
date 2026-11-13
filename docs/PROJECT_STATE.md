@@ -178,3 +178,14 @@ User supplied the generated CSV summary from `$HOME/PINVOKE_STAGE3_20261114`.
 - Stage 4 remains in progress; no Android compatibility or native dependency availability conclusion is established.
 
 Next: aggregate the linked callsites by native module, caller assembly/type, and target kind; audit join multiplicity; inspect all 27 dynamic-loader callsites in context. Use that evidence to construct the Stage 4 native dependency map. Do not rerun Stage 1/2 or modify original Managed DLLs.
+
+
+## 2026-11-14 — Stage 3 aggregation and Stage 4 evidence update
+
+- Aggregation report archived at `docs/research/PINVOKE_STAGE3_AGGREGATION_20261114.txt`.
+- 4,318 linked static IL callsite rows were grouped by native module, caller assembly/type, and target kind. Largest groups are Steamworks (`steam_api64` 1,321), GDI+ (`gdiplus` 639), EOS (382), Xbox GDK thunks (333), XGamingRuntime thunks (203), and Mono BTLS (189).
+- `Assembly-CSharp.dll` has 382 linked callsite rows targeting EOS wrappers. This does not establish runtime reachability or EOS necessity for offline play.
+- The attempted join-multiplicity key used empty fields for 3,791 declaration-only rows. The 17 reported duplicate buckets are assembly-level blank-key buckets, not verified duplicate callsites. The 4,318 populated callsite keys each appear once in the supplied multiplicity output. Raw CSV schema audit remains required.
+- All 27 dynamic-loader callsites were inspected: Apple/macOS CoreFoundation/CFNetwork paths use `dlopen/dlsym/dlclose`; Windows framework paths use `GetProcAddress/LoadLibraryEx/FreeLibrary`. No Android-specific loader caller appears in this set. Static references do not prove runtime loading.
+- Stage 3 scanner/declaration validation remains 🟢 PASS; MemberRef/MethodSpec association remains 🟡 (300,068 incomplete identities); Stage 4 native dependency mapping remains 🟡 IN PROGRESS.
+- Next: audit raw CSV headers, per-column populated counts, and sample rows to establish the correct joined-row schema; then complete the Stage 4 platform/native dependency map. Original Managed DLLs remain read-only; research remains reference-only.
