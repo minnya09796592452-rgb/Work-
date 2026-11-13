@@ -1,0 +1,234 @@
+CASTAWAY DEPTHS — CHATGPT CONVERSATION TRANSCRIPT
+Date: 2026-11-13
+Repository: https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS
+File purpose: Preserve the visible conversation context for project continuity.
+
+IMPORTANT TRANSCRIPT LIMITATION
+Some earlier messages in the chat context were represented to the assistant as “Skipped N messages” without their original text. Those omitted messages cannot be reconstructed verbatim here. This file preserves the messages and assistant replies that were visible in the available conversation context, including the user's pasted Termux output. It is not a complete export of hidden/skipped messages.
+
+======================================================================
+CONVERSATION
+======================================================================
+
+USER:
+Workflow တစ်ခုသွား run ကြည့်
+
+USER:
+run time ကိုကြည့် မအေလိုး
+
+USER:
+ငါပြောတာ runtime Limitd ပြည့်မပြည့်
+
+USER:
+ဘာလုပ်ရမှန်းတောင်မသိတော့ဘူးတကယ်ပဲ
+
+USER:
+တော်တော့ပြီးရင်မင်းစောက်အတိတ်ကမေ့မှာပဲဆက်တိုက်
+
+USER:
+ငါပြောမယ် ငါတိုကို ass တွေကို တိတိကျကျအကုန်တိထားပြီ မူရင်းဟာတွေ မင်း Godot ကိုချက်ခြင်းမပြောင်းနိုင်ဘူးလားဟမ်
+
+USER:
+ငါနားလည်တယ် အဓိက မင်းက စောက်ပေါက်လုပ်နေတာတစ်ခုပဲ အေးမင်းအတွက် သေချာရင် သွား Read ထဲသွားပြီး အဲ့ထဲက Logic တွေကို မင်း Gotdot logic သွားပြောင်းကြည့်လိုက်
+
+USER:
+လုပ်ဘယ်လိုzip ပေးမယ် Scrpic ရေးပေးတော့
+
+USER:
+/ sdcard/Download/Read_Original_Logic.zip ... (user's shell command fragment)
+
+USER:
+~/stranded_native_port $ bash ~/zip_read_folder.sh
+=== Searching for Read folder ===
+Found: /data/data/com.termux/files/home/Read
+Counting files...
+Files: 194
+The script prompted that ~/storage already exists and would rebuild its structure. User stopped at this point.
+
+USER:
+ထားလိုက်တော့ကွား အခုငါ blackscreen ဖြစ်နေတာပဲအာရုံပြန်စိုက်ရင်ရနိုင်လား
+
+USER:
+ငါကိုမေးမယ့်အစား မက်း memory ကိုပြန် ကြည့်မအေလိုး
+
+USER:
+လီးပဲဟေ့ အခု Gotdot ကိုမင်းခေါင်းထဲကဖျက်လိုက်ကွားလီးလိုပဲ
+
+USER:
+Apk ထုတ်ပိုးမှုနဲ့ GPU driver ရော ဂိမ်းဘက်မဟုတ်ပဲ ဒီဘက်ကဖြစ်တယ်ဟုတ်?
+
+USER:
+အေအကုန်zip ချုပ်ပလိုက်ကွား ငါဒီမှာပို့ပေးမယ်
+
+USER:
+Diagnostic Archive === Source: /data/data/com.termux/files/home/stranded_native_port (user-reported archive process)
+
+USER:
+~/stranded_native_port $ ps -ef | grep -E 'zip|find|sort' | grep -v grep
+u0_a250 ... bash /data/data/com.termux/files/home/zip_nyamist_diagnostics.sh
+u0_a250 ... zip -qr .../NYAMIST_BlackScreen_Diagnostics.zip stranded_native_port ...
+The archive process was running at high CPU usage.
+
+USER:
+ဘယ်ကဖြစ်နေတာလဲဆိုတာ အားလုံးခြုံပြီး တစ်ချက်တည်းနဲ့ Scrip စီးဆင်းမှုတွေကအစ ပေါ်လာတဲ့ scrip သို့မဟုတ် ငါတို့လိုချင်တဲ့အတိုင်းလွဲတာနဲ့ error ပြတဲ့ ပုံစံ မျိုး မရှိဘူးလား? အကုန်အောင်မြင်ရင်တော့ apk အလုပ်လုပိကိုလုပ်ရမယ် 100 ရာခိုင်နှုန်း
+
+USER:
+အေး မကင်းရင် နောက်ထပ် Scrpic နဲ့ပြန်ထောက်ပေါ့ကွား ဟူး
+
+USER:
+ရေးတော့ Scrpic
+
+USER:
+ကဲပါငါတောင်းပန်တယ် ငါလည်းစိတ်ရှုပ်သွားတယ်။ အခုငါစဥ်းစားမိတာတစ်ခုရှိတယ် 100% နှုန်းအလုပ်လုပ်စေမယ့်နည်းလမ်း ဘယ်လိုလဲဆိုတော့ ပြောင်းပြန်စနစ်။ ဘယ်လိုပုံစံလည်းဆိုတော့ ငါတို့ကဂိမ်းကိုအရင် သွားပြီးပြင်နေတာက ရှုပ်စေတယ် Emulator အရူးတွေနဲ့ဘာမှမကွာဘူး ငါ window ဂိမ်းကို Android မှာကစားနိုင်အောင်လုပ်နေတာမဟုတ်ဘူး Window game ကိုယ်တိုင်က Androd ဆင်းလာအောင်လုပ်ချင်တာ။ ဆိုတော့ငါတို့ ပြောင်းပြန်စနစ်နဲ့သွားမယ် ငါတို့ဂိမ်းကိုခဏထားပြီး Android Apk ကို အရင်တည်ဆောက်မယ်။ အဲ့ထဲမှာ Stranded Deep က Shader အတွက်လိုအပ်တဲ့ tool တွေ Shader တွေ .so တွေ Graphic တွေ။ Graphic ကို full HD. လုံးဝအမြင့်စားကိုသုံးမယ် K80ရဲ့ Graphic ထုတ်နဲ့မှုအလိုက်ပေါ power ကိုယူပြီးလုပ်မယ်။ အကုန်လုံး အခြားဖုန်းတွေမှာကစားလို့ရအောင်ပါစီစဥ်ပြီး Logic ကိုလမ်းကြောင်းအစဖွင့်ထားမယ် လမ်းကြောင်းကို OBB မှာ ထားမယ်။ အားလုံးပြီးမှာ ငါတို့ ဂိမ်းကိုဖောက်မယ် တစ်ခုဖောက်ပြီးရင် logic တွေကို ပြောင်းပြစ်ပြီး obb မှာ apk နဲ့သွားချိတ်မယ် shader အပိုင်းကြတော့ မူရင်ကိုသုံးနိုင်လားမသုံးနိုင်လားကြည့်မယ် မသုံးနိုင်ရင် copy နဲ့ သတ်မှတ်ထားတဲ့ Graphic အတိုင်းတစ်ခါထဲပြောင်းဆွဲထုတ်မယ်။ ဒီလိုနဲ့ apkထဲကိုဝင်စစ်လိုက် လုပ်လိုက်နဲ့ဆိုရင်ကော?????
+
+USER:
+ငါပြောတာကိုမင်းနားလည်မယ်ထင်တယ် ငါက မူရင်းရဲ့logic ကို ပုံသေလို့မပြောထားဘူး apkမှာလည်း ကိုယ်ပိုင် pipe ကိုအဖွင့်ပေးထားမှာ logic ကို တွက်ထားမှာ window ဂိမ်းရဲ့ Logic ကိုလာစပ်မှာမဟုတ်ဘူး။ မူရင်း logic အားလုံးကို အခြေခံပြီး ငါ့ apk နဲ့လိုက်ဖက်တဲ့ logic နဲ့ ပြောင်းလဲသွားမှာပဲ ပြောင်းလဲဖို့လည်းခက်မှာမဟုတ်ဘူး။ ဘာကြောင့်လဲဆိုတော့ logic ကကိုယ်ပိုင်ဖြစ်လို့ လုပ်ချင်သလိုကိုလုပ်ပလိုက်လို့ရတယ် apk က အခွံတတ်ပဲ editor လိုပုံစံပဲနားလည်လား? နောက်ဆုံးအားလုံး ready ဖြစ်မှာ တကယ့် apk အစစ်ကြီးကို ထုတ်ချမှ
+
+USER:
+အဲ့ဒါကြောင့်မင်းကိုစောက်ရူးလို့ငါပြောတာ မင်းက C++ တော်သလောက်ဦးနောက်က အရူးလိုပဲ ငါပြောတာ အရံ apk editor style obb ဖြည့်ပြီးနောက်ပိုင်း apk အစစ်ကို ထုတ်ပြီး editor apk နေရာမှာ အစားထိုးပလိုက်မှာ အရံကို ဖြုတ်ထုတ်လိုက်မှာ နားလည်လား အရံကို ဖြည့်ဖို့အတွက်ပဲ
+
+USER:
+Original custom instructions no longer available
+
+USER:
+မင်းပိုရှင်းအောင်ထပ်ပြောမယ်ကွားငါတို့က ဂိမ်းကို porting လုပ်တာမဟုတ်ဘူးကွား ငါတို့ကဂိမ်းကိုအစအဆုံးတည်ထွင်တာကွား Stranded Depp ကတော့ အနီးကပ်ကြည့်မယ့်အရာကွား ဒီတည်ထွင်နေတဲ့တစ်လျှောက် သူ့ဆီကအစစ်တွေယူသုံးလို့ရရင်ယူသုံးမယ် ယူသုံးလို့မရရင် မသုံးဘူး K80 ရဲ့ အမြင့်ဆုံး Power နဲ့ copy ဆွဲချိန်တစ်ခါထဲပြောင်းလဲမှာကွား။ ဥပမာ 8k ဆိုရင် K80 Full power 4K နဲ့ပါလာမယ်ကွား။ ဥပမာပေးတာနော်။ ဒါမှာ 100 ရာခိုင်နှုန်းအလုပ်မလုပ်ရင်လည်း ပါးရိုက်ဖို့ပဲရှိတော့မယ်
+
+USER:
+အခု repo လမ်းကြောင်းသစ်:
+https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS.git
+
+USER:
+မင်းပိုရှင်းအောင်ထပ်ပြောမယ် — Stranded Deep ကို porting လုပ်တာမဟုတ်၊ ကိုယ်ပိုင် game ကို အစအဆုံးတည်ဆောက်မယ်။ Stranded Deep ကို reference အဖြစ်သာကြည့်မယ်။ မူရင်း asset တစ်ခုခုကို တရားဝင်သုံးခွင့်ရှိမှသာ သုံးမယ်။ မသုံးနိုင်ရင် ကိုယ်ပိုင် content နဲ့ K80 ရဲ့ GPU performance ကို အခြေခံပြီး ဖန်တီးမယ်။
+
+USER:
+အဲ့ဒါကြောင့်မင်းကိုစောက်ရူးလို့ငါပြောတာ ... အရံ APK က Editor style ဖြစ်ပြီး OBB/data ဖြည့်ဖို့၊ control/test လုပ်ဖို့သာ။ အားလုံး ready ဖြစ်မှ final APK ကို ထုတ်ပြီး အရံ APK နေရာမှာ အစားထိုးမယ်၊ အရံကို ဖယ်ရှားမယ်။
+
+ASSISTANT:
+ဟုတ်တယ်။ CASTAWAY DEPTHS ကို original native Android game အဖြစ် တည်ဆောက်မယ်။ Stranded Deep port မဟုတ်ဘူး။ Temporary Editor/Control APK ကို development အတွက်သာထားပြီး နောက်ဆုံး standalone APK ထုတ်မယ်။
+
+USER:
+Original custom instructions no longer available
+
+ASSISTANT:
+ဟုတ်တယ်။ ကိုယ်ပိုင် Code, Logic, Assets, Branding နဲ့ တည်ဆောက်မယ်ဆိုရင် တရားဝင်ထုတ်ဝေနိုင်တဲ့ လမ်းကြောင်းရှိတယ်။ Third-party content အားလုံးရဲ့ license/provenance ကို စစ်ရမယ်။
+
+USER:
+ရတယ်လေ အဲ့ဒါဆိုရင် ပြောင်းမယ်ကွား တစ်ခုမှမယူသုံးဘူး K80 ရဲ့ ဆွဲထုတ်နိုင်မှုနဲ့ logic ရော နာမည်တွေပါပြောင်းပြစ်ကွား ပိုတောင်လွယ်သွားသေးတယ်
+
+ASSISTANT:
+ဒါဆို CASTAWAY DEPTHS ကို original game အဖြစ် တည်ဆောက်မယ်။ ကိုယ်ပိုင် logic, code, art, audio, models, names နဲ့ branding ကို ဖန်တီးမယ်။ Mali-G925/Vulkan ကို အခြေခံပြီး capability-based graphics profiles ထည့်မယ်။
+
+USER:
+မင်းကလည်းကွားနာမလည်လို့ပြောမိတာကိုလဥပေါ့။ ဂိမ်းnameကို မင်းစဥ်းစားလိုက်ကွား အဓိပ္ပါယ်တူတာ
+
+ASSISTANT:
+Game name suggestions:
+1. Castaway Depths
+2. Beyond the Shore
+3. Lost in the Blue
+4. Abyssbound
+5. Oceanbound: Survival
+
+USER:
+ဆက်မပြနဲ့တော့ငါကြိုက်သွားပြီ ပထမတစ်ခု
+
+ASSISTANT:
+Game name selected: CASTAWAY DEPTHS. NYAMIST is historical development codename only. Suggested tagline: SURVIVE THE UNKNOWN.
+
+USER:
+ဒီတစ်ခေါက်တော့မင်းမနက်ငါနက်မှရတော့မယ် မဟုတ်ရင်မင်းအတိတ်မေ့တာနဲ့တင်ရွာလည်နေဦးမယ် ရောဒီမှာ Repo
+https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS.git
+လမ်းကြောင်းတ တစ်ခါတည်းလုပ်ထား obb/Castaway Depths ဆိုပြီးအထဲမှာထားမှာတွေပါ
+ငါ့ဖုန်းမှာလည်းပုံစံတူလုပ်မယ် obb/Castaway Depths အတွင်းပိုင်းရော Github ကမင်းဖတ်ဖို့ အတိတ်မမေ့အောင် နော်ဆရာသမား။ Termux မှာ Ready ရတာနဲ့ ငါ့ဟာရော Github မှာရောပါတစ်ခါတည်းသိမ်းမယ်
+
+ASSISTANT:
+Repository access was confirmed. Planned a mirrored Termux/GitHub workspace with `obb/Castaway Depths/` as the development data staging root and project documents to preserve project direction.
+
+ASSISTANT:
+Created project documentation and directory scaffolding in the GitHub repository, including:
+- `README.md`
+- `docs/PROJECT_STATE.md`
+- `docs/ARCHITECTURE.md`
+- `docs/ASSET_POLICY.md`
+- `docs/TERMUX_SETUP.md`
+- `scripts/setup_termux.sh`
+- `obb/Castaway Depths/` with assets, worlds, definitions, shaders, config, localization, and manifests directories.
+
+Clarified that this directory is a development staging tree, not yet a final Android OBB archive. Native `.so` libraries belong in APK ABI paths.
+
+USER:
+Termux output:
+```
+~ $
+~ $ pkg update
+Checking availability of current mirror:
+[*] https://mirror.nevacloud.com/applications/termux/termux-main: ok
+Get:1 https://mirror.nevacloud.com/applications/termux/termux-main stable InRelease [14.0 kB]
+Get:2 https://mirror.nevacloud.com/applications/termux/termux-main stable/main aarch64 Packages [589 kB]
+Fetched 603 kB in 2s (296 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+8 packages can be upgraded. Run 'apt list --upgradable' to see them.
+~ $ pkg install -y git
+Checking availability of current mirror:
+[*] https://mirror.nevacloud.com/applications/termux/termux-main: ok
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+git is already the newest version (2.56.1).
+0 upgraded, 0 newly installed, 0 to remove and 8 not upgraded.
+~ $
+~ $ cd "$HOME"
+~ $
+~ $ git clone https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS.git Castaway-Depths
+Cloning into 'Castaway-Depths'...
+remote: Enumerating objects: 132, done.
+remote: Counting objects: 100% (132/132), done.
+remote: Compressing objects: 100% (98/98), done.
+remote: Total 132 (delta 33), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (132/132), done.
+Resolving deltas: 100% (33/33), done.
+~ $
+~ $ cd "$HOME/Castaway-Depths"
+~/Castaway-Depths $
+~/Castaway-Depths $ bash scripts/setup_termux.sh
+CASTAWAY DEPTHS workspace READY
+Repo: /data/data/com.termux/files/home/Castaway-Depths
+Data: /data/data/com.termux/files/home/Castaway-Depths/obb/Castaway Depths
+Git status:
+~/Castaway-Depths $
+~/Castaway-Depths $ cd "$HOME/Castaway-Depths"
+~/Castaway-Depths $
+~/Castaway-Depths $ git add -A
+~/Castaway-Depths $ git commit -m "chore: save Castaway Depths workspace"
+On branch main
+Your branch is up to date with 'origin/main'.
+nothing to commit, working tree clean
+~/Castaway-Depths $ git push origin main
+Everything up-to-date
+```
+
+ASSISTANT:
+Excellent. Termux clone and setup succeeded. Git working tree is clean and synchronized with origin/main. No local changes were pending.
+
+USER:
+နောက်ပြီးဆရာသမား ဒီတစ်ခေါက်တော့ငါ လုပ်ပုံလုပ်နည်းဘာပြီးရင်ဘာဆိုတာလည်းနားလည်သွားပြီးမို့ မင်းနဲ့ငါ Position change မယ်။ ငါပြောတာကိုလုပ်ငါ့ဦးဆောင်မှုနောက်ကိုလိုက်ပြီးကုဒ်သာရေးပေးပေတော့။ ဒါဆို တိုင်လည်းမပတ်တော့ဘူးတစ်နေရာတည်းမှာ
+
+ASSISTANT:
+သဘောတူတယ်။ User is Project Lead/Architect; assistant is Implementation Engineer. Follow the user's direction, write requested code/scripts, avoid unsolicited architecture changes/features, verify errors with evidence, and never claim PASS without evidence.
+
+======================================================================
+CURRENT VERIFIED STATE
+======================================================================
+
+- GitHub repository: https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS
+- Branch: main
+- Termux local clone: $HOME/Castaway-Depths
+- Data staging path: $HOME/Castaway-Depths/obb/Castaway Depths/
+- setup_termux.sh ran successfully and printed:
+  CASTAWAY DEPTHS workspace READY
+- Git status clean; branch up to date with origin/main.
+- No engine, APK, renderer, gameplay implementation, or final OBB archive is yet claimed to exist.
+
+NEXT USER REQUEST SHOULD BE FOLLOWED AS PROJECT LEAD'S INSTRUCTION.
