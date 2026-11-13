@@ -154,3 +154,10 @@ All 360 P/Invoke declarations in `Assembly-CSharp.dll` target `EOSSDK-Win64-Ship
 **Next forensic gate:** inspect managed IL method bodies and references to identify which EOS wrappers are called from startup, scene loading, save/load, and offline gameplay paths. Distinguish declaration presence, managed call-site references, reachable call paths, and actual native invocation at runtime. Do not label EOS optional or mandatory until call-graph and runtime evidence support that conclusion.
 
 Keep this research reference-only; no EOS SDK, Stranded Deep IL/code, binaries, or assets are to be reused in CASTAWAY DEPTHS. Local report: `$HOME/PINVOKE_GROUP_AUDIT_20261113_235658/13_game_assembly_pinvoke.tsv`.
+
+
+## 10. IL inspection environment check (2026-11-14)
+
+User ran a search for `Assembly-CSharp.dll` under `$HOME/PINVOKE_STAGE2_20261113_235016/extracted`; it returned no file. The same Termux check found none of `monodis`, `ilspycmd`, `ildasm`, or `dotnet` on PATH. This is expected if that extracted directory contains only the audit ZIP's CSV/report outputs rather than the original managed game assemblies. No conclusion about the original game installation's DLL availability can be drawn yet.
+
+Next action: locate the original `Assembly-CSharp.dll` under the user's actual game directory. Only after confirming its exact path and file metadata should an IL inspection approach/tool be selected. Do not install tooling or alter the source DLL before locating it.
