@@ -215,3 +215,14 @@ Next: aggregate the linked callsites by native module, caller assembly/type, and
 - Evidence summary: [Stage 4 EOS Game Dependency Audit](research/PINVOKE_STAGE4_EOS_GAME_DEPENDENCY_AUDIT_20261114.md).
 - Stage 4 remains 🟡 IN PROGRESS; do not mark complete.
 - Next: trace non-wrapper managed IL calls into `Epic.OnlineServices.*` wrapper methods to identify game-level feature use. Do not infer runtime reachability or Android compatibility from static P/Invoke links.
+
+
+## 2026-11-14 — Stage 4 EOS zero-result diagnostic
+
+User-provided read-only Termux diagnostic against il_call_sites.csv reported 695,709 total rows, 82,804 rows from Assembly-CSharp.dll, and 1,668 rows whose target_type contains Epic; no target assembly string contains Epic. In the game-assembly subset, target assembly is blank in 48,640 rows and the same-assembly identity Assembly-CSharp|0.0.0.0|neutral|null in 34,164 rows. Target kinds: MemberRef 41,144, MethodDef 34,164, MethodSpec 7,496. The sample shows EOS wrapper caller types targeting other Epic.OnlineServices.* wrapper types; one sample is Epic.OnlineServices.Helper → EOS_EResult_IsOperationComplete via EOSSDK-Win64-Shipping.
+
+The prior Game-to-EOS filter's 0 result is consistent with excluding EOS wrapper callers. The current output does not yet establish whether any non-EOS/game-specific caller types target those wrappers, because only 30 sample rows were printed and no full caller classification was produced. EOS wrapper types are contained in Assembly-CSharp.dll, so target_assembly not containing Epic is expected in this output. Static references do not establish runtime invocation, startup/offline necessity, or Android compatibility.
+
+Status: CSV diagnostic 🟢 complete; game-type-to-EOS-wrapper caller map 🟡 unresolved; no confirmed failure. Full report: docs/research/PINVOKE_STAGE4_EOS_ZERO_DIAGNOSTIC_20261114.md.
+
+Next: classify all 1,668 Epic-target rows by EOS-wrapper vs non-EOS caller type; enumerate non-EOS caller type → EOS wrapper type/method edges; count blank/malformed caller types. Read-only only; do not modify original DLLs/CSVs or restart closed stages.
