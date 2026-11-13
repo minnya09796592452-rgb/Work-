@@ -430,3 +430,25 @@ The 27 static loader API references divide into clearly platform-specific caller
 ### Immediate next action
 
 Run a read-only schema audit on `il_call_sites.csv`, `pinvoke_declarations.csv`, and `pinvoke_callsite_and_declarations.csv`: print headers, non-empty counts for every column, and the first 3 rows of each file. Specifically identify the actual callsite identity columns and determine whether the joined file contains callsite rows plus declaration-only rows. Do not rerun Stage 1/2, change the scanner, or modify original Managed DLLs. After schema confirmation, build the Stage 4 platform/native-module dependency map from the 4,318 linked calls and the 27 loader contexts.
+
+
+## 2026-11-14 — Stage 3 combined CSV schema audit (verified)
+
+Source report: `docs/research/PINVOKE_STAGE3_SCHEMA_AUDIT_20261114.txt` (244 lines; exact archived copy verified).
+
+### Raw schema and populated-field counts
+- `il_call_sites.csv`: 695,709 rows. All 16 columns are present. All callsite identity fields are populated for all rows; `pinvoke_dll` and `pinvoke_entrypoint` each have 4,318 populated rows.
+- `pinvoke_declarations.csv`: 3,791 rows; all 8 columns are populated for all rows.
+- `pinvoke_callsite_and_declarations.csv`: 8,109 rows. Callsite-side columns are populated for 4,318 rows; declaration-side columns are populated for 3,791 rows.
+- The combined output contains two row groups (4,318 linked callsite records and 3,791 declaration records). Do not call 8,109 the number of unique calls.
+- The earlier 17 repeated blank-key groups were caused by declaration-only records with empty callsite identity fields. They are not duplicate callsites. This resolves the supplied CSV's join ambiguity.
+
+### Revised Stage 3 interpretation
+- Linked static callsite subset: 🟢 4,318.
+- Combined CSV row schema / interpretation: 🟢 resolved for the supplied output.
+- MemberRef/MethodSpec association completeness: 🟡 unresolved; 300,068 incomplete identities remain.
+- Two compressed-integer warnings remain unattributed.
+- Static links do not prove runtime reachability, dynamic loading, Android ABI compatibility, or library availability.
+
+### Stage 4 next task
+Build a dependency matrix from the 4,318 linked callsites and 3,791 declarations. Classify native modules by platform family with uncertain cases marked unknown; correlate caller assembly/type/method and declaration entrypoints; separate Assembly-CSharp direct references from third-party/framework references; distinguish static references from runtime evidence. Preserve the unresolved MemberRef and warning limitations. Do not modify the original Managed DLLs or restart Stage 1/2.
