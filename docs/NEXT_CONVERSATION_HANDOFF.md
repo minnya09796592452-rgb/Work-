@@ -333,3 +333,74 @@ The row partition reconciles exactly. All filtered calls are within `Epic.Online
 Detailed evidence: `docs/research/PINVOKE_STAGE4_EOS_CALLER_CLASSIFICATION_20261114.md`.
 
 **Next action:** perform a read-only indirect EOS usage audit across managed metadata/IL. Search reflection APIs and string constants for EOS wrapper type/method names; inspect delegate construction/invocation and callback registration; map any hits to concrete caller methods. Keep original Managed DLLs and Stage 3 CSVs read-only. Do not restart Stage 1/2 or infer runtime reachability, offline necessity, or Android compatibility.
+
+
+## Next-chat exact first-pass command — indirect EOS callsite screen
+
+Run this read-only CSV screen first. It uses the verified `il_call_sites.csv` schema and restricts to `Assembly-CSharp.dll`; it counts reflection, delegate, and callback-like call targets and prints up to 120 candidate rows. This is only a screening pass: it cannot find `ldstr` string constants or prove callback execution. After reviewing its output, inspect the original IL for string-based EOS type/method lookup and any indirect wiring candidates. Original DLLs and Stage 3 CSVs remain read-only.
+
+```bash
+cd "$HOME/PINVOKE_STAGE3_20261114" && python - <<'PY'
+import csv
+from collections import Counter
+
+path = "il_call_sites.csv"
+reflection = {
+    "GetType", "GetMethod", "GetMethods", "GetMember", "GetMembers",
+    "GetProperty", "GetProperties", "GetField", "GetFields",
+    "Invoke", "InvokeMember", "CreateInstance", "CreateDelegate",
+    "GetConstructor", "GetConstructors", "GetEvent", "GetEvents",
+    "AddEventHandler", "RemoveEventHandler", "GetCustomAttributes",
+    "GetCustomAttribute", "GetTypeFromHandle", "GetMethodFromHandle",
+    "GetInterface", "GetInterfaces", "IsAssignableFrom"
+}
+delegates = {
+    "DynamicInvoke", "BeginInvoke", "EndInvoke", "Combine", "Remove",
+    "CreateDelegate", "GetDelegateForFunctionPointer",
+    "GetFunctionPointerForDelegate"
+}
+callback_prefixes = ("AddNotify", "RemoveNotify", "Register", "Unregister")
+rows = []
+counts = Counter()
+caller_types = { "reflection": set(), "delegate": set(), "callback": set() }
+
+with open(path, newline="", encoding="utf-8") as f:
+    for r in csv.DictReader(f):
+        if r.get("assembly") != "Assembly-CSharp.dll":
+            continue
+        method = (r.get("target_method") or "").split("::")[-1]
+        opcode = (r.get("opcode") or "").lower()
+        categories = []
+        if method in reflection:
+            categories.append("reflection")
+        if method in delegates or opcode in {"ldftn", "ldvirtftn"}:
+            categories.append("delegate")
+        if method.startswith(callback_prefixes):
+            categories.append("callback")
+        if not categories:
+            continue
+        for cat in categories:
+            counts[cat] += 1
+            caller_types[cat].add(r.get("caller_type", ""))
+        rows.append((categories, r))
+
+print("STAGE4_EOS_INDIRECT_CALLSITE_SCREEN")
+for cat in ("reflection", "delegate", "callback"):
+    print(f"{cat.upper()}_CANDIDATE_ROWS = {counts[cat]}")
+    print(f"{cat.upper()}_UNIQUE_CALLER_TYPES = {len(caller_types[cat])}")
+print("TOTAL_MATCHED_ROWS =", len(rows))
+print("=== CANDIDATE CALLSITES (first 120) ===")
+for cats, r in rows[:120]:
+    print(
+        ",".join(cats),
+        "|", r.get("caller_type", ""),
+        "|", r.get("caller_method", ""),
+        "|", r.get("il_offset", ""),
+        "|", r.get("opcode", ""),
+        "|", r.get("target_kind", ""),
+        "|", r.get("target_type", "") or "<unresolved>",
+        "|", r.get("target_method", "")
+    )
+print("STAGE4_EOS_INDIRECT_CALLSITE_SCREEN_END")
+PY
+```
