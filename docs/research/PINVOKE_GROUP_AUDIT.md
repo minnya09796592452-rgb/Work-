@@ -75,7 +75,7 @@ Observed examples:
 - Windows APIs in Rewired_Windows.dll, including repeated obfuscated methods and repeated User32 imports.
 - SDL2 `SDL_GameControllerMappingForGUID` repeated within Rewired_Core.dll.
 
-One notable item is `Kernel32.dll!SetNamedPipeHandleState`, shown twice under the same obfuscated declaring type/method in Rewired_Windows.dll. This merits a focused raw-row check to determine whether it is a duplicate metadata record, a distinct overload/signature, or a grouping-key artifact. It is not yet classified as a defect.
+One notable item is `Kernel32.dll!SetNamedPipeHandleState`, shown twice under the same obfuscated declaring type/method in Rewired_Windows.dll. A direct check of the source CSV rows found two distinct decoded signatures: `int32 (native int, int32&, int32&, int32&)` and `int32 (native int, int32&, native int, native int)`. Their raw signature blobs also differ (`00040818100810081008` vs `0004081810081818`), so these are distinct metadata signatures sharing the same native entry point—not duplicate identical records. A separate `System.Core.dll` declaration targets the lowercase `kernel32.dll` module name with its own SafePipeHandle signature and different mapping flags.
 
 **Interpretation:** use the full duplicate report `08_duplicate_entrypoints.tsv` to triage by exact managed signature, declaring type, assembly, and mapping flags. Do not deduplicate or delete declarations solely because the native DLL and entry-point strings match.
 
