@@ -87,3 +87,12 @@ Mark each gate PASS only with captured evidence: BUILD, INSTALL, LAUNCH, VULKAN 
 - Immediate resume point: inspect `dll` / `entrypoint` values in the extracted Stage 2 CSV; then repair the scanner before running it against the original Managed directory.
 - Full evidence: [P/Invoke Group Audit](research/PINVOKE_GROUP_AUDIT.md) and [Next Conversation Handoff](NEXT_CONVERSATION_HANDOFF.md).
 - Forensic research remains reference-only; original source DLLs remain read-only, and no Stranded Deep code, IL, binaries, or assets may be reused in CASTAWAY DEPTHS.
+
+
+## 2026-11-14 — Raw Stage 2 CSV verification closed
+
+- User's read-only Termux check confirms `dll`: 3,791 rows, 0 missing, 66 unique modules.
+- `entrypoint`: 3,791 rows, 0 missing, 3,324 unique entrypoints.
+- Therefore the previous `native_module: NOT FOUND` is only a report alias mismatch; source CSV uses `dll`. No missing module data.
+- Stage 2 field-profile validation is GREEN / closed; do not rerun Stage 2.
+- Resume at Stage 3 scanner repair and validation. Exact evidence is in [P/Invoke Group Audit](research/PINVOKE_GROUP_AUDIT.md) and [Next Conversation Handoff](NEXT_CONVERSATION_HANDOFF.md).
