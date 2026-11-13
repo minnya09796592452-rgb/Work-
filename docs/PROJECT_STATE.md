@@ -226,3 +226,31 @@ The prior Game-to-EOS filter's 0 result is consistent with excluding EOS wrapper
 Status: CSV diagnostic 🟢 complete; game-type-to-EOS-wrapper caller map 🟡 unresolved; no confirmed failure. Full report: docs/research/PINVOKE_STAGE4_EOS_ZERO_DIAGNOSTIC_20261114.md.
 
 Next: classify all 1,668 Epic-target rows by EOS-wrapper vs non-EOS caller type; enumerate non-EOS caller type → EOS wrapper type/method edges; count blank/malformed caller types. Read-only only; do not modify original DLLs/CSVs or restart closed stages.
+
+
+## 2026-11-14 — Stage 4 EOS caller classification completed
+
+User supplied the full read-only classification output for the 1,668 Assembly-CSharp IL rows whose target type contains `Epic`.
+
+Verified partition:
+- Total Epic-target rows: **1,668**.
+- EOS-wrapper caller rows (`caller_type` begins `Epic.OnlineServices.`): **1,668**.
+- Non-EOS caller rows: **0**.
+- Blank caller rows: **0**.
+- Unique EOS wrapper caller types: **317**.
+- Unique non-EOS caller types: **0**.
+- Unique game-to-EOS direct edges: **0**.
+- Partition reconciles exactly: 1,668 = 1,668 + 0 + 0.
+
+Interpretation:
+- Every row in this filtered direct IL callsite set is an EOS-wrapper-internal call. No direct non-EOS/game-specific caller → EOS wrapper edge was found by this method.
+- This does not prove the game never uses EOS. Reflection, string-based lookup, delegate/callback wiring, generated bindings, or other indirect paths may not appear as direct call edges in this classification.
+- Earlier evidence remains: Assembly-CSharp.dll has 382 linked static callsites into EOSSDK-Win64-Shipping at the managed wrapper/native boundary. That does not prove game-specific invocation, runtime execution, startup necessity, offline-play necessity, or Android compatibility.
+- Research report: [Stage 4 EOS Caller Classification](research/PINVOKE_STAGE4_EOS_CALLER_CLASSIFICATION_20261114.md).
+
+Status:
+- Classification partition 🟢 PASS.
+- Direct game-specific EOS caller linkage 🟡 unresolved / no edge found by this method.
+- No confirmed failure 🔴.
+
+Next: read-only audit of indirect EOS paths in managed metadata/IL: reflection APIs, string-based EOS type/method lookup, delegate construction/invocation, and callback registration. Correlate hits to concrete caller methods. Preserve original Managed DLLs and Stage 3 CSVs read-only; do not restart closed stages.
