@@ -2,6 +2,9 @@ package com.castawaydepths.editor;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.DocumentsContract;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -16,6 +19,10 @@ public final class MainActivity extends Activity {
     private static final String KEY_DIAGNOSTICS = "show_diagnostics";
     private static final String KEY_NATIVE_DETAILS = "show_native_details";
     private static final String KEY_LANDSCAPE_LOCK = "landscape_lock";
+    private static final String KEY_LOGIC_INPUT_TREE_URI = "logic_input_tree_uri";
+    private static final int REQUEST_LOGIC_INPUT_FOLDER = 4101;
+    private static final String EXPECTED_LOGIC_INPUT_PATH =
+            "primary:Download/NYAMIST/Castaway Depths";
 
     static {
         System.loadLibrary("castaway_engine");
@@ -40,6 +47,67 @@ public final class MainActivity extends Activity {
         }
 
         showHome();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != REQUEST_LOGIC_INPUT_FOLDER || resultCode != RESULT_OK
+                || data == null || data.getData() == null) {
+            return;
+        }
+
+        Uri treeUri = data.getData();
+        String documentId;
+        try {
+            documentId = Uri.decode(DocumentsContract.getTreeDocumentId(treeUri));
+        } catch (IllegalArgumentException error) {
+            showFolderSelectionError("Selected location is not a supported folder.");
+            return;
+        }
+
+        if (!EXPECTED_LOGIC_INPUT_PATH.equals(documentId)) {
+            showFolderSelectionError(
+                    "Wrong folder. Select Download/NYAMIST/Castaway Depths exactly.");
+            return;
+        }
+
+        int grantFlags = data.getFlags()
+                & (Intent.FLAG_GRANT_READ_URI_PERMISSION
+                | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        try {
+            getContentResolver().takePersistableUriPermission(treeUri, grantFlags);
+            preferences.edit().putString(KEY_LOGIC_INPUT_TREE_URI,
+                    treeUri.toString()).apply();
+            showSettings();
+        } catch (SecurityException error) {
+            showFolderSelectionError(
+                    "Android did not grant persistent access. Please select the folder again.");
+        }
+    }
+
+    private void showFolderSelectionError(String message) {
+        new android.app.AlertDialog.Builder(this)
+                .setTitle("Logic input folder")
+                .setMessage(message)
+                .setPositiveButton("OK", (dialog, which) -> showSettings())
+                .show();
+    }
+
+    private void openLogicInputFolderPicker() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        startActivityForResult(intent, REQUEST_LOGIC_INPUT_FOLDER);
+    }
+
+    private String getLogicInputFolderStatus() {
+        String treeUri = preferences.getString(KEY_LOGIC_INPUT_TREE_URI, null);
+        if (treeUri == null) {
+            return "LOGIC INPUT: Not selected";
+        }
+        return "LOGIC INPUT: Download/NYAMIST/Castaway Depths (access saved)";
     }
 
     private void applyLandscapeLock(boolean enabled) {
@@ -79,6 +147,7 @@ public final class MainActivity extends Activity {
         settingsButton.setText("SETTINGS");
         settingsButton.setOnClickListener(view -> showSettings());
         content.addView(settingsButton);
+        content.addView(createText(getLogicInputFolderStatus(), 14));
 
         if (preferences.getBoolean(KEY_DIAGNOSTICS, true)) {
             content.addView(createText("DIAGNOSTICS: ON", 16));
@@ -122,6 +191,15 @@ public final class MainActivity extends Activity {
             applyLandscapeLock(checked);
         });
         content.addView(landscapeSwitch);
+
+        content.addView(createText(
+                "Required logic input folder:\\n/storage/emulated/0/Download/NYAMIST/Castaway Depths/",
+                14));
+        Button selectFolderButton = new Button(this);
+        selectFolderButton.setText("SELECT LOGIC INPUT FOLDER");
+        selectFolderButton.setOnClickListener(view -> openLogicInputFolderPicker());
+        content.addView(selectFolderButton);
+        content.addView(createText(getLogicInputFolderStatus(), 14));
 
         Switch diagnosticsSwitch = new Switch(this);
         diagnosticsSwitch.setText("Diagnostic Panel");
