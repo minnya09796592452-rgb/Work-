@@ -1,3 +1,44 @@
+# LATEST HANDOFF — 2026-11-14 — VULKAN QUEUE / LOGICAL DEVICE TEST READY
+
+## Read first
+Repository: `devmyatmin/Read-CASTAWAY-DEPTHS`, branch `main`. GitHub is the source of truth. User is Project Lead; follow their lead, keep steps concise, and show GREEN/YELLOW/RED status.
+
+## Latest verified preflight
+- Android 16 / API 36; ABI `arm64-v8a`; platform `mt6991`.
+- System loader: `/system/lib64/libvulkan.so`, AArch64 ELF.
+- Official headers: `$PREFIX/include/vulkan/vulkan.h`.
+- Clang/Clang++ 21.1.8, target `aarch64-unknown-linux-android24`.
+- Required loader symbols are present. Raw diagnostic: `Recyclebin/CASTAWAY_VULKAN_PREFLIGHT.txt`.
+- This is prerequisite evidence, not logical-device runtime evidence.
+
+## Newly committed probe files
+- `native/vulkan/vulkan_device_probe.cpp` — official-header probe using the direct Android system loader. It enumerates physical devices and queue families, selects a graphics queue family, creates one logical device, retrieves queue 0, and cleans up.
+- `scripts/vulkan_device_probe.py` — compiles/runs the C++ source, captures stdout/stderr and exit codes, and writes a combined report.
+- Research: `docs/research/VULKAN_QUEUE_DEVICE_PROBE_20261114.md`.
+
+## Exact next action
+From Termux repository root:
+```sh
+python scripts/vulkan_device_probe.py
+```
+Default report: `$HOME/CASTAWAY_VULKAN_DEVICE_TEST.txt`.
+Upload that report to GitHub repository root and send its URL. Inspect the complete report before changing status. If compile or runtime fails, preserve the report and diagnose the exact error; do not guess or modify the driver.
+
+## Traffic-light status
+- 🟢 Vulkan preflight: headers, compiler, system loader and symbols verified.
+- 🟢 Earlier direct-system-loader physical-device enumeration: Mali-G925-Immortalis MC12, Vulkan 1.3.278, 152 device extensions (prior archived evidence).
+- 🟡 Queue-family enumeration and graphics-family selection: runtime pending.
+- 🟡 Logical-device create/destroy and queue retrieval: runtime pending.
+- 🟡 Surface/swapchain/submit-present/render output: not tested.
+- 🟡 APK/JNI build/install/launch: not demonstrated.
+- 🟡 Gameplay/save-load: not implemented/verified.
+- 🔴 No reproducible blocker currently established.
+
+## Scope guards
+Do not claim Vulkan logical-device success until runtime output says so. No surface, swapchain, presentation, rendering, APK/JNI, or gameplay claim follows from this probe. Do not modify system/vendor drivers, permissions, symlinks, or global environment. CASTAWAY DEPTHS remains an original Android project; historical Stranded Deep material is reference-only.
+
+---
+
 # LATEST HANDOFF UPDATE — 2026-11-14 — ANDROID NATIVE RUNTIME LOAD
 
 ## Verified result
