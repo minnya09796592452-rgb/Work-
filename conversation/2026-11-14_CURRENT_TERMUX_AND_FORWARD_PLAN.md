@@ -99,3 +99,5 @@ This document records user-provided live Termux output and the conversation's cu
 - Do not install duplicate SDK Build Tools or NDK packages yet.
 - Next: inspect the complete `dpkg -L ndk-sysroot` output and actual sysroot paths; then run a minimal AArch64 Android shared-library compile/link test using explicit, verified headers and libraries. Do not claim NDK linking, APK build, GPU rendering, or game port completion until each is tested.
 - User asked to archive this conversation and continue in a new conversation, treating this private GitHub repository as the project memory/source of truth.
+
+- Conversation transcript companion: `conversation/2026-11-14_CHATGPT.txt` (verified on `main`; covers the Android SDK 36 / Termux / NDK exchange available in this conversation context).
