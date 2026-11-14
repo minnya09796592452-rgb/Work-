@@ -1,0 +1,51 @@
+# CASTAWAY-DEPTHS — 2026-11-14 continuation checkpoint
+
+## User direction (current, authoritative)
+- The user states that the earlier work has already succeeded and explicitly wants to leave the old paths behind.
+- Do not repeatedly re-audit or redo completed historical work.
+- Establish a forward path using the currently prepared environment and continue from the current stage.
+- Keep responses concise; avoid long explanations and repeated diagnostic requests.
+- User explicitly requests that progress and decisions be archived in this GitHub repository so they do not need to repeat instructions.
+- Do not modify the device, drivers, project files, or repository implementation unless the user directs/approves the specific change.
+
+## Current Termux workspace reported by user
+- Working directory: `~/PINVOKE_STAGE3_20261114`
+- Device: `25060RK16C`
+- Android: 16
+- Platform/SoC property: `mt6991`
+- Toolchain/packages reported installed: Clang 21.1.8, CMake 4.4.5, Ninja 1.13.2, Gradle 9.9.1, OpenJDK 21.0.13, Python 3.14.10, glslang 16.6.0, shaderc 2026.4, SPIRV-Tools 1.4.363.0, Vulkan headers 1.4.368, Vulkan tools 1.4.368, Vulkan loader packages, Git 2.56.1, Git LFS 3.8.1.
+- Available commands confirmed: `vulkaninfo`, `glslangValidator`, `glslc`, `spirv-val`.
+- Existing project/work directories visible in the user's HOME include `stranded_native_port`, `Read`, `Castaway-Depths`, `PINVOKE_STAGE3_20261114`, `PINVOKE_STAGE3_TEST`, `PINVOKE_STAGE3_TEST_OUT`, and `PINVOKE_STAGE4_LDSTR_20261114`. Their contents/status were not re-audited in this checkpoint.
+
+## Hardware Vulkan result — confirmed by direct probe
+The user compiled and ran `~/vk_probe.cpp` using:
+```sh
+clang++ -std=c++20 -O2 ~/vk_probe.cpp -ldl -o ~/vk_probe
+~/vk_probe
+```
+The probe explicitly loaded `/system/lib64/libvulkan.so`, created a Vulkan instance, and enumerated:
+- `Mali-G925-Immortalis MC12`
+- Device type: integrated GPU
+- Vulkan API: 1.3.278
+- Vendor ID: `0x13b5`
+- Device ID: `0xd8300010`
+- Driver version: `0x0c401000`
+- 152 device extensions
+
+The Android system properties also report `ro.hardware.vulkan=mali`, `ro.hardware.egl=mali`, and `ro.hwui.use_vulkan=true`. Vendor driver files are present at `/vendor/lib64/hw/mt6991/vulkan.mali.so`, `/vendor/lib64/hw/vulkan.mali.so`, and `/vendor/lib64/egl/mt6991/libGLES_mali.so`.
+
+## Important distinction retained
+The normal Termux `vulkaninfo --summary` invocation previously enumerated Mesa llvmpipe (CPU), while the direct probe through Android's system Vulkan loader enumerated the real Mali-G925. These are different loader paths. The direct probe proves hardware enumeration via the system loader; it does not by itself prove swapchain/presentation or completed rendering. Do not misstate this distinction.
+
+## Forward work checkpoint
+- The immediate proposed next stage is native Vulkan execution on the Mali path: create a logical device, find a graphics-capable queue family, submit a minimal command buffer, and verify completion.
+- The assistant last asked the user to show `sed -n '1,260p' ~/vk_probe.cpp` so the next probe can be based on the actual current source. The user has not yet supplied that output in this checkpoint.
+- Avoid restarting the old inventory or re-running already completed hardware enumeration unless a new failure makes it necessary.
+- Before implementation, inspect the existing current-stage files relevant to Stage 4, especially `~/PINVOKE_STAGE4_LDSTR_20261114`, only as needed. Prefer a minimal, isolated test and preserve existing work.
+- No Stage 4 logical-device/queue/command-buffer test result is claimed yet.
+
+## APK Editor / game port direction
+The user's larger intended sequence remains: first build and add the APK Editor utility; only after the required stages succeed, package/connect the real game build. Multiplayer is not a current requirement; if ever considered, it should be optional and user-owned/custom rather than a dependency. The user has also stated that final shaders should be newly authored/created for the target path, not simply reuse original game shaders. Rigorous validation is a priority. Do not jump ahead to final game packaging before the staged validation path is ready.
+
+## Repository archive provenance
+This document records user-provided live Termux output and the conversation's current decisions as of 2026-11-14. It is an archive checkpoint, not an assertion that unrun Stage 4 tests have passed.
