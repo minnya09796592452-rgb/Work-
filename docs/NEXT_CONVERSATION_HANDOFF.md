@@ -1,3 +1,40 @@
+# LATEST HANDOFF UPDATE — 2026-11-14 — ANDROID NATIVE RUNTIME LOAD
+
+## Verified result
+- User supplied `CASTAWAY_NDK_RUNTIME_TEST.txt`.
+- Loader test compiled: `COMPILE_EXIT=0`.
+- `dlopen`: PASS.
+- `dlsym("castaway_probe")`: PASS (the function was invoked).
+- Function return: `1`.
+- `dlclose`: PASS.
+- Process exit: `RUNTIME_EXIT=0`.
+- Raw diagnostic preserved under `Recyclebin/CASTAWAY_NDK_RUNTIME_TEST.txt`.
+- Concise record: `docs/research/ANDROID_NDK_RUNTIME_TEST_20261114.md`.
+
+## Next exact task
+Preflight Vulkan SDK headers and the existing `vk_probe.cpp` location on-device. Then create an isolated direct-system-loader probe for:
+1. Enumerate physical devices.
+2. Query queue-family properties.
+3. Select a graphics-capable queue family (also report compute/transfer flags).
+4. Create and destroy one logical device and retrieve its queue.
+5. Report each VkResult and clean up all objects.
+
+Use `/system/lib64/libvulkan.so`. Do not touch driver/vendor configuration, permissions, symlinks, or global environment. Do not claim surface/swapchain/present/rendering until separately tested.
+
+## Status key
+- 🟢 GREEN: verified by runtime evidence.
+- 🟡 YELLOW: not yet verified / investigation pending.
+- 🔴 RED: reproducible blocker that needs correction.
+
+## Current gates
+- AArch64 shared-library compile/link: 🟢
+- Termux runtime dlopen/dlsym/function call: 🟢
+- Direct Android Vulkan physical-device enumeration: 🟢 from earlier archived live evidence (Mali-G925-Immortalis MC12; Vulkan 1.3.278); the newer hand-written source revision is separately not yet runtime-verified.
+- Vulkan queue-family selection/logical-device creation: 🟡
+- Surface/swapchain/submit-present/render output: 🟡
+- APK build/install/launch and JNI: 🟡 (not demonstrated; no blocker diagnosed).
+- Gameplay/save-load: 🟡 (not implemented/verified).
+
 # LATEST HANDOFF UPDATE — 2026-11-14 — ANDROID ARM64 SHARED-LIBRARY LINK
 
 ## Verified latest result
