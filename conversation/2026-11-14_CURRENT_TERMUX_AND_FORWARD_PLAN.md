@@ -60,3 +60,14 @@ This document records user-provided live Termux output and the conversation's cu
 - Next requested diagnostic is `command -v curl; command -v unzip; df -h "$HOME"`. Then choose a verified Termux-compatible Android SDK installation path; no SDK or APK build yet.
 - No project source/data changes were made. No Vulkan device/driver/system changes were made.
 - Follow-up instructions must remain short and sequential. Preserve completed historical stages and use the GitHub handoff as source of truth.
+
+
+## 2026-11-14 — latest Termux prerequisite confirmation and continuation
+- User supplied fresh output from `~/Castaway-Depths`:
+  - `curl`: `/data/data/com.termux/files/usr/bin/curl` (available).
+  - `unzip`: `/data/data/com.termux/files/usr/bin/unzip` (available).
+  - HOME filesystem: 233 GB total, 152 GB used, 81 GB available (66% used).
+- These checks confirm download and ZIP extraction tools are present and storage headroom is ample for the next SDK-platform acquisition step.
+- Earlier finding remains: `pkg show android-sdk` failed with “Unable to locate package”; do not retry that package name.
+- Android SDK Platform / `android.jar` is still not confirmed installed. No SDK package download or APK build has been performed yet.
+- No local project/device changes were made by the assistant. Continue with a verified Termux-compatible method, first checking architecture and installed Android build tools, then obtain only the missing SDK platform components. Keep commands sequential and ask the user to return output before proceeding.
