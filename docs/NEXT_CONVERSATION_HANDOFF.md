@@ -529,3 +529,53 @@ After receiving it:
 5. Keep static references distinct from runtime reachability and actual Android availability.
 
 Original Managed DLLs and Stage 3 CSVs remain read-only. Do not rerun closed Stage 1/2. CASTAWAY DEPTHS remains an original native Android game; Stranded Deep work is reference-only. Follow the user's lead and keep responses concise.
+
+
+## 2026-11-14 — Termux reset/rebuild and Android build-tool checkpoint
+
+This is the newest live Termux checkpoint. Preserve the earlier Stage 1–4 findings above; do not repeat completed work.
+
+### User-reported Termux recovery
+- Termux had reset and previous console output was unavailable. User restarted from a clean Termux session.
+- `pkg update` succeeded. Selected mirror: `https://mirrors.cbrx.io/apt/termux/termux-main`.
+- `pkg install -y git python clang cmake ninja` completed; CMake upgraded to 4.5.0. Git, Python, Clang, Ninja were already installed.
+- Cloned `https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS.git` into `$HOME/Castaway-Depths`.
+- `bash scripts/setup_termux.sh` reported: `CASTAWAY DEPTHS workspace READY`; data path: `$HOME/Castaway-Depths/obb/Castaway Depths`.
+- Local branch state shown by user: `c854a31 (HEAD -> main, origin/main, origin/HEAD) docs: add Termux logic file intake register`.
+- `git status --short` returned no output: working tree clean.
+- Workspace root contains `.git`, `README.md`, `conversation/`, `docs/`, `obb/`, `scripts/`. Data staging tree contains `assets/`, `config/`, `definitions/`, `localization/`, `manifests/`, `shaders/`, `worlds/`.
+
+### Verified toolchain
+- Python 3.14.10
+- Clang 21.1.8, target `aarch64-unknown-linux-android24`
+- CMake 4.5.0
+- Ninja 1.13.2
+- Git 2.56.1
+- OpenJDK 21.0.13; `JAVA_HOME=/data/data/com.termux/files/usr/lib/jvm/java-21-openjdk/`
+- Gradle 9.9.1
+- AAPT: `Android Asset Packaging Tool, v0.2-android-16.0.0_r4`
+- D8: `9.2.4-dev`
+- Installed related packages include `aapt2`, `aapt`, `d8`, `gradle`, `ndk-sysroot`, `ndk-multilib`, `ndk-multilib-native-stubs`, and OpenJDK 21.
+
+### Android SDK gaps verified
+- `sdkmanager`, `adb` not found.
+- `ANDROID_HOME`, `ANDROID_SDK_ROOT`, `ANDROID_NDK_HOME` not set.
+- `find "$PREFIX" ... -name android.jar -o -name package.xml -o -name source.properties` returned no files within the searched depth.
+- `pkg show android-sdk` returned `Unable to locate package android-sdk`; do not retry that package name.
+- The user has not yet checked `curl`, `unzip`, or free storage. Last requested command:
+  ```sh
+  command -v curl
+  command -v unzip
+  df -h "$HOME"
+  ```
+- No Android SDK Platform/API has been installed. No APK build has been attempted. Do not claim APK build readiness based only on AAPT/D8/Gradle.
+- A possible route under investigation is the Termux Android SDK command-line-tools setup script; verify exact official installer/revision/checksum and platform package requirements before asking the user to download or install. Avoid guessing package names or issuing a large install before confirming storage.
+
+### Immediate resume point
+Ask for the pending `curl` / `unzip` / `df -h "$HOME"` output. Then establish a verified Android SDK Platform (including `android.jar`) and build-tools path suitable for Termux. Only after that inspect the repository's actual Editor/Control APK source/build files and attempt a minimal build. Do not create or modify project implementation files without the user's approval.
+
+### Working constraints
+- Keep instructions short and sequential; request complete output from one diagnostic step at a time.
+- Follow the user's lead. Do not restart closed historical audit stages or repeat completed Vulkan hardware enumeration.
+- Preserve original data and existing GitHub records. GitHub remains the primary project archive.
+- This checkpoint records environment preparation only; it does not prove SDK installation, APK BUILD/INSTALL/LAUNCH, Vulkan surface/swapchain/presentation, rendering, or gameplay.
