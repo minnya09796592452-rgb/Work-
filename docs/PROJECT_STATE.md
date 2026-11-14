@@ -345,3 +345,11 @@ Android EOS SDK availability is confirmed. This does not make EOSSDK-Win64-Shipp
 - Prior independently archived direct system-loader execution already enumerated Mali-G925-Immortalis MC12 (Vulkan 1.3.278, vendor 0x13b5, device 0xd8300010, 152 device extensions); ordinary Termux `vulkaninfo` previously selected llvmpipe. These are distinct loader paths.
 - No driver, vendor file, permission, symlink, or global environment changes were made or authorized.
 - Next: wait for the user's compile/run output for this exact source revision. Then review it and continue to an isolated queue/surface test. Surface, swapchain, submission, presentation, and rendering remain unproven.
+
+## 2026-11-14 — Vulkan preflight and next runtime gate
+- Device preflight: Android 16/API 36, `arm64-v8a`, `mt6991`; Vulkan headers found at `$PREFIX/include/vulkan/vulkan.h`; Clang/Clang++ 21.1.8; Android system loader `/system/lib64/libvulkan.so` and required symbols present.
+- Raw evidence: `Recyclebin/CASTAWAY_VULKAN_PREFLIGHT.txt`.
+- Added `native/vulkan/vulkan_device_probe.cpp` and `scripts/vulkan_device_probe.py`.
+- Immediate next step: run `python scripts/vulkan_device_probe.py` from the Termux repository root and upload `$HOME/CASTAWAY_VULKAN_DEVICE_TEST.txt`.
+- Current gate: preflight 🟢; queue-family selection and logical-device create/destroy 🟡 until runtime evidence arrives. Surface/swapchain/present/render output and APK/JNI remain unverified.
+- Details: `docs/research/VULKAN_QUEUE_DEVICE_PROBE_20261114.md`.
