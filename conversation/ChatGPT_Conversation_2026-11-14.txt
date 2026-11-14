@@ -707,3 +707,43 @@ This paste is source code, not a new execution result. Earlier archived direct-l
 - This conversation transcript is appended with the supplied source and review.
 
 NEXT ACTION: Wait for the compile/run result of this exact `vk_probe.cpp` revision. Then review complete stdout/stderr and continue to the isolated queue/surface test. Keep Android driver/vendor configuration unchanged.
+
+================================================================================
+CASTAWAY DEPTHS — CONVERSATION CONTINUATION — 2026-11-14
+================================================================================
+
+USER:
+https://github.com/devmyatmin/Read-CASTAWAY-DEPTHS/blob/6a213728654d88a103a7bbf0e438c9a76c4f2a16/CASTAWAY_VULKAN_PREFLIGHT.txt
+
+ကယ် Update တွေစမယ် ဒီ Conversation ထဲ message တွေကိုလည်း Copy နဲ့ Chatgpt txt မှာထည့်မယ်။ စကားဝိုင်းပြောင်းမယ် အကုန်အဆင့်သင့်ဖြစ်နေပါစေ PY ကိုလည်း တင်ဖို့မမေ့နဲ့။ ပြီးတော့ ဝါစိမ်းနီကိုလည်း ခုဏကမင်းပြသလိုပြဖို့ပါတစ်ပါတည်းလုပ်ပါ။ စတော့
+
+ASSISTANT:
+Reviewed the uploaded Vulkan preflight report. It confirms Android 16/API 36, arm64-v8a/mt6991, official Vulkan headers, Clang/Clang++ 21.1.8, the Android system Vulkan loader, and required loader symbols. This is environment preflight evidence only; queue-family and logical-device runtime tests remain pending.
+
+ASSISTANT:
+Traffic-light status for this continuation:
+- GREEN: Android Vulkan preflight; earlier direct system-loader physical-device enumeration (Mali-G925-Immortalis MC12, Vulkan 1.3.278, 152 device extensions).
+- YELLOW: queue-family selection; logical-device create/destroy and queue retrieval; surface/swapchain/present/render; APK/JNI; gameplay/save-load.
+- RED: no reproducible blocker currently established.
+
+USER:
+Update လုပ်ဆက်သွားမယ်
+
+ASSISTANT:
+Reviewed the previously supplied vk_probe.cpp source. It used a manually approximated VkPhysicalDeviceProperties layout and omitted several function-pointer/VkResult checks, zero-device handling, API-version negotiation, and vkDestroyInstance. The exact source paste was not a runtime result. The preflight now confirms official headers are installed, so the new diagnostic uses the official Vulkan declarations instead of the manual ABI structure.
+
+ASSISTANT:
+Created and committed:
+- native/vulkan/vulkan_device_probe.cpp — direct Android system-loader probe; enumerate physical devices and queue families, select a graphics-capable family, create a logical device, retrieve queue 0, destroy device/instance.
+- scripts/vulkan_device_probe.py — compile/run harness; captures stdout/stderr and compile/runtime exit codes; default report path $HOME/CASTAWAY_VULKAN_DEVICE_TEST.txt.
+- docs/research/VULKAN_QUEUE_DEVICE_PROBE_20261114.md — test scope, run instructions, evidence boundaries.
+- Updated docs/IMPLEMENTATION_STATUS.md, docs/NEXT_CONVERSATION_HANDOFF.md, docs/PROJECT_STATE.md, and archived the raw preflight report under Recyclebin/.
+
+NEXT ACTION:
+From the Termux repository root, run:
+python scripts/vulkan_device_probe.py
+
+Then upload $HOME/CASTAWAY_VULKAN_DEVICE_TEST.txt to GitHub and send its URL. Do not mark the logical-device gate GREEN until the runtime report confirms queue retrieval and cleanup.
+
+NOTE:
+This is an archival continuation summary, not a claim that hidden UI/system messages or unavailable conversation content have been copied verbatim.
