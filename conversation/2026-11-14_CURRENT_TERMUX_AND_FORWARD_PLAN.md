@@ -71,3 +71,31 @@ This document records user-provided live Termux output and the conversation's cu
 - Earlier finding remains: `pkg show android-sdk` failed with “Unable to locate package”; do not retry that package name.
 - Android SDK Platform / `android.jar` is still not confirmed installed. No SDK package download or APK build has been performed yet.
 - No local project/device changes were made by the assistant. Continue with a verified Termux-compatible method, first checking architecture and installed Android build tools, then obtain only the missing SDK platform components. Keep commands sequential and ask the user to return output before proceeding.
+
+
+## 2026-11-14 — Android SDK Platform 36 and NDK/toolchain verification
+
+### Android device and SDK platform
+- User's fresh Termux output from `~/Castaway-Depths` confirms device architecture `aarch64`, Android API level `36`, and Termux prefix `/data/data/com.termux/files/usr`.
+- OpenJDK 21.0.13 is available.
+- Termux commands available: `aapt`, `d8`, `gradle`, and `cmake`; later checks also confirmed `aapt2`, `apksigner`, `zipalign`, `clang`, `clang++`, and `llvm-ar`.
+- `android.jar` was initially absent and `ANDROID_HOME`/ `ANDROID_SDK_ROOT` were unset.
+- Downloaded Google Android SDK Platform 36 archive from `https://dl.google.com/android/repository/platform-36_r02.zip` to `$HOME/android-platform-36.zip`.
+- SHA-1 verification succeeded: `2c1a80dd4d9f7d0e6dd336ec603d9b5c55a6f576`; archive listing confirmed `android-36/android.jar` (27,768,026 bytes).
+- User extracted platform to `$HOME/android-sdk/platforms/android-36`. Confirmed file: `$HOME/android-sdk/platforms/android-36/android.jar` (27 MB). User output confirmed `ANDROID_HOME=/data/data/com.termux/files/home/android-sdk` and `ANDROID PLATFORM 36: READY`.
+
+### Build tools and NDK findings
+- No SDK-local Build Tools binaries were found under `$ANDROID_HOME` at the checked depth. Termux-hosted equivalents are present:
+  - `aapt`, `aapt2`, `d8`, `apksigner`, `zipalign`, `clang`, `clang++`, `llvm-ar`.
+- Installed packages include `aapt 16.0.0.4-4`, `aapt2 16.0.0.4-4`, `apksigner 37.0.0`, `d8 37.0.0`, `clang 21.1.8-3`, `llvm 21.1.8-3`, `ndk-multilib 30`, `ndk-multilib-native-stubs 30`, and `ndk-sysroot 30`.
+- `$PREFIX/opt/ndk-multilib` contains architecture directories including `aarch64-linux-android`; its AArch64 library directory includes Android system libraries/stubs such as `libandroid.so`, `libc.so`, `liblog.so`, `libvulkan.so`, `libEGL.so`, and GLES libraries.
+- `jni.h` was found at `$PREFIX/include/jni.h` and in the OpenJDK 21 include directory. The attempted header search emitted a warning because `-name android/api-level.h` incorrectly contains a slash; no `android_native_app_glue.h` result was shown.
+- Clang 21.1.8 accepted `--target=aarch64-linux-android36`; preprocessing and a simple C compilation both exited 0. The compile produced `$HOME/ndk_test.o`, but the user could not inspect it because the Termux `file` utility is not installed. This verifies object compilation only, not successful linking against the intended Android NDK sysroot or a runnable shared library.
+- The earlier `find` under `$PREFIX/opt/ndk-multilib/aarch64-linux-android` showed libraries but no headers in that directory. The full `dpkg -L ndk-sysroot` output was not included in the user's latest message, so exact sysroot header location and Clang sysroot wiring remain to be established.
+
+### Current verified state and next action
+- Android Platform 36 is installed and its `android.jar` is verified.
+- Java, Android packaging/signing tools, Clang/LLVM, and Termux NDK-related packages are installed.
+- Do not install duplicate SDK Build Tools or NDK packages yet.
+- Next: inspect the complete `dpkg -L ndk-sysroot` output and actual sysroot paths; then run a minimal AArch64 Android shared-library compile/link test using explicit, verified headers and libraries. Do not claim NDK linking, APK build, GPU rendering, or game port completion until each is tested.
+- User asked to archive this conversation and continue in a new conversation, treating this private GitHub repository as the project memory/source of truth.
