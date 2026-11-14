@@ -1,0 +1,334 @@
+STRANDED DEEP ORIGINAL DEPENDENCY INVENTORY
+Date: 2026-11-14
+Source: /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep
+
+===== ORIGINAL ASSEMBLY-CSharp HASH =====
+d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+
+===== ALL MANAGED DLL FILES =====
+642048 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp-firstpass.dll
+05dc598d55fcd2440946fceb7a47a829fa23de26f7c05283080013e4c1c588ae  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp-firstpass.dll
+3432448 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+d5501ae7a2c09499cdf569c5b52578401f039c2f4aa5e7e9240c22faeef214bc  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Assembly-CSharp.dll
+8704 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/GdkUtilities.dll
+dfbc714be3626ed6acee6d589985462b6a58aec74da3d64afcd1688ff523635f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/GdkUtilities.dll
+241152 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Mono.Security.dll
+0cc6975490d9479836b44420e7a8f4fa4189dd4095cfe5d167222175df83764a  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Mono.Security.dll
+683008 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Newtonsoft.Json.dll
+759accaa5fb7bddb54a2ceab92a3d8ab50750333ec73b62605aea6165d1ca6dd  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Newtonsoft.Json.dll
+230912 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Photon3Unity3D.dll
+1f33ae7cc6a47975bee1b12ffed75b893c9ee3899c9fb95944f8e77b6851d12e  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Photon3Unity3D.dll
+12800 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/PhotonBolt.dll
+12fcb9b268d4ab16e49c5c64838f95b56ac103db8250cca3c8cdbe74205011d0  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/PhotonBolt.dll
+101376 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/PhotonRealtime.dll
+942b5163ed62b3330f944a9dfffd42e83764f29aa10cf105d993ca3573a29f1c  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/PhotonRealtime.dll
+2007040 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Rewired_Core.dll
+018f083660e95467146c23ef07246ee4150401c5e6f3437e7ead33c052c40ab4  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Rewired_Core.dll
+929792 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Rewired_Windows.dll
+956b674bb57869657aa27f1bea133ea3737cef497fba2898eb6d9e7d52c13cbd  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Rewired_Windows.dll
+4096 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Rewired_Windows_Functions.dll
+b5863c2d83d6c12a32188a2f91257dd35a7ce71aaf322112120638592e13b516  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Rewired_Windows_Functions.dll
+32768 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.OdinInspector.Attributes.dll
+eb99ab952321cc480407776826271c4c76d883c2dd34a18aa6a5b105750c42c1  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.OdinInspector.Attributes.dll
+5120 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.OdinInspector.CompatibilityLayer.dll
+221668f02231e278bf71e80edde812d3cedeacd1e002b3665b40b29b8ed0629b  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.OdinInspector.CompatibilityLayer.dll
+15360 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.Serialization.Config.dll
+6cc7314c41b47dea8591a637e56aa5157b6ecbe53984737d7832fee799e64e34  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.Serialization.Config.dll
+325632 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.Serialization.dll
+7c19482c463c3489958adf3faaf6c2dcb860e3041cbe4505ead53cfb7b49b05f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.Serialization.dll
+148992 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.Utilities.dll
+215aec75a1878d30d0859b99e7d19f276c1d32552fe5d29bc47376af94b8afd0  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Sirenix.Utilities.dll
+257024 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.ComponentModel.Composition.dll
+d16928486929ea4cc79002405200842aeb2b2ae8c58d3cceb47967b1b3e256a7  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.ComponentModel.Composition.dll
+124928 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Configuration.dll
+e111536716c63008954d78eff8b3907f249d4bfa50f6e42f2e72102e1717fe96  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Configuration.dll
+1113088 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Core.dll
+45d3a0977e12023dc2816d659246f68e340335547048f74d7eb6a30ee4912238  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Core.dll
+29696 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Data.DataSetExtensions.dll
+e8d282d7c2f101772146d64053862389c04f2aed376fea02b8014ff7216762da  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Data.DataSetExtensions.dll
+2118656 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Data.dll
+7dd981005553ba7f99d59146a6c9502284f421ba666b6d342aed43b95a573e89  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Data.dll
+489984 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Drawing.dll
+d269d61de260ed44b4cfc2638d2e9a68e06feb98c72f8b13d96503ea5afc2e70  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Drawing.dll
+44544 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.EnterpriseServices.dll
+3cdd80057644e17e0907ffff09d948c0498f7698fe6399f904c822f3713c65d1  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.EnterpriseServices.dll
+18432 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.IO.Compression.FileSystem.dll
+acce4b586280b6e9e6b00bc8d1f449dc06dc35905671906154d1b62785dfc9fd  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.IO.Compression.FileSystem.dll
+114688 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.IO.Compression.dll
+028ed0fe07b80a2201c524bc9986ee5cf0617bc97d49e113011391965468148d  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.IO.Compression.dll
+121344 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Net.Http.dll
+88c26c3efff07edfc6e081103ee404bd6bb0735e01c7babd6c179597be30178f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Net.Http.dll
+119296 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Numerics.dll
+88794bc9a56d3e7e772d62e14a5eec4a5d35d706ced07e34297b6b77988ed4fb  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Numerics.dll
+934400 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Runtime.Serialization.dll
+6d8b0f85d36b6a321ccc74e6279c9c2f90b066693b361b6f23d4f42c97f18566  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Runtime.Serialization.dll
+314880 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Security.dll
+63cd7d2124011b34d1b036fbe34faa9788b03c0ec65cf7e79a901ec330923bc3  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Security.dll
+215040 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.ServiceModel.Internals.dll
+bb129ed1dad9601c5dceb97afba9459221b30cb96fef7731ab849f1a7088afb6  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.ServiceModel.Internals.dll
+35328 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Transactions.dll
+0a64951aff627bc1301ca65aa90ebfaef5ee4a67e12d7de57afa54e54d234ec7  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Transactions.dll
+136704 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Xml.Linq.dll
+c11da2c2322f01a9478d3d4707bdd393021074c5260cefe4247bfec5f95b38a7  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Xml.Linq.dll
+3160064 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Xml.dll
+61f1d631e023b604743c4c393b8f25d7922e828a6505c517f522e7e1f1b1cbef  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.Xml.dll
+2637312 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.dll
+fe68e66f5bae8bc81b955141a6e1e22157d5b2d842d317b8a0621957102e8ad4  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/System.dll
+144896 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Unity.Postprocessing.Runtime.dll
+70d7694264c5f65fb3eaa39a32068877e5f820ae2f3188c194dfb3aa94ce2ed6  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Unity.Postprocessing.Runtime.dll
+370688 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Unity.TextMeshPro.dll
+8b516f94898cc5ce45a8a05c88c5b047878348826dcb356c58fd72e5a442bbc6  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Unity.TextMeshPro.dll
+115712 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Unity.Timeline.dll
+9160b2ab54ed9ef91763bd2e7e2c5f39d5c91f794cf9f8e4b33307ab09d9108c  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Unity.Timeline.dll
+45568 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AIModule.dll
+88dfa816d43ed99c22370f8cd86cd328527d70b708c4176d046c8cb0bbb7f9d3  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AIModule.dll
+10752 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ARModule.dll
+bc1144686abeb2496313c20ea9d679f6c814ce76e892e4f6c420b34c9e2f3c7a  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ARModule.dll
+12800 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AccessibilityModule.dll
+3807f2de8531b7c197848a2deaac5d296a5b15b967a0178a39d7ac047886ad23  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AccessibilityModule.dll
+68608 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AndroidJNIModule.dll
+95b7b57a016198ca6682dd85d13a24fc7adfc426cfa4bcb54cecd73edd3bdb4e  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AndroidJNIModule.dll
+151040 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AnimationModule.dll
+fa8d93af6239c1ad002d18f59ab8477ef3db257f4fb84515973786c9fc6f4a81  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AnimationModule.dll
+23040 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AssetBundleModule.dll
+cee2cc1434c9f3b44bb4da33e1e09bf587e40b50a7a950f585d82a26c41ed972  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AssetBundleModule.dll
+59392 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AudioModule.dll
+289f0c25dc3e9ce7431517fc80d27931910eff7adf7d2efd171b6bdc6605cb21  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.AudioModule.dll
+15360 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ClothModule.dll
+e5a58bebc02a1e40c159f8edfd313a86b64de165fa641d59bcd4e6075a73e850  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ClothModule.dll
+10752 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ClusterInputModule.dll
+61c3140f8dd19de98123266dd64b9a2b0a9f6cf31d867c652ec1499285f5f549  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ClusterInputModule.dll
+11776 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ClusterRendererModule.dll
+a8e818df22913131d4cd467364d6d2ebd9792fbb73b685f38580b503b08f7835  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ClusterRendererModule.dll
+1252352 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.CoreModule.dll
+66ed9a597e0e3d00a691362697df43b274b0a51505045ba2207740c741f554ca  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.CoreModule.dll
+10240 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.CrashReportingModule.dll
+e318be05f4bb381a1fa6ab99f0d57ac1f85a2e030b597562b4b98e953fd39f1f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.CrashReportingModule.dll
+18432 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.DSPGraphModule.dll
+a34e19abaed467039e200815a10eb725f52bd1aaa6281c30a3fa08261d4148a8  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.DSPGraphModule.dll
+14336 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.DirectorModule.dll
+663b3b8d8d8e8d6c55074e709b56ce924614bc4e4b3e438a24d88f17b944530d  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.DirectorModule.dll
+9216 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.GIModule.dll
+cb0a9289f9908348f555cdbda9b4bf9af268fa63075cafa0576f763956eca6b5  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.GIModule.dll
+29184 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.GameCenterModule.dll
+a422e598c5ee01f143d2fb585d2964e966de9b41615cbebcbc9eacf1045b9409  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.GameCenterModule.dll
+14336 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.GridModule.dll
+2eddc47114178d346c625f48875abbff86c8f0451e0652a1bc79cef50471c9d5  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.GridModule.dll
+9216 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.HotReloadModule.dll
+5d32e967a4c7e68f6d355e14d1a919e3272be86948f6ba71e06545248a25de4d  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.HotReloadModule.dll
+162304 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.IMGUIModule.dll
+45327d6cbbaf833bc7fce9f02ea2822e475a3bc4091fccc72a590247ff5a1818  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.IMGUIModule.dll
+13824 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ImageConversionModule.dll
+7ade90fff73068bfc5b9735d808c877df21e55040f24850f72d0c3f6bbbac60f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ImageConversionModule.dll
+26112 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.InputLegacyModule.dll
+098b986474de1d1d3bd56522d1bbf73362409540edb79354a580a2d7d435d990  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.InputLegacyModule.dll
+12800 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.InputModule.dll
+c55c3d440a8798d7d339dce2328856d26cf1284daec170d6038810b3aae6d4c7  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.InputModule.dll
+11264 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.JSONSerializeModule.dll
+92a11197b4c65d8751ade8f2124938842991dfbbae4ee931e14ff1599cfb817b  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.JSONSerializeModule.dll
+10752 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.LocalizationModule.dll
+9580584566ca9587543422538e18f5ea88d1f48778428c9b8aa4545db9bc0fc4  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.LocalizationModule.dll
+23040 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.NVIDIAModule.dll
+f155b991fea52cc68d4a925e1ab34b0bd8d778937fb4fa0e1c76d0fa8d376342  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.NVIDIAModule.dll
+143872 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ParticleSystemModule.dll
+fa6a46fa297c677c0ba39fc2f666ad07178452babb2ad720875c8dfc22c7b96a  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ParticleSystemModule.dll
+10240 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.PerformanceReportingModule.dll
+70ff02c0f8e1e809e6cbadaf80ba62a11d61ee3846802004c4ea20b558b16031  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.PerformanceReportingModule.dll
+123392 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.Physics2DModule.dll
+ee6216a9655221d66b1ba494dde2554fadbe0b154c2b89d1f1e0981facb299ff  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.Physics2DModule.dll
+102912 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.PhysicsModule.dll
+3a5285e74188397d65243384e0de9fa3ad0f63a013a31d0549673477f98a27cd  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.PhysicsModule.dll
+9216 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ProfilerModule.dll
+f5ef58b578b1a4487c3d219acbbe44da066a82e67783fb47f2f55fc7b3839398  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ProfilerModule.dll
+9728 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll
+f56f5f208de43b4a2954e391839c1a03d8f1a2c8fbe424dbc86df64b12ce531b  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll
+10240 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ScreenCaptureModule.dll
+143c6aa4fdd67fc735515743da09eac062ee5b539193756849bf5815560bf725  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.ScreenCaptureModule.dll
+21504 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SharedInternalsModule.dll
+9879ab99c6b9233c5f1e6628ca801089552e9d82d112598036b039fd2ac57af1  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SharedInternalsModule.dll
+10752 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SpriteMaskModule.dll
+bb3a3e62827040b538f97e5d849872dab02c35ed6ede96f879b54eaf16f1ff2f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SpriteMaskModule.dll
+14848 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SpriteShapeModule.dll
+696cdddc13e68df41339a491db283a3dedfea58997afa7f3f71fb37f74857dec  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SpriteShapeModule.dll
+10240 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.StreamingModule.dll
+16614ca1acbce996fbebf97cc35138e8a8d1cd16f2c1e3cfaf9ee813dcd745fc  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.StreamingModule.dll
+14336 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SubstanceModule.dll
+43a74eceb329abbad8055d03b2de59e0a954068610ff021018d0af189e3319a2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SubstanceModule.dll
+24064 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SubsystemsModule.dll
+271ceb8df324f8f1c2320b8720a0c8bbf956e7b0f4c29cc9cd6bc5599776ddbe  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.SubsystemsModule.dll
+15872 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TLSModule.dll
+d3b491a47b25bbe37d5467505c351827c16dd1016dcea143a6146e4e74d8fdf4  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TLSModule.dll
+88064 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TerrainModule.dll
+83f880dc6736d601833072c44690933fc054f3f6be46c8044af279904dfe029d  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TerrainModule.dll
+10240 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TerrainPhysicsModule.dll
+d1a6d4b7ded7c367b9611b7595db7940a0c8e2cedca3105f423fc49c1535b6e2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TerrainPhysicsModule.dll
+40448 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll
+0ecf5560101e5459e6bc4af45c09ad0995edbea44afac889dae952dbfd24b552  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll
+183808 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll
+2f5b53cd51add74498e4b38ca2bb503b2243381b2cdc8961eeaf1b0db4d99c05  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll
+28160 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TextRenderingModule.dll
+0822c8d52efee10245727f38a7f5b0fde1c0a3bcf7883e6a692ad8f459b1eaba  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TextRenderingModule.dll
+32256 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TilemapModule.dll
+45b57ce143805963306479aac6acf573884201a27454418cf2a5d2338e6b5461  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.TilemapModule.dll
+227840 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UI.dll
+95d619b958bcda21a274ef869bd8328a423c21404f3bff73ac89d1ab34a86125  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UI.dll
+1186816 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UIElementsModule.dll
+d43261610ec73521ccc5926b4cd159c67f68e890dd1797692f2f0e9726b82f99  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UIElementsModule.dll
+48128 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UIElementsNativeModule.dll
+9cacb2157a70cddeac03c1f83e4b1d7efb56b913ba792f9f1e9bf22e7488d725  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UIElementsNativeModule.dll
+25600 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UIModule.dll
+e290a3c51adf546b5701561efbc0e8184811fd4464be6ea7440775e95556f900  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UIModule.dll
+78848 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UNETModule.dll
+7df17569428df6ad5b03711fa9e74efd64f5c130193e0c817556cf7e4cec5d01  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UNETModule.dll
+9216 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UaaLAnalyticsModule.dll
+ebe741924d7aebbd58cbcfbf1bdf82bf0ea3f5e6b65d2b09a9e8dbe1637d6970  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UaaLAnalyticsModule.dll
+9216 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UmbraModule.dll
+93f987ad8a55ffcd28790c0b481388d5a0115fff357419a66221c73d3fda4107  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UmbraModule.dll
+33792 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityAnalyticsModule.dll
+a1c609f765cc28f25cb3f8f580b0170a4492e8426bc2944d0868d06d235d243f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityAnalyticsModule.dll
+11264 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityConnectModule.dll
+69198f8c9d6517f31865a3ba08b3a34ed2aa7dc95f6ce5abc47983aed90950b4  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityConnectModule.dll
+11264 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityCurlModule.dll
+c6a8bf370501549d63a82fc8c7d0c377c8d23833809cfddac63e4c7a9a9f6263  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityCurlModule.dll
+9216 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityTestProtocolModule.dll
+a103448dac9cdbc837e191f57f0e0d6196959a4dc4858368772b7f7099f6bbca  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityTestProtocolModule.dll
+12288 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll
+5de42d38c131b0d7833114c85908948ec0265fbd987eefedb662bae70d356e88  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll
+12288 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll
+5a1e3c110fb24b814063c091c8c9420817a1505b78fe65cd689a2c15a33bc773  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll
+46080 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestModule.dll
+7efef4ee773f8cea2c69b54cec14c61045052d7e58b273a229d9b8420d83b796  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestModule.dll
+11264 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll
+ba8616cc0466d55d5879b01ee7af1f57b28d5508b3eeabdbc8369d39ac6473d3  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll
+20992 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll
+c44eabe25b2909e81dc2473311ee9a511df34b57782ee0a2365215ceca4e3318  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll
+43520 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VFXModule.dll
+e19fece80b37d9c3ca49f00911676e6956dfe3eeb71482a32e8627eff72e9d5f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VFXModule.dll
+15872 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VRModule.dll
+e15a1650f703bc57450c90868aa245d86d7122e1db75b1b49296ee3bda81a635  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VRModule.dll
+13312 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VehiclesModule.dll
+43ca803cf879c4946149abb53d708ba2356bb18f03b39fdce3119093499e9214  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VehiclesModule.dll
+29696 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VideoModule.dll
+f2b672059e402fdcf7fbbbdc24285e991c27b313a5d65e795fe3154444820e07  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VideoModule.dll
+24064 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VirtualTexturingModule.dll
+de92d9a3d080008044d34c5308e5b5b3847a73fd82dcb61155bc8a760bdbab82  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.VirtualTexturingModule.dll
+10240 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.WindModule.dll
+5b066f67f132884aa9d83a601d80447485ef033ae8fae2b802c783bc6f3955a2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.WindModule.dll
+59392 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.XRModule.dll
+0ce4c7c84c2882d9950b875d1e7c8c8b560d7fb049772b08cc0e46c4b8c2ed1f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.XRModule.dll
+100352 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.dll
+d59a2f80ae96a7fa5bb19aa27c49a336f7af3fac4e629d566999d44d3544c6f3  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/UnityEngine.dll
+345600 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/XGamingRuntime.dll
+144e7cf1e6d2dfa59d955e175f413915d289c3905a6363bfca338a76983033e8  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/XGamingRuntime.dll
+262656 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/bolt.dll
+71a061ec327dc844cd1ecdea95fb58659aa49338328c36bd4cbbd30a8407763e  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/bolt.dll
+91648 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/bolt.user.dll
+2ad4fac9803d77840e31ecc3b5b444161ad8af866280ee0519b5d2fac9eb3ed5  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/bolt.user.dll
+62976 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/ch.sycoforge.Decal.dll
+e0783a1c75a967591b404eb556315ab424ce182abb96ec168a2abab3781528c2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/ch.sycoforge.Decal.dll
+366592 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/com.rlabrecque.steamworks.net.dll
+465c8f4e30120e3060d57efd4d4ffb5061fbcfa85d1320f286bedd1e4152f49c  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/com.rlabrecque.steamworks.net.dll
+4630528 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/mscorlib.dll
+3d703c5b485b712e364603cf4b28ce0b05a5139f76093c2b668d9a78c338ce19  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/mscorlib.dll
+90112 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/netstandard.dll
+6ae62e082dc494a2433984177f60ca4db5fae69b1f360a8b33754172b310b8c5  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/netstandard.dll
+40448 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.common.dll
+6d33766589dfa7b431fbb3d3973fbbb69a48bbeb22fa45d3b418f1abce932831  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.common.dll
+102912 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.dll
+93b45dbea1ee99bff47a3188f830814eb3252060bc97932ac202c60774552db1  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.dll
+15872 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.dotnet.dll
+443349a8d096d5b03369ed43c06dc2cfaccab3e2dc6e495852949898b0014df3  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.dotnet.dll
+6656 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.null.dll
+c9e435db6bd825d2105bec2c4888ff29c15631a3fa91708c55a22804671ee07f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.null.dll
+73216 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.photon.dll
+5537dae08e35683e0e0f223339d4f87ff98c868670ec4d9cd9c78c480fac2f31  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.photon.dll
+250368 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/websocket-sharp.dll
+fb06ffceb4f8789c893d2f292e5810927dd7266d3bad68df2cedb8775500e8be  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/websocket-sharp.dll
+
+===== NETWORK / MULTIPLAYER DEPENDENCIES =====
+8704 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/GdkUtilities.dll
+dfbc714be3626ed6acee6d589985462b6a58aec74da3d64afcd1688ff523635f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/GdkUtilities.dll
+230912 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Photon3Unity3D.dll
+1f33ae7cc6a47975bee1b12ffed75b893c9ee3899c9fb95944f8e77b6851d12e  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/Photon3Unity3D.dll
+12800 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/PhotonBolt.dll
+12fcb9b268d4ab16e49c5c64838f95b56ac103db8250cca3c8cdbe74205011d0  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/PhotonBolt.dll
+101376 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/PhotonRealtime.dll
+942b5163ed62b3330f944a9dfffd42e83764f29aa10cf105d993ca3573a29f1c  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/PhotonRealtime.dll
+345600 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/XGamingRuntime.dll
+144e7cf1e6d2dfa59d955e175f413915d289c3905a6363bfca338a76983033e8  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/XGamingRuntime.dll
+262656 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/bolt.dll
+71a061ec327dc844cd1ecdea95fb58659aa49338328c36bd4cbbd30a8407763e  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/bolt.dll
+91648 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/bolt.user.dll
+2ad4fac9803d77840e31ecc3b5b444161ad8af866280ee0519b5d2fac9eb3ed5  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/bolt.user.dll
+366592 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/com.rlabrecque.steamworks.net.dll
+465c8f4e30120e3060d57efd4d4ffb5061fbcfa85d1320f286bedd1e4152f49c  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/com.rlabrecque.steamworks.net.dll
+40448 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.common.dll
+6d33766589dfa7b431fbb3d3973fbbb69a48bbeb22fa45d3b418f1abce932831  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.common.dll
+102912 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.dll
+93b45dbea1ee99bff47a3188f830814eb3252060bc97932ac202c60774552db1  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.dll
+15872 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.dotnet.dll
+443349a8d096d5b03369ed43c06dc2cfaccab3e2dc6e495852949898b0014df3  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.dotnet.dll
+6656 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.null.dll
+c9e435db6bd825d2105bec2c4888ff29c15631a3fa91708c55a22804671ee07f  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.null.dll
+73216 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.photon.dll
+5537dae08e35683e0e0f223339d4f87ff98c868670ec4d9cd9c78c480fac2f31  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/udpkit.platform.photon.dll
+250368 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/websocket-sharp.dll
+fb06ffceb4f8789c893d2f292e5810927dd7266d3bad68df2cedb8775500e8be  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Managed/websocket-sharp.dll
+239 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/Steamworks.NET.txt
+3fe41687eb3a9097cd547c15348461ae8364585651e7e3a8a2fed905774c6330  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/Steamworks.NET.txt
+1692672 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_api64.dll
+53ca528e1cf660e8b53c5bbc78decb994cb650709155407fa9978200f9a05ae2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_api64.dll
+17 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/user_steam_id.txt
+7b8395410d34332d2aa5a417d92f0ba94dba62cc0a5bbb4b5e1ac14638d8a935  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/user_steam_id.txt
+6 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/steam_appid.txt
+4d556f283df5525ff6ea6f6b46f674ad0413a7a4be5e13808ee8f0be29dc579a  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/steam_appid.txt
+
+===== NATIVE PLUGINS =====
+239 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/Steamworks.NET.txt
+3fe41687eb3a9097cd547c15348461ae8364585651e7e3a8a2fed905774c6330  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/Steamworks.NET.txt
+12800 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/Rewired_DirectInput.dll
+9989b282d43621259160954f3c2191afc3e3a13adb0091c3f60be228831858ad  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/Rewired_DirectInput.dll
+14 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/local_save.txt
+f9b90c494b4680361fb937a3d7cf2c7712b69637d81885f90bffd28825ff1ad2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/local_save.txt
+1692672 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_api64.dll
+53ca528e1cf660e8b53c5bbc78decb994cb650709155407fa9978200f9a05ae2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_api64.dll
+41 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/dlc.txt
+ade37c3d942ce0cf768a4083011890cbbc1c5ab01bd99a7d10e42a3bab877eb6  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/dlc.txt
+8 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/account_name.txt
+0a5850e75aa14f97a545eb93d12131aa9a75f8fb8dccc1365d5e3f0202227bab  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/account_name.txt
+7 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/language.txt
+b6234d2ea0d6022be63db80d7b80e221097fe4a469dc44febcd2a9241effdeba  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/language.txt
+5 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/listen_port.txt
+45095e3e3f29ea73ffab2e23158b7cd2afa6532004b5a9b6f06d4e5e068a89aa  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/listen_port.txt
+17 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/user_steam_id.txt
+7b8395410d34332d2aa5a417d92f0ba94dba62cc0a5bbb4b5e1ac14638d8a935  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/settings/user_steam_id.txt
+6 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/steam_appid.txt
+4d556f283df5525ff6ea6f6b46f674ad0413a7a4be5e13808ee8f0be29dc579a  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/Plugins/x86_64/steam_settings/steam_appid.txt
+
+===== IMPORTANT UNITY DATA FILES =====
+928516 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/globalgamemanagers.assets
+e8dabcd7465a021c197913d317898a10342db3047bfbf48108db096826bf673e  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/globalgamemanagers.assets
+184519152 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/resources.assets
+4d5c887f1cc9329cd86398281410c51c6f232f741901ac9a76ee2cfbc4ac44b2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/resources.assets
+1373682164 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/resources.assets.resS
+498dd5025d778c4ce9a4046aee1a4880cd23c28292d1eb75496c3ae90f78bdcc  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/resources.assets.resS
+12027872 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets0.assets
+aa59339ad600680f4977a6968650a36c7b625082f4d05a936469671f26254a50  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets0.assets
+42516984 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets0.assets.resS
+198201eef6ae95e75428fa8cccbb94355a89db9ef22510d3ce0323026066e830  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets0.assets.resS
+303064 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets1.assets
+e04b4c463589c2fe10622c9e0c7121eeafd3f46ce7909d3453e41b3eebdaf4a2  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets1.assets
+12545080 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets1.assets.resS
+a87b2a0490cb2e5f33f6210b7b0f2b25c4fd848a244281abd6ecbe3135ab0819  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets1.assets.resS
+170092 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets2.assets
+024a155bd918aa7ecf745e59dbec6ae8808741e7509a35aa478f1ade5383c17e  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets2.assets
+1029728 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets2.assets.resS
+661cfa961ee0a1fbcd34075909bd9f209ab22e1bd1c428f6a51f389ebdf4bb24  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets2.assets.resS
+14261120 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets3.assets
+03753b40f3e6d393faf051692e763754626be6b983199645ae29703c902ab1a4  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets3.assets
+51739940 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets3.assets.resS
+097cc45f37be7a2c63a2ab0953fc14db4cc88d9425982cccd9fde103a1b5ea1e  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets3.assets.resS
+16492880 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets4.assets
+eaa3356dbff97da237f572e47107b306bb705541b396acb7fa0e7d92ed2b0cde  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets4.assets
+2350508 bytes | /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets4.assets.resS
+20a0564d5c60eeea79f04a6d8e5acbbce04447f9bc4a848a0bebced74a688ecb  /storage/emulated/0/Download/PC GAMES/Game Zip/Stranded Deep/Stranded_Deep_Data/sharedassets4.assets.resS
