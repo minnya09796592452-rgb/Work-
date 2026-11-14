@@ -63,3 +63,11 @@ Track each gate independently. Attach logs or other reproducible evidence before
 ## Forensic P/Invoke audit update — 2026-11-13
 
 Completed full metadata inventory of the supplied audit ZIP: 119/119 Managed DLLs parsed and 119/119 manifest hashes verified; 3,791 MethodDef P/InvokeImpl flags match 3,791 ImplMap rows across 17 assemblies. Three native binaries were confirmed Windows PE32+ x86-64, not Android ELF. This does not change CASTAWAY DEPTHS implementation status or authorize reuse of the source game's materials. See [full P/Invoke inventory](research/PINVOKE_FULL_METADATA_INVENTORY.md).
+
+ 
+## 2026-11-14 Android ARM64 native-link evidence
+- User-provided report confirms an AArch64 ELF64 shared object was produced with `LINK_EXIT=0` using Clang 21.1.8 and the installed Termux Android sysroot/stub packages.
+- `readelf` confirms `ET_DYN`, machine AArch64, SONAME `libcastaway_probe.so`, and dependencies `liblog.so`, `libdl.so`, `libc.so`.
+- This is a compile/link gate only. Runtime `dlopen`, JNI, APK build/install/launch, Vulkan presentation/rendering, and gameplay remain unverified.
+- Evidence: `docs/research/ANDROID_NDK_LINK_TEST_20261114.md`; raw logs retained under `Recyclebin/`.
+- Next gate: runtime `dlopen` + exported symbol call, then continue Vulkan logical-device/queue testing.
