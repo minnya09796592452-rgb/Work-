@@ -1,3 +1,26 @@
+# LATEST HANDOFF UPDATE — 2026-11-14 — ANDROID ARM64 SHARED-LIBRARY LINK
+
+## Verified latest result
+- User supplied `CASTAWAY_NDK_LINK_TEST2.txt`; original verbose diagnostic is preserved at `Recyclebin/CASTAWAY_NDK_LINK_TEST2.txt`.
+- The AArch64 header `$PREFIX/include/aarch64-linux-android/asm/types.h` was found.
+- Adding `-isystem "$PREFIX/include/aarch64-linux-android"` fixed the previous missing-header compile error.
+- Shared-library link completed with `LINK_EXIT=0`.
+- `readelf` confirmed ELF64, little-endian, `ET_DYN`, machine AArch64, SONAME `libcastaway_probe.so`.
+- Dynamic dependencies: `liblog.so`, `libdl.so`, `libc.so`.
+- `file` utility is not installed; ELF validation used `readelf`.
+- Clang 21.1.8 does not accept `-print-sysroot`; this was a non-blocking diagnostic.
+- RUNPATH shown by `readelf`: `/data/data/com.termux/files/usr/usr/lib`. This requires runtime-loader verification.
+- Detailed concise record: `docs/research/ANDROID_NDK_LINK_TEST_20261114.md`.
+- Raw verbose diagnostics were moved from the repository root into `Recyclebin/`; they were preserved, not discarded.
+
+## Immediate next action
+Run a minimal runtime `dlopen` + `dlsym` + exported-function call against the produced `$HOME/.cache/castaway_ndk_probe/libcastaway_probe.so`. Capture loader errors and verify that `castaway_probe()` returns. Do not claim APK/JNI/app-runtime success from this test. After runtime loading is verified, resume the isolated Vulkan logical-device/queue execution test on the direct Android system Vulkan loader.
+
+## Scope guard
+This result proves only an Android-target AArch64 shared-library link. It does not prove Android APK BUILD/INSTALL/LAUNCH, JNI integration, Vulkan surface/swapchain/present, rendered output, or gameplay.
+
+---
+
 # LATEST HANDOFF UPDATE — 2026-11-14 — DIRECT VULKAN PROBE SOURCE REVIEW
 
 ## Read this first
