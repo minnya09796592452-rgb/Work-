@@ -1,4 +1,93 @@
 ဒီမှာ Conversation Message တွေထည့်သွားပေး
 
-
 Chtbox ( 1 )
+
+# Ending Castaway Depths — Conversation Context
+
+> ဤဖိုင်သည် 2026-11-14 ရက်နေ့တွင် Ending Castaway Depths Project အကြောင်း ဆွေးနွေးခဲ့သော ChatGPT နှင့် Project Owner တို့၏ အဓိကအချက်အလက်များကို စုစည်းထားသည့် context log ဖြစ်သည်။ နောက်ဆက်တွဲ AI session များတွင် Project အခြေအနေကို ပြန်လည်နားလည်ရန် ရည်ရွယ်သည်။
+>
+> အောက်ပါ နည်းပညာဆိုင်ရာ တိုးတက်မှုများသည် Project Owner က ပြောကြားထားသော အခြေအနေများဖြစ်ပြီး repository သို့မဟုတ် build artifact များဖြင့် သီးခြားအတည်ပြုထားခြင်း မဟုတ်သေးပါ။
+
+## 1. Project ရည်မှန်းချက်
+
+- မူရင်းအခြေခံအဖြစ် **Stranded Deep (Windows / DirectX 11)** ကို ရည်ညွှန်းထားသည်။
+- ရည်မှန်းချက်မှာ Android ဖုန်းပေါ်တွင် **Vulkan Native Mobile** အဖြစ် ပြောင်းလဲတည်ဆောက်ရန် ဖြစ်သည်။
+- Development နှင့် build workflow အားလုံးကို **ဖုန်းတစ်လုံးတည်းဖြင့်၊ PC မသုံးဘဲ** ဆောင်ရွက်ရမည်။
+- Project Owner ၏ ရည်မှန်းချက်မှာ source/build/runtime ဘက်တွင် error မရှိဘဲ၊ unexpected exit မဖြစ်စေသော အခြေအနေသို့ ရောက်ရှိရန် ဖြစ်သည်။ “0 Error / 0 Exit” သည် ရည်မှန်းချက်နှင့် Owner ၏ လက်ရှိ logic စမ်းသပ်မှုအပေါ် ဖော်ပြချက်ဖြစ်ပြီး အပြည့်အဝ independent verification မလုပ်ရသေးပါ။
+
+## 2. Project Owner ပြောကြားထားသော လက်ရှိအခြေအနေ
+
+Owner ၏ ပြောကြားချက်အရ—
+
+- Termux environment ပြင်ဆင်ပြီးဖြစ်သည်။
+- GPU Driver ဆိုင်ရာ ပြင်ဆင်မှု ပြီးစီးထားသည်။
+- Logic ကို “0 Error / 0 Exit” အခြေအနေဖြင့် ဖောက်ပြီးဖြစ်သည်။
+- EOS Multiplayer ကို လက်ရှိ main scope မှ ဖယ်ထားသည်။
+- Multiplayer ကို နောက်ပိုင်းတွင် သီးခြားအသစ်ပြန်တည်ဆောက်မည်။
+- မူရင်းဂိမ်းကို အခြေခံထားသော်လည်း မူရင်း Source Code သို့မဟုတ် Asset များကို ပြန်ယူသုံးခြင်း မရှိကြောင်း Owner က ပြောကြားထားသည်။ ဤအချက်နှင့် derivative-work ဆိုင်ရာ ခွင့်ပြုချက်များကို သီးခြားစစ်ဆေးရန် လိုအပ်သည်။
+
+Owner က Workflow နှင့် အောက်ပါအချက် 1၊ 2 ကို အောင်မြင်ထားပြီးဖြစ်ကြောင်း အတည်ပြုပြောကြားခဲ့သည်—
+1. Build Integrity
+2. Native Compatibility
+
+## 3. သတ်မှတ်ထားသော Workflow
+
+Owner ပေးထားသော Pipeline—
+
+`Termux → APK Editor → Main Logic & Data → GitHub Actions Workflow → APK → Ready Logic & Data → Copyright / Licensing → Play Store`
+
+Workflow အဆင့်များကို Owner ၏ လက်ရှိစနစ်အတိုင်း ထိန်းသိမ်းရန်။ မလိုအပ်ဘဲ ပြန်လည်ဒီဇိုင်းမလုပ်ရန်။
+
+## 4. Multiplayer Scope
+
+- EOS Multiplayer ကို လက်ရှိ build မှ ဖယ်ထားသည်။
+- Multiplayer implementation ကို သီးခြား subsystem အဖြစ် အသစ်တည်ဆောက်ရန် စီစဉ်ထားသည်။
+- Single-player / main application scope နှင့် multiplayer scope ကို မရောထွေးစေရန်။
+
+## 5. ChatGPT / Codex အတွက် အလုပ်လုပ်ပုံ
+
+Project Owner က AI ကို အကူအညီအဖြစ် အသုံးပြုမည်ဖြစ်ပြီး၊ AI ဘက်မှ အောက်ပါ engineering discipline များကို လိုက်နာရန် တောင်းဆိုထားသည်—
+
+- Senior Engineer ထက်ကျော်လွန်သော Systems / Architecture အမြင်ဖြင့် စဉ်းစားရန်။
+- Low-level implementation, platform boundary, rendering/API compatibility, memory, performance နှင့် build pipeline တို့ကို အထောက်အထားဖြင့် စစ်ဆေးရန်။
+- လက်ရှိ codebase ကို မလေ့လာဘဲ အပြောင်းအလဲ မလုပ်ရန်။
+- Strict scope control ထားရန်၊ မသက်ဆိုင်သောဖိုင်များ မပြင်ရန်။
+- Major change မလုပ်မီ implementation plan ရှင်းပြရန်။
+- Code ပြင်ပြီးတိုင်း သက်ဆိုင်ရာ test/build ကို အမှန်တကယ် run လုပ်ရန်။
+- Test မလုပ်ရသေးလျှင် pass ဖြစ်သည်ဟု မပြောရန်။
+- မသေချာသည့်အချက်များကို အတည်ပြုပြီးသားအဖြစ် မဖော်ပြရန်။
+- ဖုန်းတစ်လုံးတည်းဖြင့် လုပ်ဆောင်ရမည့် ကန့်သတ်ချက်ကို အမြဲထည့်သွင်းစဉ်းစားရန်။
+
+### AI ၏ အခန်းကဏ္ဍ
+
+- Architecture နှင့် technical decision များကို သုံးသပ်ခြင်း
+- Repository/code review နှင့် dependency analysis
+- Debugging၊ implementation planning နှင့် test design
+- GitHub Actions workflow နှင့် build artifact များကို စစ်ဆေးခြင်း
+- Vulkan / Android native compatibility ကို evidence ဖြင့် သုံးသပ်ခြင်း
+- Licensing နှင့် distribution risk များကို သတိပေးခြင်း
+
+## 6. မပြီးသေးသော / အတည်ပြုရန်လိုသော အချက်များ
+
+1. Copyright, trademark, derivative-work နှင့် distribution permission ကို စာရွက်စာတမ်းအထောက်အထားဖြင့် စစ်ဆေးရန်။
+2. Play Store တင်သွင်းမှုအတွက် လိုအပ်ချက်များနှင့် policy compliance ကို စစ်ဆေးရန်။
+3. Main APK ကို သန့်ရှင်းသော environment တွင် install / launch / runtime စမ်းသပ်ရန်။
+4. Target Android ABI နှင့် GPU များပေါ်တွင် Vulkan compatibility ကို သီးခြားစမ်းသပ်ရန်။
+5. EOS မပါသော main build နှင့် နောင်တွင် အသစ်တည်ဆောက်မည့် Multiplayer subsystem တို့၏ boundary ကို သေချာထိန်းရန်။
+
+**သတိပြုရန်:** “Workflow နဲ့ 1၊ 2 အောင်မြင်ပြီး” ဟူသောအချက်သည် Owner ၏ status report ဖြစ်သည်။ AI session အသစ်များတွင် build logs, workflow runs, APK နှင့် device test evidence များကို လိုအပ်သလို ပြန်စစ်ပြီးမှ verified status အဖြစ် သတ်မှတ်ရမည်။
+
+## 7. Conversation မှတ်တမ်း — အဓိက အပြန်အလှန်ဆွေးနွေးချက်များ
+
+- **Owner:** Project သည် သာမန် development task မဟုတ်ဘဲ ကုမ္ပဏီများက လနှင့်ချီကိုင်တွယ်ရနိုင်သော အရွယ်အစားရှိကြောင်း၊ AI ကို low-level အဆင့်အထိ လိုက်ပါကူညီနိုင်မလား မေးမြန်းခဲ့သည်။
+- **Assistant:** Senior / Principal Engineering, Systems Architecture, low-level debugging နှင့် evidence-based verification ပုံစံဖြင့် ကူညီနိုင်ကြောင်း၊ မသိသည့်အရာကို မသိဟု ပြောပြီး မစမ်းရသေးသည့်အရာကို အောင်မြင်သည်ဟု မဆိုကြောင်း သတ်မှတ်ခဲ့သည်။
+- **Owner:** အကြီးဆုံးကန့်သတ်ချက်မှာ PC မရှိဘဲ ဖုန်းတစ်လုံးတည်းဖြင့် အလုပ်လုပ်ရခြင်းဖြစ်ကြောင်း ရှင်းပြခဲ့သည်။
+- **Owner:** Target သည် Stranded Deep Windows DX11 မှ Vulkan Native Mobile သို့ ပြောင်းလဲခြင်းဖြစ်ကြောင်း၊ source code error နှင့် unexpected exit မရှိရန် ရည်မှန်းကြောင်း ပြောကြားခဲ့သည်။
+- **Owner:** Termux နှင့် GPU Driver ပြင်ဆင်ပြီး၊ logic ကို 0 Error / 0 Exit အခြေအနေဖြင့် ဖောက်ပြီးဖြစ်ကြောင်း၊ EOS Multiplayer ကို ဖယ်ပြီး သီးခြားအသစ်ပြန်တည်ဆောက်မည်ဖြစ်ကြောင်း ရှင်းပြခဲ့သည်။
+- **Owner:** မူရင်းဂိမ်းကို အခြေခံထားသော်လည်း မူရင်း code သို့မဟုတ် asset များကို ပြန်ယူမသုံးကြောင်း ပြောကြားခဲ့သည်။
+- **Assistant:** DX11 မှ Vulkan သို့ ပြောင်းခြင်းတွင် API mapping တစ်ခုတည်းမဟုတ်ဘဲ engine/platform dependency နှင့် runtime behavior များကို စစ်ဆေးရန်လိုကြောင်း၊ intellectual-property နှင့် distribution permission ကိုလည်း စစ်ဆေးရန်လိုကြောင်း သတိပေးခဲ့သည်။
+- **Owner:** Workflow၊ Build Integrity နှင့် Native Compatibility အပိုင်းများတွင် Workflow နှင့် 1၊ 2 ကို အောင်မြင်ထားပြီးဖြစ်ကြောင်း ပြန်လည်အတည်ပြုခဲ့သည်။
+
+## 8. နောက်ဆက်တွဲ Session အတွက် အရေးကြီးဆုံးညွှန်ကြားချက်
+
+ဤ Project ကို ဆက်လုပ်ရာတွင် Owner ၏ လက်ရှိပြီးစီးထားသောအလုပ်များကို မလိုအပ်ဘဲ ပြန်မလုပ်ပါနှင့်။ ပထမဦးစွာ repository၊ လက်ရှိ file structure၊ workflow နှင့် ရရှိနိုင်သော build/test evidence များကို ဖတ်ရှုပါ။ ထို့နောက် မပြီးသေးသော scope ကိုသာ သတ်မှတ်ပြီး Owner နှင့် ကိုက်ညီသည့် အဆင့်လိုက်အစီအစဉ်ဖြင့် ဆက်လုပ်ပါ။
