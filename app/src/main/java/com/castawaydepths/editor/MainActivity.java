@@ -1,6 +1,7 @@
 package com.castawaydepths.editor;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,6 +15,7 @@ public final class MainActivity extends Activity {
     private static final String PREFS_NAME = "castaway_editor_settings";
     private static final String KEY_DIAGNOSTICS = "show_diagnostics";
     private static final String KEY_NATIVE_DETAILS = "show_native_details";
+    private static final String KEY_LANDSCAPE_LOCK = "landscape_lock";
 
     static {
         System.loadLibrary("castaway_engine");
@@ -28,6 +30,7 @@ public final class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        applyLandscapeLock(preferences.getBoolean(KEY_LANDSCAPE_LOCK, false));
 
         try {
             nativeReport = nativeBootstrapReport();
@@ -37,6 +40,12 @@ public final class MainActivity extends Activity {
         }
 
         showHome();
+    }
+
+    private void applyLandscapeLock(boolean enabled) {
+        setRequestedOrientation(enabled
+                ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                : ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
     }
 
     private LinearLayout createContent() {
@@ -101,6 +110,18 @@ public final class MainActivity extends Activity {
         TextView title = createText("SETTINGS", 24);
         title.setGravity(Gravity.CENTER_HORIZONTAL);
         content.addView(title);
+
+        Switch landscapeSwitch = new Switch(this);
+        landscapeSwitch.setText("Landscape Lock");
+        landscapeSwitch.setTextSize(16);
+        landscapeSwitch.setPadding(0, 20, 0, 20);
+        landscapeSwitch.setChecked(
+                preferences.getBoolean(KEY_LANDSCAPE_LOCK, false));
+        landscapeSwitch.setOnCheckedChangeListener((button, checked) -> {
+            preferences.edit().putBoolean(KEY_LANDSCAPE_LOCK, checked).apply();
+            applyLandscapeLock(checked);
+        });
+        content.addView(landscapeSwitch);
 
         Switch diagnosticsSwitch = new Switch(this);
         diagnosticsSwitch.setText("Diagnostic Panel");
