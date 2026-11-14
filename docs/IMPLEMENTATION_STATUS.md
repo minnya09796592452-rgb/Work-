@@ -71,3 +71,10 @@ Completed full metadata inventory of the supplied audit ZIP: 119/119 Managed DLL
 - This is a compile/link gate only. Runtime `dlopen`, JNI, APK build/install/launch, Vulkan presentation/rendering, and gameplay remain unverified.
 - Evidence: `docs/research/ANDROID_NDK_LINK_TEST_20261114.md`; raw logs retained under `Recyclebin/`.
 - Next gate: runtime `dlopen` + exported symbol call, then continue Vulkan logical-device/queue testing.
+
+ 
+## 2026-11-14 Android native runtime load evidence
+- User-provided Termux report: compile exit 0; `dlopen` PASS; `dlsym("castaway_probe")` and function invocation PASS; return value 1; `dlclose` PASS; process exit 0.
+- This validates the small test library in the Termux process only. It does not validate APK/JNI loading or Vulkan.
+- Evidence: `docs/research/ANDROID_NDK_RUNTIME_TEST_20261114.md`; raw report retained under `Recyclebin/`.
+- Next gate: Vulkan header/source preflight, then queue-family selection and logical-device create/destroy test using the Android system Vulkan loader.
