@@ -78,3 +78,12 @@ Completed full metadata inventory of the supplied audit ZIP: 119/119 Managed DLL
 - This validates the small test library in the Termux process only. It does not validate APK/JNI loading or Vulkan.
 - Evidence: `docs/research/ANDROID_NDK_RUNTIME_TEST_20261114.md`; raw report retained under `Recyclebin/`.
 - Next gate: Vulkan header/source preflight, then queue-family selection and logical-device create/destroy test using the Android system Vulkan loader.
+
+## 2026-11-14 Vulkan preflight and queue/device probe preparation
+- User-provided preflight confirms Android 16/API 36, AArch64 `arm64-v8a`, device platform `mt6991`, official Vulkan headers at `$PREFIX/include/vulkan/vulkan.h`, Clang/Clang++ 21.1.8, and the direct Android system loader `/system/lib64/libvulkan.so`.
+- Loader ELF is AArch64; required Vulkan loader symbols are present. Raw report retained at `Recyclebin/CASTAWAY_VULKAN_PREFLIGHT.txt`.
+- Added official-header C++ diagnostic: `native/vulkan/vulkan_device_probe.cpp`.
+- Added Python build/run harness: `scripts/vulkan_device_probe.py`. It compiles, runs, captures stdout/stderr, and writes `$HOME/CASTAWAY_VULKAN_DEVICE_TEST.txt`.
+- Preflight and probe-source preparation are complete; the C++/Python probe has NOT yet been run on-device.
+- Status: preflight 🟢; prior physical-device enumeration 🟢 from earlier evidence; queue-family selection and logical-device create/destroy 🟡 pending runtime report. Surface/swapchain/present/render output, APK/JNI, gameplay, and save/load remain 🟡 unverified. No 🔴 blocker identified.
+- Research record: `docs/research/VULKAN_QUEUE_DEVICE_PROBE_20261114.md`.
