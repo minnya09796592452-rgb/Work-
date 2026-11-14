@@ -49,3 +49,14 @@ The user's larger intended sequence remains: first build and add the APK Editor 
 
 ## Repository archive provenance
 This document records user-provided live Termux output and the conversation's current decisions as of 2026-11-14. It is an archive checkpoint, not an assertion that unrun Stage 4 tests have passed.
+
+
+## 2026-11-14 — Termux recovery session update
+
+- Termux was reset; user rebuilt the environment in `~/Castaway-Depths`.
+- Repository clone succeeded at commit `c854a31`; setup script reported workspace READY; `git status --short` clean.
+- Toolchain verified: Python 3.14.10, Clang 21.1.8 (Android aarch64 API 24 target), CMake 4.5.0, Ninja 1.13.2, Git 2.56.1, OpenJDK 21.0.13, Gradle 9.9.1, AAPT, D8. NDK sysroot/multilib packages installed.
+- Android SDK Platform not present in searched Termux prefix; `sdkmanager` and `adb` missing; SDK environment variables unset. `pkg show android-sdk` failed because package is unavailable by that name.
+- Next requested diagnostic is `command -v curl; command -v unzip; df -h "$HOME"`. Then choose a verified Termux-compatible Android SDK installation path; no SDK or APK build yet.
+- No project source/data changes were made. No Vulkan device/driver/system changes were made.
+- Follow-up instructions must remain short and sequential. Preserve completed historical stages and use the GitHub handoff as source of truth.
